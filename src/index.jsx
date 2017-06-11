@@ -1,15 +1,23 @@
 import 'react-hot-loader/patch';
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
+import { updateSlots } from './actions/index.js';
+import chrome from './chrome/index.js';
+
+import store from './store.js';
+
 import App from './components/app.jsx';
 
-
+chrome();
 
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
-            <Component />
+            <Provider store={store}>
+                <Component />
+            </Provider>
         </AppContainer>,
     document.getElementById('root')
 )

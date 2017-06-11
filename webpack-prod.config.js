@@ -1,28 +1,30 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const BG_ENTRY = path.join(__dirname, 'src/background/bg.js');
+const APP_ENTRY = path.join(__dirname, 'src/index.jsx');
+const APP_DIR = path.join(__dirname, 'src');
 const BUILD_DIR = path.join(__dirname, '/build');
 
 const config = {
     devtool: 'source-map',
-    entry: [BG_ENTRY],
+    entry: APP_ENTRY,
     output: {
         path: BUILD_DIR,
         publicPath: '/build',
-        filename: 'bg.js',
+        filename: '[name].js',
     },
     module: {
         loaders: [
             {
                 test : /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader : 'babel-loader',
-                    options: {
-                        presets: ['es2015' ,'stage-0'],
-                    }
-                }
+                include: APP_DIR,
+                loader : 'babel-loader'
+            },
+            {
+                test: /\.css$/,
+                include: APP_DIR,
+                use: [ 'style-loader', 'css-loader' ],
             },
         ]
     }

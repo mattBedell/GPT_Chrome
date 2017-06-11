@@ -10,14 +10,15 @@
         "default_popup": "popup.html"
     },
     "background": {
-        "persistant": false,
+        "persistant": true,
         "scripts": ["bg.js"]
     },
     "content_scripts":[{
         "matches":["http://*/*", "https://*/*"],
-        "js": ["script.js"]
+        "js": ["script.js"],
+        "run_at": "document_start"
     }],
-    "web_accessible_resources": ["inject_script.js"],
+    "web_accessible_resources": ["inject_script.js", "main.js"],
     "permissions": [
         "activeTab"
     ]

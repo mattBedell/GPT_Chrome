@@ -1,10 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const APP_ENTRY = path.join(__dirname, 'src/index.jsx');
-const BG_ENTRY = path.join(__dirname, 'src/bg.js');
+const BG_DIR = /src\/background/
 const APP_DIR = path.join(__dirname, 'src');
 const BUILD_DIR = path.join(__dirname, '/build');
 
@@ -13,8 +11,7 @@ const config = {
     entry: [
             'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-            APP_ENTRY,
-            BG_ENTRY
+            APP_ENTRY
     ],
     output: {
         path: BUILD_DIR,
@@ -25,12 +22,14 @@ const config = {
         loaders: [
             {
                 test : /\.(js|jsx)$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/, BG_DIR],
+                include: APP_DIR,
                 loader : 'babel-loader'
             },
             {
                 test: /\.css$/,
                 include: APP_DIR,
+                exclude: BG_DIR,
                 use: [ 'style-loader', 'css-loader' ],
             },
         ]
