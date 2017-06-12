@@ -11473,7 +11473,7 @@ var _default = function _default() {
     var port = chrome.runtime.connect();
     port.onMessage.addListener(function (msg) {
         switch (msg.type) {
-            case 'SLOT_PAYLOAD':
+            case 'DISPLAY_SLOTS':
                 // update local store
                 console.log(msg.payload);
         };
