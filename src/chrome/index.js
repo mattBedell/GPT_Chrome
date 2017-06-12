@@ -1,3 +1,4 @@
+import store from './../store.js';
 import { updateSlots } from '../actions/index.js';
 
 export default function() {

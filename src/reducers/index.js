@@ -1,6 +1,10 @@
-import slots from './slots.js';
 import { combineReducers } from 'redux';
+import { tabs, currentTab, getTabSlots } from './slots.js';
 
+export function getSlots(...args) {
+    getTabSlots(...args)
+}
 export default combineReducers({
-    slots
+    tabs,
+    currentTab
 });

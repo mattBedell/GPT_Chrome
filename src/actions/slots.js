@@ -1,6 +1,7 @@
-export const updateSlots = (payload) => {
+export const updateSlots = (payload, tabId) => {
     return {
-        type: 'updateSlots',
+        type: 'UPDATE_SLOTS',
         payload,
+        tabId,
     }
 };
