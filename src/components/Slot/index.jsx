@@ -3,7 +3,7 @@ import './index.css'
 
 const Slot = props => {
     return (
-        <div>{props.name}</div>
+        <div>{props.adUnit}</div>
     )
 };
 

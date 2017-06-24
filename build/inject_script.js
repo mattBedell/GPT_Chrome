@@ -36,10 +36,8 @@ function getTargeting(slot) {
 
 
 addEventListener('REQUEST_DOM_SLOTS', () => {
-    dispatchEvent(new CustomEvent('RECIEVE_DOM_SLOTS', {detail: window.gptslots}));
-})
-
-
+    dispatchEvent(new CustomEvent('DOM_SLOTS_TO_SCRIPT', {detail: window.gptslots}));
+});
 
 
 

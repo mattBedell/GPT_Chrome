@@ -119,8 +119,8 @@ var _redux = __webpack_require__(0);
 
 var _slots = __webpack_require__(12);
 
-function getSlots() {
-    _slots.getTabSlots.apply(undefined, arguments);
+function getSlots(state) {
+    return (0, _slots.getTabSlots)(state);
 }
 
 var _default = (0, _redux.combineReducers)({
@@ -136,9 +136,9 @@ var _temp = function () {
         return;
     }
 
-    __REACT_HOT_LOADER__.register(getSlots, 'getSlots', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/index.js');
+    __REACT_HOT_LOADER__.register(getSlots, 'getSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
 
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/index.js');
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
 }();
 
 ;
@@ -793,33 +793,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // chrome.tabs.onReplaced.addListener(function callback)
 // chrome.tabs.onUpdated.addListener(function callback)
+// function getCurrentTab() {
+// return store.getState().currentTab;
+// }
+
+
+var popup = void 0;
 
 chrome.runtime.onConnect.addListener(function (port) {
-    console.log('----->>>>> CONNECTED', port.sender);
-    port.onMessage.addListener(function (msg) {
-        switch (msg.type) {
-            case 'SLOT_PAYLOAD':
-                _store2.default.dispatch((0, _index.updateSlots)(msg.payload, port.sender.tab.id));
-                port.postMessage({
-                    type: 'DISPLAY_SLOTS',
-                    payload: (0, _index2.getSlots)(_store2.default.getState())
-                });
-                console.log(_store2.default.getState());
-                break;
-        }
+  if (port.sender.url === chrome.runtime.getURL('popup.html')) {
+    port.postMessage({
+      type: 'BG_SLOTS_TO_POPUP',
+      payload: (0, _index2.getSlots)(_store2.default.getState()),
+      tabId: _store2.default.getState().currentTab
     });
+  };
+  port.onMessage.addListener(function (msg) {
+    switch (msg.type) {
+      case 'SCRIPT_SLOTS_TO_BG':
+        _store2.default.dispatch((0, _index.updateSlots)(msg.payload, port.sender.tab.id));
+        break;
+    };
+  });
 });
-
-// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     console.log(`--->>> got tab: ${tabs[0].id}`)
-// });
-
 ;
 
 var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(popup, 'popup', '/Users/mattbedell/projects/gpt_chrome/src/background/bg.js');
 }();
 
 ;
@@ -873,7 +877,7 @@ var _temp = function () {
         return;
     }
 
-    __REACT_HOT_LOADER__.register(updateSlots, 'updateSlots', '/Users/mattbedell/projects/gpt_chrome/src/background/actions/slots.js');
+    __REACT_HOT_LOADER__.register(updateSlots, 'updateSlots', '/Users/mattbedell/projects/gpt_chrome/src/actions/slots.js');
 }();
 
 ;
@@ -886,9 +890,9 @@ var _temp = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.getTabSlots = exports.currentTab = exports.tabs = undefined;
+exports.getTabSlots = exports.tabs = exports.currentTab = undefined;
 
 var _redux = __webpack_require__(0);
 
@@ -897,61 +901,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var slots = function slots() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
 
-    switch (action.type) {
-        case 'UPDATE_SLOTS':
-            return [].concat(_toConsumableArray(action.payload));
-        default:
-            return state;
-    };
-};
-
-var tabs = exports.tabs = function tabs() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments[1];
-
-    switch (action.type) {
-        case 'UPDATE_SLOTS':
-            return Object.assign({}, state, _defineProperty({}, action.tabId, slots(state, action)));
-        default:
-            return state;
-    };
+  switch (action.type) {
+    case 'UPDATE_SLOTS':
+      return [].concat(_toConsumableArray(action.payload));
+    default:
+      return state;
+  };
 };
 
 var currentTab = exports.currentTab = function currentTab() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var action = arguments[1];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var action = arguments[1];
 
-    if (action.type) return '' + action.tabId;
-    return state;
+  if (action && action.tabId) return action.tabId;
+  return state;
 };
 
-var getTabSlots = exports.getTabSlots = function getTabSlots(state, tabId) {
-    return state.tabs[tabId];
+var tabs = exports.tabs = function tabs() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'UPDATE_SLOTS':
+      return Object.assign({}, state, _defineProperty({}, currentTab(state, action), slots(state, action)));
+    default:
+      return state;
+  };
+};
+
+var getTabSlots = exports.getTabSlots = function getTabSlots(state) {
+  return state.tabs[state.currentTab];
 };
 
 // let state_shape = {
-//     '32134': {
-//         slots: []
-//     },
+// '32134': {
+// slots: []
+// },
 // }
 
 ;
 
 var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
 
-    __REACT_HOT_LOADER__.register(tabs, 'tabs', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/slots.js');
+  __REACT_HOT_LOADER__.register(currentTab, 'currentTab', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
 
-    __REACT_HOT_LOADER__.register(currentTab, 'currentTab', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/slots.js');
+  __REACT_HOT_LOADER__.register(tabs, 'tabs', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
 
-    __REACT_HOT_LOADER__.register(getTabSlots, 'getTabSlots', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/slots.js');
+  __REACT_HOT_LOADER__.register(getTabSlots, 'getTabSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
 
-    __REACT_HOT_LOADER__.register(slots, 'slots', '/Users/mattbedell/projects/gpt_chrome/src/background/reducers/slots.js');
+  __REACT_HOT_LOADER__.register(slots, 'slots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
 }();
 
 ;
@@ -964,7 +968,7 @@ var _temp = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _redux = __webpack_require__(0);
@@ -975,20 +979,38 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_index2.default);
+var intitialState = {
+    currentTab: '1234567',
+    tabs: {
+        '1234567': [{
+            adUnit: 'Leaderboard_1',
+            adUnitPath: '123455/Leaderboard_1',
+            div: 'ad-div-leaderboard',
+            divExists: true,
+            targeting: [{
+                key: 'hello',
+                val: 'world'
+            }]
+        }]
+    }
+};
+
+var store = (0, _redux.createStore)(_index2.default, intitialState);
 
 var _default = store;
 exports.default = _default;
 ;
 
 var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
+    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+        return;
+    }
 
-  __REACT_HOT_LOADER__.register(store, 'store', '/Users/mattbedell/projects/gpt_chrome/src/background/store.js');
+    __REACT_HOT_LOADER__.register(intitialState, 'intitialState', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/background/store.js');
+    __REACT_HOT_LOADER__.register(store, 'store', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
+
+    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
 }();
 
 ;

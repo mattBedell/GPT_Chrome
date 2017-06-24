@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateSlots } from './../../../actions/index.js';
+import { getSlots } from './../../../reducers/index.js';
 
 import Slot from './../../Slot/index.jsx';
 
@@ -10,7 +10,7 @@ class Slots extends Component {
         return this.props.slots.map((slot, i) => {
             return (
                 <Slot
-                    key={`${slot.name}${i}`}
+                    key={`${slot.adUnit}${i}`}
                     {...slot}
                 />
             )
@@ -26,7 +26,7 @@ class Slots extends Component {
 }
 const mapStateToProps = state => {
     return {
-        slots: state.slots
+        slots: getSlots(state, state.currentTab)
     };
 }
 export default connect(mapStateToProps)(Slots);
