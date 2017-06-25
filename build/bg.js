@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/build";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 29);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,9 +73,9 @@
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createStore__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__combineReducers__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bindActionCreators__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__applyMiddleware__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__compose__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_warning__ = __webpack_require__(7);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createStore", function() { return __WEBPACK_IMPORTED_MODULE_0__createStore__["a"]; });
@@ -111,34 +111,58 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.getSlots = getSlots;
+exports.bgStore = exports.appStore = undefined;
+exports.getSlotsByTab = getSlotsByTab;
+exports.getAllSlots = getAllSlots;
 
 var _redux = __webpack_require__(0);
 
-var _slots = __webpack_require__(12);
+var _slots = __webpack_require__(13);
 
-function getSlots(state) {
-    return (0, _slots.getTabSlots)(state);
+var _tabs = __webpack_require__(14);
+
+function getSlotsByTab(state, tabId) {
+  return (0, _slots.getSlotsByTabId)(state, tabId);
+};
+
+function getAllSlots(state) {
+  return (0, _slots.getSlots)(state);
 }
 
+var appStore = exports.appStore = (0, _redux.combineReducers)({
+  slots: _slots.slots,
+  currentTab: _tabs.currentTab
+});
+
+var bgStore = exports.bgStore = (0, _redux.combineReducers)({
+  slots: _slots.slots,
+  currentTab: _tabs.currentTab
+});
+
 var _default = (0, _redux.combineReducers)({
-    tabs: _slots.tabs,
-    currentTab: _slots.currentTab
+  slots: _slots.slots,
+  currentTab: _tabs.currentTab
 });
 
 exports.default = _default;
 ;
 
 var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
 
-    __REACT_HOT_LOADER__.register(getSlots, 'getSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
+  __REACT_HOT_LOADER__.register(getSlotsByTab, 'getSlotsByTab', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
 
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
+  __REACT_HOT_LOADER__.register(getAllSlots, 'getAllSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
+
+  __REACT_HOT_LOADER__.register(appStore, 'appStore', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
+
+  __REACT_HOT_LOADER__.register(bgStore, 'bgStore', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/reducers/index.js');
 }();
 
 ;
@@ -148,7 +172,7 @@ var _temp = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__root_js__ = __webpack_require__(22);
 
 
 /** Built-in value references. */
@@ -162,9 +186,9 @@ var Symbol = __WEBPACK_IMPORTED_MODULE_0__root_js__["a" /* default */].Symbol;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(23);
 
 
 
@@ -468,7 +492,7 @@ function compose() {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ActionTypes; });
 /* harmony export (immutable) */ __webpack_exports__["a"] = createStore;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_isPlainObject__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_symbol_observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_symbol_observable__);
 
 
@@ -781,7 +805,7 @@ module.exports = g;
 "use strict";
 
 
-var _store = __webpack_require__(13);
+var _store = __webpack_require__(15);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -791,27 +815,34 @@ var _index2 = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// let store = storeInit('bgStore');
 // chrome.tabs.onReplaced.addListener(function callback)
 // chrome.tabs.onUpdated.addListener(function callback)
 // function getCurrentTab() {
 // return store.getState().currentTab;
 // }
-
-
-var popup = void 0;
+chrome.tabs.onActivated.addListener(function (activeTab) {
+  _store2.default.dispatch((0, _index.changeTab)(activeTab.tabId));
+});
 
 chrome.runtime.onConnect.addListener(function (port) {
   if (port.sender.url === chrome.runtime.getURL('popup.html')) {
+    var tabId = _store2.default.getState().currentTab;
+    console.log('SENDING SLOTS: ', (0, _index2.getSlotsByTab)(_store2.default.getState(), tabId));
     port.postMessage({
       type: 'BG_SLOTS_TO_POPUP',
-      payload: (0, _index2.getSlots)(_store2.default.getState()),
-      tabId: _store2.default.getState().currentTab
+      payload: (0, _index2.getSlotsByTab)(_store2.default.getState(), tabId),
+      tabId: tabId
     });
   };
+
   port.onMessage.addListener(function (msg) {
+    var tabId = port.sender.tab.id;
+    msg.payload.tabId = tabId;
     switch (msg.type) {
-      case 'SCRIPT_SLOTS_TO_BG':
-        _store2.default.dispatch((0, _index.updateSlots)(msg.payload, port.sender.tab.id));
+      case 'SCRIPT_SLOT_TO_BG':
+        _store2.default.dispatch((0, _index.updateSlots)([msg.payload], tabId));
+        console.log('STATE: ', _store2.default.getState());
         break;
     };
   });
@@ -822,8 +853,6 @@ var _temp = function () {
   if (typeof __REACT_HOT_LOADER__ === 'undefined') {
     return;
   }
-
-  __REACT_HOT_LOADER__.register(popup, 'popup', '/Users/mattbedell/projects/gpt_chrome/src/background/bg.js');
 }();
 
 ;
@@ -838,11 +867,14 @@ var _temp = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.updateSlots = undefined;
+exports.changeTab = exports.updateSlots = undefined;
 
 var _slots = __webpack_require__(11);
 
+var _tabs = __webpack_require__(12);
+
 exports.updateSlots = _slots.updateSlots;
+exports.changeTab = _tabs.changeTab;
 ;
 
 var _temp = function () {
@@ -892,56 +924,12 @@ var _temp = function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getTabSlots = exports.tabs = exports.currentTab = undefined;
-
-var _redux = __webpack_require__(0);
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var slots = function slots() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case 'UPDATE_SLOTS':
-      return [].concat(_toConsumableArray(action.payload));
-    default:
-      return state;
+var changeTab = exports.changeTab = function changeTab(tabId) {
+  return {
+    type: 'CHANGE_TAB',
+    tabId: tabId
   };
 };
-
-var currentTab = exports.currentTab = function currentTab() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var action = arguments[1];
-
-  if (action && action.tabId) return action.tabId;
-  return state;
-};
-
-var tabs = exports.tabs = function tabs() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  switch (action.type) {
-    case 'UPDATE_SLOTS':
-      return Object.assign({}, state, _defineProperty({}, currentTab(state, action), slots(state, action)));
-    default:
-      return state;
-  };
-};
-
-var getTabSlots = exports.getTabSlots = function getTabSlots(state) {
-  return state.tabs[state.currentTab];
-};
-
-// let state_shape = {
-// '32134': {
-// slots: []
-// },
-// }
-
 ;
 
 var _temp = function () {
@@ -949,13 +937,7 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(currentTab, 'currentTab', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
-
-  __REACT_HOT_LOADER__.register(tabs, 'tabs', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
-
-  __REACT_HOT_LOADER__.register(getTabSlots, 'getTabSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
-
-  __REACT_HOT_LOADER__.register(slots, 'slots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
+  __REACT_HOT_LOADER__.register(changeTab, 'changeTab', '/Users/mattbedell/projects/gpt_chrome/src/actions/tabs.js');
 }();
 
 ;
@@ -968,7 +950,90 @@ var _temp = function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
+});
+exports.getSlots = exports.getSlotsByTabId = exports.slots = undefined;
+
+var _redux = __webpack_require__(0);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var slots = exports.slots = function slots() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case 'UPDATE_SLOTS':
+      return [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
+  }
+  return state;
+};
+
+var getSlotsByTabId = exports.getSlotsByTabId = function getSlotsByTabId(state, tabId) {
+  return state.slots.filter(function (slot) {
+    return slot.tabId == tabId;
+  });
+};
+
+var getSlots = exports.getSlots = function getSlots(state) {
+  return state.slots;
+};
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(slots, 'slots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
+
+  __REACT_HOT_LOADER__.register(getSlotsByTabId, 'getSlotsByTabId', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
+
+  __REACT_HOT_LOADER__.register(getSlots, 'getSlots', '/Users/mattbedell/projects/gpt_chrome/src/reducers/slots.js');
+}();
+
+;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var currentTab = exports.currentTab = function currentTab() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var action = arguments[1];
+
+  if (typeof action !== 'undefined' && action.tabId) {
+    return action.tabId;
+  }
+  return state;
+};
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(currentTab, 'currentTab', '/Users/mattbedell/projects/gpt_chrome/src/reducers/tabs.js');
+}();
+
+;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 
 var _redux = __webpack_require__(0);
@@ -979,50 +1044,29 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var intitialState = {
-    currentTab: '1234567',
-    tabs: {
-        '1234567': [{
-            adUnit: 'Leaderboard_1',
-            adUnitPath: '123455/Leaderboard_1',
-            div: 'ad-div-leaderboard',
-            divExists: true,
-            targeting: [{
-                key: 'hello',
-                val: 'world'
-            }]
-        }]
-    }
-};
+var _default = (0, _redux.createStore)(_index2.default);
 
-var store = (0, _redux.createStore)(_index2.default, intitialState);
-
-var _default = store;
 exports.default = _default;
 ;
 
 var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
 
-    __REACT_HOT_LOADER__.register(intitialState, 'intitialState', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
-
-    __REACT_HOT_LOADER__.register(store, 'store', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
 }();
 
 ;
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(20);
 
 
 
@@ -1054,7 +1098,7 @@ function baseGetTag(value) {
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1066,11 +1110,11 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__overArg_js__ = __webpack_require__(21);
 
 
 /** Built-in value references. */
@@ -1080,7 +1124,7 @@ var getPrototype = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__overArg_js
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1134,7 +1178,7 @@ function getRawTag(value) {
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1163,7 +1207,7 @@ function objectToString(value) {
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1185,11 +1229,11 @@ function overArg(func, transform) {
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__ = __webpack_require__(17);
 
 
 /** Detect free variable `self`. */
@@ -1202,7 +1246,7 @@ var root = __WEBPACK_IMPORTED_MODULE_0__freeGlobal_js__["a" /* default */] || fr
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1238,7 +1282,7 @@ function isObjectLike(value) {
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1294,7 +1338,7 @@ function applyMiddleware() {
 }
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1348,7 +1392,7 @@ function bindActionCreators(actionCreators, dispatch) {
 }
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1488,14 +1532,14 @@ function combineReducers(reducers) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(28);
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1505,7 +1549,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ponyfill = __webpack_require__(27);
+var _ponyfill = __webpack_require__(29);
 
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -1528,10 +1572,10 @@ if (typeof self !== 'undefined') {
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(28)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(30)(module)))
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1560,7 +1604,7 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1588,7 +1632,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(9);

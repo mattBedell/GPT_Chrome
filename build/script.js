@@ -22,9 +22,9 @@ port.onMessage.addListener(msg => {
   };
 });
 
-addEventListener('DOM_SLOTS_TO_SCRIPT', e => {
+addEventListener('DOM_SLOT_TO_SCRIPT', e => {
   port.postMessage({
-    type: 'SCRIPT_SLOTS_TO_BG',
+    type: 'SCRIPT_SLOT_TO_BG',
     payload: e.detail,
   });
 });
