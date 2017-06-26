@@ -826,7 +826,7 @@ chrome.tabs.onActivated.addListener(function (activeTab) {
 });
 
 chrome.runtime.onConnect.addListener(function (port) {
-  if (port.sender.url === chrome.runtime.getURL('popup.html')) {
+  if (port.sender.url === chrome.runtime.getURL('index.html')) {
     var tabId = _store2.default.getState().currentTab;
     console.log('SENDING SLOTS: ', (0, _index2.getSlotsByTab)(_store2.default.getState(), tabId));
     port.postMessage({
@@ -1044,6 +1044,47 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var inititalState = {
+  currentTab: 1234567,
+  slots: [{
+    divExists: false,
+    divId: "ad-div-ros_300x250_btm",
+    name: "ROS_300x250_BTM",
+    path: "/33049290/GREATIST/ROS_300x250_BTM",
+    targeting: [{
+      key: 'keywords',
+      val: ['science', 'space', 'aliens']
+    }, {
+      key: 'type',
+      val: ['article']
+    }]
+  }, {
+    divExists: true,
+    divId: "ad-div-ros_flex_300x600",
+    name: "ROS_Flex_300x250_300x600",
+    path: "/33049290/GREATIST/ROS_Flex_300x250_300x600",
+    targeting: [{
+      key: 'keywords',
+      val: ['science', 'space', 'aliens']
+    }, {
+      key: 'type',
+      val: ['article']
+    }]
+  }, {
+    divExists: true,
+    divId: "ad-div-ros_flex_300x250",
+    name: "ROS_Flex_300x250_300x600",
+    path: "/33049290/GREATIST/ROS_Flex_300x250_300x600",
+    targeting: [{
+      key: 'keywords',
+      val: ['science', 'space', 'aliens']
+    }, {
+      key: 'type',
+      val: ['article']
+    }]
+  }]
+};
+
 var _default = (0, _redux.createStore)(_index2.default);
 
 exports.default = _default;
@@ -1053,6 +1094,8 @@ var _temp = function () {
   if (typeof __REACT_HOT_LOADER__ === 'undefined') {
     return;
   }
+
+  __REACT_HOT_LOADER__.register(inititalState, 'inititalState', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
 
   __REACT_HOT_LOADER__.register(_default, 'default', '/Users/mattbedell/projects/gpt_chrome/src/store.js');
 }();

@@ -1,0 +1,33 @@
+.controlCont {
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+  width: 40px;
+  display: flex;
+}
+.arrowCont {
+  display: flex;
+  align-items: center;
+}
+.slotArrow {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid rgb(184,184,184);
+}
+.divDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: 20px;
+}
+.divIcon {
+  color: rgb(213,234,218);
+  font-size: .7em;
+}
+.divTrue {
+  background-color: rgb(52,168,83);
+  border: 1px solid rgb(213,234,218)
+}

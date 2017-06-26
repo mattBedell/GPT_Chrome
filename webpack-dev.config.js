@@ -3,20 +3,16 @@ const path = require('path');
 
 const APP_ENTRY = path.join(__dirname, 'src/index.jsx');
 const BG_DIR = /src\/background/
-const APP_DIR = path.join(__dirname, 'src');
-const BUILD_DIR = path.join(__dirname, '/build');
+const APP_DIR = path.resolve(__dirname, 'src');
+const BUILD_DIR = path.resolve(__dirname, 'build');
 
 const config = {
     devtool: 'source-map',
-    entry: [
-            'webpack-dev-server/client?http://localhost:3000',
-            'webpack/hot/only-dev-server',
-            APP_ENTRY
-    ],
+    entry: APP_ENTRY,
     output: {
         path: BUILD_DIR,
-        publicPath: '/build',
-        filename: '[name].js',
+        publicPath: '/',
+        filename: 'main.js'
     },
     module: {
         loaders: [

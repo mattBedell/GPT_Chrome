@@ -14,7 +14,7 @@ chrome.tabs.onActivated.addListener(activeTab => {
 
 
 chrome.runtime.onConnect.addListener(port => {
-  if (port.sender.url === chrome.runtime.getURL('popup.html')) {
+  if (port.sender.url === chrome.runtime.getURL('index.html')) {
     let tabId = store.getState().currentTab;
     console.log('SENDING SLOTS: ', getSlotsByTab(store.getState(), tabId))
     port.postMessage({

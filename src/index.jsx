@@ -13,18 +13,18 @@ import App from './components/app.jsx';
 chrome();
 
 const render = Component => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider store={store}>
-                <Component />
-            </Provider>
-        </AppContainer>,
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
     document.getElementById('root')
-)
+  )
 }
 
 render(App)
 
 if (module.hot) {
-    module.hot.accept('./components/app.jsx', () => { render(App) })
+  module.hot.accept('./components/app.jsx', () => { render(App) })
 };
