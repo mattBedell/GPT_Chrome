@@ -22,6 +22,7 @@ function configSlotInfo(slot) {
     divId,
     divExists: document.querySelector(`#${divId}`) ? true : false,
     targeting: getTargeting(slot),
+    ident: `${path.split('/')[1]}${name}${divId}`
   };
   window.gptslots.push(configuredSlot);
   return configuredSlot;
