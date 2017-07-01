@@ -46,4 +46,4 @@ const inititalState = {
 };
 
 
-export default createStore(rootReducer);
+export default createStore(bgStore);

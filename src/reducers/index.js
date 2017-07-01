@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { slots, getSlotsByTabId, getSlots } from './slots.js';
-import { currentTab } from './tabs.js';
+import { currentTab, tabs } from './tabs.js';
 
 export function getSlotsByTab(state, tabId) {
   return getSlotsByTabId(state, tabId);
@@ -17,7 +17,8 @@ export const appStore = combineReducers({
 
 export const bgStore = combineReducers({
   slots,
-  currentTab
+  currentTab,
+  tabs
 });
 
 export default combineReducers({
