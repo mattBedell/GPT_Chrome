@@ -8,8 +8,11 @@ import { getSlotsByTab } from './../reducers/index.js'
 // function getCurrentTab() {
 // return store.getState().currentTab;
 // }
-chrome.tabs.onActivated.addListener(activeTab => {
-  store.dispatch(changeTab(activeTab.tabId))
+// chrome.tabs.onActivated.addListener(activeTab => {
+//   store.dispatch(changeTab(activeTab.tabId))
+// })
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+  console.log(tabId, info, tab);
 })
 
 
