@@ -11,14 +11,14 @@
     },
     "background": {
         "persistant": true,
-        "scripts": ["./../build/bg.js"]
+        "scripts": ["/build/bg.js"]
     },
     "content_scripts":[{
         "matches":["http://*/*", "https://*/*"],
         "js": ["script.js"],
         "run_at": "document_start"
     }],
-    "web_accessible_resources": ["inject_script.js", "./../build/main.js"],
+    "web_accessible_resources": ["inject_script.js", "/build/main.js"],
     "permissions": [
         "activeTab"
     ]
