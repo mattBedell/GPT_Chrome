@@ -1,26 +1,29 @@
-import store from './../store.js';
-import { updateSlots, changeTab } from './../actions/index.js';
-import { getSlotsByTab } from './../reducers/index.js'
-
+import storeConstructor from './../store.js';
+import { updateSlots, clearSlots, changeTab } from './../actions/index.js';
+import { getSlotsByTab, getCurrentTab } from './../reducers/index.js'
+let store = storeConstructor('bgStore');
 // let store = storeInit('bgStore');
 // chrome.tabs.onReplaced.addListener(function callback)
-// chrome.tabs.onUpdated.addListener(function callback)
-// function getCurrentTab() {
-// return store.getState().currentTab;
-// }
-// chrome.tabs.onActivated.addListener(activeTab => {
-//   store.dispatch(changeTab(activeTab.tabId))
-// })
-chrome.tabs.onUpdated.addListener((tabId, tabInfo, tab) => {
-  // console.log('TabID: ', tabId);
-  // console.log('TAB INFO: ', tabInfo);
-  // console.log('TAB: ', tab);
+window.getState = () => store.getState();
+
+chrome.tabs.onActivated.addListener((active) => {
+  store.dispatch(changeTab(active.tabId));
+});
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+  store.dispatch(clearSlots(tabId));
+});
+
+chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+  if(change.status === 'loading') {
+    store.dispatch(clearSlots(getCurrentTab(store.getState())))
+  }
 })
 
 
 chrome.runtime.onConnect.addListener(port => {
   if (port.sender.url === chrome.runtime.getURL('index.html')) {
-    let tabId = store.getState().currentTab;
+    let tabId = getCurrentTab(store.getState());
     console.log('SENDING SLOTS: ', getSlotsByTab(store.getState(), tabId))
     port.postMessage({
       type: 'BG_SLOTS_TO_POPUP',
@@ -35,7 +38,6 @@ chrome.runtime.onConnect.addListener(port => {
     switch (msg.type) {
       case 'SCRIPT_SLOT_TO_BG':
         store.dispatch(updateSlots([msg.payload], tabId));
-        console.log('STATE: ', store.getState())
         break;
     };
   });

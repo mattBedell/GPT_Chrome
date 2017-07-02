@@ -1,7 +1,9 @@
-import { updateSlots } from './slots.js';
-import { changeTab } from './tabs.js';
+import { updateSlots, clearSlots } from './slots.js';
+import { changeTab, updateTab } from './tabs.js';
 
 export {
     updateSlots,
-    changeTab
+    clearSlots,
+    changeTab,
+    updateTab
 };

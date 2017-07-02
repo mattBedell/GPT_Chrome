@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import { updateSlots } from './actions/index.js';
 import chrome from './chrome/index.js';
 
-import store from './store.js';
+import storeConstructor from './store.js';
 
+let store = storeConstructor('appStore');
 import App from './components/app.jsx';
 
-chrome();
+chrome(store);
 
 const render = Component => {
   ReactDOM.render(

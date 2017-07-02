@@ -46,4 +46,7 @@ const inititalState = {
 };
 
 
-export default createStore(bgStore);
+export default function(type) {
+  if(type === 'bgStore') return createStore(bgStore)
+  return createStore(appStore);
+};

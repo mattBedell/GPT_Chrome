@@ -1,7 +1,6 @@
-import store from './../store.js';
 import { updateSlots } from '../actions/index.js';
 
-export default function () {
+export default function (store) {
   const port = chrome.runtime.connect();
   port.onMessage.addListener(msg => {
     console.log('MESSAGE', msg)

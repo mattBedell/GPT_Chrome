@@ -4,3 +4,8 @@ export const changeTab = tabId => {
     tabId
   }
 };
+
+export const updateTab = status => {
+  type: 'UPDATE_TAB',
+  status
+}

@@ -20,6 +20,7 @@
     }],
     "web_accessible_resources": ["inject_script.js", "/build/main.js"],
     "permissions": [
-        "activeTab"
+        "activeTab",
+        "history"
     ]
 }
