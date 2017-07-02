@@ -12,3 +12,10 @@ export const clearSlots = (tabId) => {
     tabId
   }
 }
+
+export const updateSlotTargs = payload => {
+  return {
+    type: 'UPDATE_SLOT_TARGS',
+    payload
+  }
+}
