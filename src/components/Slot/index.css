@@ -1,7 +1,27 @@
 .slotCont {
   display: flex;
-  padding-left: 10px;
   background-color: #FAFAFA;
-  height: 20px;
-  border-bottom: 1px solid rgb(241,241,241);
+  height: 30px;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+.arrowCont {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 15px;
+  height: 100%;
+  padding-right: 5px;
+}
+.slotArrow {
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid rgb(184,184,184);
+  transition: transform .2s;
+}
+.slotArrowOn {
+  transform: rotate(90deg);
 }

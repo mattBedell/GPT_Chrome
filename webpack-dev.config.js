@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const APP_ENTRY = path.join(__dirname, 'src/index.jsx');
-const BG_DIR = /src\/background/
+const BG_DIR = /src\/background/;
 const APP_DIR = path.resolve(__dirname, 'src');
 const BUILD_DIR = path.join(__dirname, '/extension/build');
 

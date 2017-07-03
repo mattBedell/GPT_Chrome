@@ -6,7 +6,7 @@ var config = require('./webpack-dev.config');
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
-  contentBase: path.resolve('build'),
+  contentBase: path.resolve('extension'),
   stats: {
     colors: true
   }

@@ -15,7 +15,8 @@ const inititalState = {
     {
       key: 'type',
       val: ['article']
-    }]
+    }],
+    slotIdent: "1423423-ad-div-ros_300x250_btm"
   },{
     divExists: true,
     divId: "ad-div-ros_flex_300x600",
@@ -28,7 +29,9 @@ const inititalState = {
     {
       key: 'type',
       val: ['article']
-    }]
+    }],
+    slotIdent: "1423423-ad-div-ros_flex_300x600",
+    isRefreshed: true,
   },{
     divExists: true,
     divId: "ad-div-ros_flex_300x250",
@@ -41,7 +44,9 @@ const inititalState = {
     {
       key: 'type',
       val: ['article']
-    }]
+    }],
+    slotIdent: "1423423-ad-div-ros_flex_300x250",
+    isRefreshed: true,
   }]
 };
 
