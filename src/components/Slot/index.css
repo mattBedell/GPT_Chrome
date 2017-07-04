@@ -5,14 +5,17 @@
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
+  margin-bottom: 3px;
+  color: rgb(105,105,105);
 }
 .arrowCont {
+  cursor: pointer;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 15px;
   height: 100%;
-  padding-right: 5px;
+  padding-right: 9px;
 }
 .slotArrow {
   width: 0;

@@ -4,3 +4,9 @@ export const selectSlot = slotIdent => {
     slotIdent
   }
 }
+export const selectSlotNav = slotNav => {
+  return {
+    type: 'SELECT_SLOT_NAV',
+    slotNav
+  }
+};

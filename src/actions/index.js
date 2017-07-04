@@ -1,6 +1,6 @@
 import { updateSlots, clearSlots, updateSlotTargs } from './slots.js';
 import { changeTab, updateTab } from './tabs.js';
-import { selectSlot } from './ui.js';
+import { selectSlot, selectSlotNav } from './ui.js';
 
 export {
     updateSlots,
@@ -9,4 +9,5 @@ export {
     changeTab,
     updateTab,
     selectSlot,
+    selectSlotNav,
 };

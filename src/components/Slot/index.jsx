@@ -6,10 +6,6 @@ const toggleSelected = props => {
   if(props.selectedSlot === props.slotIdent) return true;
   return false;
 }
-const generateDetail = (props) => {
-  if(toggleSelected(props)) return <SlotDetail />
-}
-
 const Slot = props => {
   return (
     <div className="slotCont">
@@ -21,7 +17,6 @@ const Slot = props => {
         isRefreshed = {props.isRefreshed}
       />
       <div>{props.name}</div>
-      <div>{generateDetail(props)}</div>
     </div>
   )
 };

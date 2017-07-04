@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllSlots, getUi } from './../../../reducers/index.js';
-import { selectSlot } from './../../../actions/index.js';
+import { selectSlot, selectSlotNav } from './../../../actions/index.js';
 
 import Slot from './../../Slot/index.jsx';
 import SlotDetail from './../../SlotDetail/index.jsx';
 
 
 class Slots extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSlotSelect = this.handleSlotSelect.bind(this)
+    this.handleSlotNavSelect = this.props.selectSlotNav.bind(this)
   }
   genarateSlots() {
     return this.props.slots.map((slot, i) => {
@@ -41,6 +42,8 @@ class Slots extends Component {
       return (<SlotDetail
                 key={`${slot.slotIdent}-detail`}
                 selectedSlot={this.props.ui.selectedSlot}
+                selectedSlotNav={this.props.ui.selectedSlotNav}
+                handleSlotNavSelect={this.handleSlotNavSelect}
                 {...slot}
       />)}
   }
@@ -60,7 +63,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    selectSlot: (slotIdent) => dispatch(selectSlot(slotIdent)),
+    selectSlot: slotIdent => dispatch(selectSlot(slotIdent)),
+    selectSlotNav: slotNav => dispatch(selectSlotNav(slotNav)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Slots);

@@ -1,0 +1,22 @@
+#navContainer {
+  background-color: rgb(240,240,240);
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+.slotNavBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: .7em;
+  height: 100%;
+  text-align: center;
+  padding: 0px 10px 0px 10px;
+  font-weight: bold;
+  color: rgb(184,184,184);
+}
+.slotNavBtnOn {
+  color: rgb(105,105,105);
+  background-color: #FAFAFA;
+}

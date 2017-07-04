@@ -11,7 +11,7 @@ import storeConstructor from './store.js';
 let store = storeConstructor('appStore');
 import App from './components/app.jsx';
 
-chrome(store);
+// chrome(store);
 
 const render = Component => {
   ReactDOM.render(
