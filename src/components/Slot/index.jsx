@@ -16,7 +16,7 @@ const Slot = props => {
         divExists = {props.divExists}
         isRefreshed = {props.isRefreshed}
       />
-      <div>{props.name}</div>
+      <div className="slotName" onClick={() => props.handleSlotSelect(props.slotIdent)}>{props.name}</div>
     </div>
   )
 };

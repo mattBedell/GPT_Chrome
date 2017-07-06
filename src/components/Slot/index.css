@@ -28,3 +28,10 @@
 .slotArrowOn {
   transform: rotate(90deg);
 }
+.slotName {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
