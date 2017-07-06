@@ -58,11 +58,13 @@ function getTargeting(slot) {
 function patchSetTargeting(key, val) {
   let { slotIdent } = this;
   this._setTargeting(key, val);
+  let targVals = val;
+  if(typeof val !== 'object') targVals = [val]
   dispatchEvent(new CustomEvent('DOM_SLOT_TARG_TO_SCRIPT', {detail: {
     slotIdent,
     targObj: {
       key,
-      val
+      val: targVals,
     }
   }}))
 }

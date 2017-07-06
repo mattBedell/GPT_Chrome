@@ -1,5 +1,7 @@
 .targCont {
   padding: 5px;
+  height: 150px;
+  overflow-y: scroll;
 }
 .keyValCont {
   display: flex;
@@ -7,6 +9,7 @@
 }
 .valCont {
   display: flex;
+  flex-wrap: wrap;
 }
 .keyValItem {
   padding: 3px 4px 3px 4px;
@@ -18,6 +21,8 @@
     font-weight: bold;
     color: rgb(92,40,114);
     margin-right: 3px;
+    display: flex;
+    align-items: center;
 }
 .valItem {
   background-color: white;
