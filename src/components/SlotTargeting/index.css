@@ -1,0 +1,27 @@
+.targCont {
+  padding: 5px;
+}
+.keyValCont {
+  display: flex;
+  padding: 3px 0px 3px 0px;
+}
+.valCont {
+  display: flex;
+}
+.keyValItem {
+  padding: 3px 4px 3px 4px;
+  background-color: rgb(240,240,240);
+  font-size: .9em;
+  border: 1px solid rgb(225,225,225);
+}
+.keyItem {
+    font-weight: bold;
+    color: rgb(92,40,114);
+    margin-right: 3px;
+}
+.valItem {
+  background-color: white;
+  color: rgb(144,144,144);
+  margin-right: 3px;
+  border: 1px solid rgb(240,240,240);
+}
