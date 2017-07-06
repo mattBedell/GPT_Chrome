@@ -4,6 +4,18 @@ window.gptslots = [];
 const ident = Math.floor(Math.random()*1000000000);
 googletag.cmd.push(function () {
   console.log('---->>>> INIT... QUEUE POSITION', googletag.cmd.j);
+  window._gptRefresh = googletag.pubads().refresh.bind(googletag.pubads());
+  googletag.pubads().__proto__.refresh = args => {
+    console.log('REFRESH ARGS: ', args);
+    let whichSlots;
+    if(typeof args === 'undefined') {
+      whichSlots = 'ALL';
+    } else {
+      whichSlots = args.map(slot => slot.slotIdent);
+    }
+    window._gptRefresh(args);
+    dispatchEvent(new CustomEvent('DOM_REFRESH_SLOTS_TO_SCRIPT', { detail: { whichSlots } }));
+  };
   window._defineSlot = window.googletag.defineSlot;
   window.googletag.defineSlot = (...args) => {
     console.log(' --->>> slot defined')
@@ -27,7 +39,8 @@ function configSlotInfo(slot) {
     divId,
     divExists: document.querySelector(`#${divId}`) ? true : false,
     targeting: [],
-    slotIdent
+    slotIdent,
+    isRefreshed: 0,
   };
   window.gptslots.push(configuredSlot);
   return configuredSlot;

@@ -4,6 +4,24 @@ function updateTargeting(slotObj, action) {
   let targeting = [...slotObj.targeting, action.payload.targObj];
   return Object.assign({}, slotObj, { targeting });
 };
+function updateSlotRefresh(state, action) {
+  if(action.payload.whichSlots === 'ALL') {
+    return state.map(slot => {
+      slot.isRefreshed += 1;
+      return slot;
+    })
+  }
+  // TODO - CHANGE NESTED LOOP
+  let stateToUpdate = state.map(slot => slot);
+  action.payload.whichSlots.forEach(slotIdent => {
+    stateToUpdate.forEach(slot => {
+      if(slot.slotIdent === slotIdent) {
+        slot.isRefreshed += 1;
+      }
+    })
+  });
+  return stateToUpdate;
+};
 
 
 
@@ -19,8 +37,9 @@ export const slots = (state = [], action) => {
     return state.map(slot => {
       if(slot.slotIdent === action.payload.slotIdent) return updateTargeting(slot, action);
       return slot;
-    })
-    break;
+    });
+    case 'UPDATE_SLOT_REFRESH':
+    return updateSlotRefresh(state, action);
     default:
     return state;
   }

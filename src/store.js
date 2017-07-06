@@ -53,5 +53,5 @@ const inititalState = {
 
 export default function(type) {
   if(type === 'bgStore') return createStore(bgStore)
-  return createStore(appStore,inititalState);
+  return createStore(appStore);
 };

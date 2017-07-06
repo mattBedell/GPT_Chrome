@@ -33,4 +33,10 @@ addEventListener('DOM_SLOT_TARG_TO_SCRIPT', e => {
     type: 'SCRIPT_SLOT_TARG_TO_BG',
     payload: e.detail
   })
-})
+});
+addEventListener('DOM_REFRESH_SLOTS_TO_SCRIPT', e => {
+  port.postMessage({
+    type: 'SCRIPT_REFRESH_SLOTS_TO_BG',
+    payload: e.detail
+  })
+});

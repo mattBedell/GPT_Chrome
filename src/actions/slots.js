@@ -19,3 +19,9 @@ export const updateSlotTargs = payload => {
     payload
   }
 }
+export const updateSlotRefresh = payload => {
+  return {
+    type: 'UPDATE_SLOT_REFRESH',
+    payload
+  }
+}
