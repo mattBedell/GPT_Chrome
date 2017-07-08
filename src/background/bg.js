@@ -1,5 +1,5 @@
 import storeConstructor from './../store.js';
-import { updateSlots, updateSlotTargs, updateSlotRefresh, clearSlots, changeTab } from './../actions/index.js';
+import { updateSlots, updateSlotTargs, updateSlotRefresh, updateSlotRender, clearSlots, changeTab } from './../actions/index.js';
 import { getSlotsByTab, getCurrentTab } from './../reducers/index.js'
 let store = storeConstructor('bgStore');
 // let store = storeInit('bgStore');
@@ -43,7 +43,11 @@ chrome.runtime.onConnect.addListener(port => {
         store.dispatch(updateSlotTargs(msg.payload));
         break;
       case 'SCRIPT_REFRESH_SLOTS_TO_BG':
-        store.dispatch(updateSlotRefresh(msg.payload))
+        store.dispatch(updateSlotRefresh(msg.payload));
+        break;
+      case 'SCRIPT_SLOT_RENDER_TO_BG':
+        // store.dispatch(updateSlotRender(msg.payload));
+        break;
     };
   });
 });
