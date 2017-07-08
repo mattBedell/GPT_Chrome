@@ -1,8 +1,21 @@
 import { combineReducers } from 'redux';
 
-function updateTargeting(slotObj, action) {
-  let targeting = [...slotObj.targeting, action.payload.targObj];
-  return Object.assign({}, slotObj, { targeting });
+function updateSlotProps(slot, props) {
+  return Object.assign({}, slot, props);
+}
+function updateSlotInList(state, slotIdent, updater) {
+  return state.map(slot => {
+    if(slot.slotIdent === slotIdent) {
+      return updater(slot);
+    }
+    return slot;
+  })
+}
+function updateTargeting(slotObj, newTargeting) {
+  let targeting = [...slotObj.targeting, newTargeting];
+  return {
+    targeting
+  };
 };
 function updateSlotRefresh(state, action) {
   if(action.payload.whichSlots === 'ALL') {
@@ -22,6 +35,9 @@ function updateSlotRefresh(state, action) {
   });
   return stateToUpdate;
 };
+function updateSlotRender(state, action) {
+
+}
 
 
 
@@ -34,12 +50,20 @@ export const slots = (state = [], action) => {
     return state.filter(slot => slot.tabId !== action.tabId);
 
     case 'UPDATE_SLOT_TARGS':
-    return state.map(slot => {
-      if(slot.slotIdent === action.payload.slotIdent) return updateTargeting(slot, action);
-      return slot;
-    });
+    // return state.map(slot => {
+    //   if(slot.slotIdent === action.payload.slotIdent) return updateTargeting(slot, action);
+    //   return slot;
+    // });
+    return updateSlotInList(state, action.payload.slotIdent, slot => {
+      return updateSlotProps(slot, updateTargeting(slot, action.payload.targObj));
+    })
+
     case 'UPDATE_SLOT_REFRESH':
     return updateSlotRefresh(state, action);
+
+    case 'UPDATE_SLOT_RENDER':
+    return updateSlotRender(state, action);
+
     default:
     return state;
   }
