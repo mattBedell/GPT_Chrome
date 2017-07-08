@@ -46,7 +46,7 @@ chrome.runtime.onConnect.addListener(port => {
         store.dispatch(updateSlotRefresh(msg.payload));
         break;
       case 'SCRIPT_SLOT_RENDER_TO_BG':
-        // store.dispatch(updateSlotRender(msg.payload));
+        store.dispatch(updateSlotRender(msg.payload));
         break;
     };
   });

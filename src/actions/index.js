@@ -7,6 +7,7 @@ export {
     clearSlots,
     updateSlotTargs,
     updateSlotRefresh,
+    updateSlotRender,
     changeTab,
     updateTab,
     selectSlot,
