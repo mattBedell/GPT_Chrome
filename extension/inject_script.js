@@ -5,11 +5,17 @@ const ident = Math.floor(Math.random()*1000000000);
 // dispatchEvent(new Event('INJECT_SUCCESS'));
 googletag.cmd.unshift(function () {
   console.log('---->>>> INIT... QUEUE POSITION', googletag.cmd.j);
+  googletag.pubads().addEventListener('slotRenderEnded', eventRenderEndedCallback);
   window._gptRefresh = googletag.pubads().refresh.bind(googletag.pubads());
   window._defineSlot = window.googletag.defineSlot;
   googletag.pubads().__proto__.refresh = patchRefresh;
   window.googletag.defineSlot = patchDefineSlot;
 });
+function eventRenderEndedCallback(e) {
+  let { slotIdent } = e.slot;
+  delete e.slot;
+  dispatchEvent(new CustomEvent('DOM_SLOT_RENDER_TO_SCRIPT', { detail: { slotIdent, renderInfo: e }}));
+}
 function patchRefresh(args) {
   let whichSlots;
   if(typeof args === 'undefined') {
@@ -42,6 +48,7 @@ function configSlotInfo(slot) {
     targeting: [],
     slotIdent,
     isRefreshed: 0,
+    renderInfo: false,
   };
   window.gptslots.push(configuredSlot);
   return configuredSlot;

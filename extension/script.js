@@ -8,19 +8,7 @@ const checkHead = setInterval(() => {
   }
 });
 
-
-
-
-
 const port = chrome.runtime.connect();
-
-port.onMessage.addListener(msg => {
-  switch (msg.type) {
-    case 'REQUEST_DOM_SLOTS':
-      dispatchEvent(new Event('REQUEST_DOM_SLOTS'));
-      break;
-  };
-});
 
 addEventListener('DOM_SLOT_TO_SCRIPT', e => {
   port.postMessage({
@@ -37,6 +25,12 @@ addEventListener('DOM_SLOT_TARG_TO_SCRIPT', e => {
 addEventListener('DOM_REFRESH_SLOTS_TO_SCRIPT', e => {
   port.postMessage({
     type: 'SCRIPT_REFRESH_SLOTS_TO_BG',
+    payload: e.detail
+  })
+});
+addEventListener('DOM_SLOT_RENDER_TO_SCRIPT', e => {
+  port.postMessage({
+    type: 'SCRIPT_SLOT_RENDER_TO_BG',
     payload: e.detail
   })
 });
