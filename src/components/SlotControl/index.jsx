@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import './index.css'
 
+const jumpToDiv = props => {
+  let { divId, divExists, tabId } = props;
+  if(divExists) {
+    console.log(tabId, chrome.tabs)
+    chrome.tabs.sendMessage(tabId, {
+      type: 'POPUP_JUMP_TO_DIV',
+      payload: divId
+    })
+  }
+}
+
 const SlotControl = props => {
   return (
     <div className="controlCont">
       <div className={`quickDisplay ${props.divExists ? 'quickDisplayTrue' : ''}`}>
-        <div className="divIcon">DIV</div>
+        <div className="divIcon" onClick={() => jumpToDiv(props)}>DIV</div>
       </div>
       <div className={`quickDisplay ${props.isRefreshed ? 'quickDisplayTrue' : ''}`}>
         <svg version="1.1" className="refreshIcon" id={props.isRefreshed ? 'refreshOn' : ''} x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">

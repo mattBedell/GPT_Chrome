@@ -13,6 +13,8 @@ const Slot = props => {
         <div className={`slotArrow ${toggleSelected(props) ? 'slotArrowOn' : ''}`}></div>
       </div>
       <SlotControl
+        divId={props.divId}
+        tabId={props.tabId}
         divExists = {props.divExists}
         isRefreshed = {props.isRefreshed}
       />

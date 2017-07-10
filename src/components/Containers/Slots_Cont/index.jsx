@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllSlots, getUi } from './../../../reducers/index.js';
+import { getAllSlots, getUi, getCurrentTab } from './../../../reducers/index.js';
 import { selectSlot, selectSlotNav } from './../../../actions/index.js';
 
 import Slot from './../../Slot/index.jsx';
@@ -20,6 +20,7 @@ class Slots extends Component {
           <Slot
             key={slot.slotIdent}
             {...slot}
+            tabId={this.props.tabId}
             selectedSlot={this.props.ui.selectedSlot}
             handleSlotSelect={this.handleSlotSelect}
           />
@@ -58,7 +59,8 @@ class Slots extends Component {
 const mapStateToProps = state => {
   return {
     slots: getAllSlots(state),
-    ui: getUi(state)
+    ui: getUi(state),
+    tabId: getCurrentTab(state),
   };
 }
 const mapDispatchToProps = dispatch => {

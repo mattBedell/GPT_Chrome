@@ -43,6 +43,9 @@ function updateSlotRender(state, action) {
 
 export const slots = (state = [], action) => {
   switch(action.type) {
+    case 'SET_STATE_FROM_BG':
+    return action.payload.slots;
+
     case 'UPDATE_SLOTS':
     return [...state, ...action.payload]
 

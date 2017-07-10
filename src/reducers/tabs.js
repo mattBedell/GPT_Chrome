@@ -11,10 +11,16 @@ const status = (state = '', action) => {
 
 
 export const currentTab = (state = '', action) => {
-  if(action.type === 'CHANGE_TAB') {
+  switch(action.type) {
+    case 'CHANGE_TAB':
     return action.tabId;
+
+    case 'SET_STATE_FROM_BG':
+    return action.payload.currentTab;
+
+    default:
+    return state;
   }
-  return state;
 }
 export const tabs = (state = {}, action) => {
   if(action.type = 'UPDATE_TAB') {

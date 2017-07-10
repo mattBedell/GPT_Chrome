@@ -2,7 +2,7 @@ window.googletag = window.googletag || {};
 window.googletag.cmd = window.googletag.cmd || [];
 window.gptslots = [];
 const ident = Math.floor(Math.random()*1000000000);
-// dispatchEvent(new Event('INJECT_SUCCESS'));
+
 googletag.cmd.unshift(function () {
   console.log('---->>>> INIT... QUEUE POSITION', googletag.cmd.j);
   googletag.pubads().addEventListener('slotRenderEnded', eventRenderEndedCallback);
@@ -11,6 +11,10 @@ googletag.cmd.unshift(function () {
   googletag.pubads().__proto__.refresh = patchRefresh;
   window.googletag.defineSlot = patchDefineSlot;
 });
+
+addEventListener('SCROLL_TO_DIV', scrollToDiv);
+
+
 function eventRenderEndedCallback(e) {
   let { slotIdent } = e.slot;
   let neededKeys = ['size', 'isEmpty', 'isBackfill','lineItemId', 'advertiserId', 'campaignId']
@@ -33,7 +37,6 @@ function patchRefresh(args) {
   dispatchEvent(new CustomEvent('DOM_REFRESH_SLOTS_TO_SCRIPT', { detail: { whichSlots } }));
 };
 function patchDefineSlot(...args) {
-  console.log(' --->>> slot defined')
   let slot = window._defineSlot(...args);
   dispatchEvent(new CustomEvent('DOM_SLOT_TO_SCRIPT', { detail: configSlotInfo(slot) }));
   slot._setTargeting = slot.setTargeting;
@@ -54,7 +57,7 @@ function configSlotInfo(slot) {
     targeting: [],
     slotIdent,
     isRefreshed: 0,
-    renderInfo: false,
+    renderInfo: [],
   };
   window.gptslots.push(configuredSlot);
   return configuredSlot;
@@ -80,6 +83,39 @@ function patchSetTargeting(key, val) {
     }
   }}))
 }
+
+function scrollToDiv(e) {
+  let div = document.body.querySelector(`#${e.detail}`);
+  if(!div) return;
+
+  let divPos = div.getBoundingClientRect();
+
+  if(divPos.top < 0) {
+
+  }
+}
+function animateScrollToDiv(timestamp) {
+  if(divPos.top < 5) {
+    
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

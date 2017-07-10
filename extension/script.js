@@ -9,6 +9,14 @@ const checkHead = setInterval(() => {
 });
 
 const port = chrome.runtime.connect();
+chrome.runtime.onMessage.addListener(msg => {
+  console.log('MESSAGE');
+  switch(msg.type) {
+    case 'POPUP_JUMP_TO_DIV':
+      dispatchEvent(new CustomEvent('SCROLL_TO_DIV', {detail: msg.payload }))
+      break;
+  }
+});
 
 addEventListener('DOM_SLOT_TO_SCRIPT', e => {
   port.postMessage({

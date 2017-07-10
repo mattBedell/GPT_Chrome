@@ -20,14 +20,14 @@ chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
   }
 })
 
-
 chrome.runtime.onConnect.addListener(port => {
   if (port.sender.url === chrome.runtime.getURL('index.html')) {
-    let tabId = getCurrentTab(store.getState());
-    console.log('SENDING SLOTS: ', getSlotsByTab(store.getState(), tabId))
+    let state = store.getState();
+    let tabId = getCurrentTab(state);
+    // console.log('SENDING SLOTS: ', getSlotsByTab(state, tabId))
     port.postMessage({
-      type: 'BG_SLOTS_TO_POPUP',
-      payload: getSlotsByTab(store.getState(), tabId),
+      type: 'INITIAL_POPUP_STATE',
+      payload: Object.assign({}, state, { slots: getSlotsByTab(state, tabId) }),
       tabId
     });
   };

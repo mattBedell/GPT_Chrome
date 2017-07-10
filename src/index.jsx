@@ -5,7 +5,6 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import { updateSlots } from './actions/index.js';
 import chrome from './chrome/index.js';
-
 import storeConstructor from './store.js';
 
 let store = storeConstructor('appStore');
