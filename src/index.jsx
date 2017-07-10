@@ -12,6 +12,7 @@ let store = storeConstructor('appStore');
 import App from './components/app.jsx';
 
 chrome(store);
+window.getState = () => store.getState();
 
 const render = Component => {
   ReactDOM.render(

@@ -13,8 +13,14 @@ googletag.cmd.unshift(function () {
 });
 function eventRenderEndedCallback(e) {
   let { slotIdent } = e.slot;
-  delete e.slot;
-  dispatchEvent(new CustomEvent('DOM_SLOT_RENDER_TO_SCRIPT', { detail: { slotIdent, renderInfo: e }}));
+  let neededKeys = ['size', 'isEmpty', 'isBackfill','lineItemId', 'advertiserId', 'campaignId']
+  let renderInfo = neededKeys.map(key => {
+    if(key === 'size') return {[key]: [`${e[key][0]}x${e[key][1]}`]};
+    return {
+      [key]: [e[key]]
+    }
+  })
+  dispatchEvent(new CustomEvent('DOM_SLOT_RENDER_TO_SCRIPT', { detail: { slotIdent, renderInfo }}));
 }
 function patchRefresh(args) {
   let whichSlots;
@@ -57,8 +63,7 @@ function configSlotInfo(slot) {
 function getTargeting(slot) {
   return slot.getTargetingKeys().map(key => {
     return {
-      key,
-      val: slot.getTargeting(key),
+      [key]: slot.getTargeting(key),
     };
   })
 };
@@ -71,8 +76,7 @@ function patchSetTargeting(key, val) {
   dispatchEvent(new CustomEvent('DOM_SLOT_TARG_TO_SCRIPT', {detail: {
     slotIdent,
     targObj: {
-      key,
-      val: targVals,
+      [key]: targVals,
     }
   }}))
 }
@@ -89,5 +93,7 @@ function patchSetTargeting(key, val) {
 //             key: `${key}`,
 //             val: `${val}`,
 //         },
-//     ]
+//     ],
+//     isRefreshed: false,
+//     renderInfo: false
 // }

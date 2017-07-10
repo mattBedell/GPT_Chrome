@@ -1,4 +1,4 @@
-import { updateSlots, clearSlots, updateSlotTargs, updateSlotRefresh } from './slots.js';
+import { updateSlots, clearSlots, updateSlotTargs, updateSlotRender, updateSlotRefresh } from './slots.js';
 import { changeTab, updateTab } from './tabs.js';
 import { selectSlot, selectSlotNav } from './ui.js';
 

@@ -50,10 +50,6 @@ export const slots = (state = [], action) => {
     return state.filter(slot => slot.tabId !== action.tabId);
 
     case 'UPDATE_SLOT_TARGS':
-    // return state.map(slot => {
-    //   if(slot.slotIdent === action.payload.slotIdent) return updateTargeting(slot, action);
-    //   return slot;
-    // });
     return updateSlotInList(state, action.payload.slotIdent, slot => {
       return updateSlotProps(slot, updateTargeting(slot, action.payload.targObj));
     })
@@ -62,7 +58,9 @@ export const slots = (state = [], action) => {
     return updateSlotRefresh(state, action);
 
     case 'UPDATE_SLOT_RENDER':
-    return updateSlotRender(state, action);
+    return updateSlotInList(state, action.payload.slotIdent, slot => {
+      return updateSlotProps(slot, { renderInfo: action.payload.renderInfo });
+    })
 
     default:
     return state;

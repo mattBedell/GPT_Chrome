@@ -9,8 +9,8 @@ const toggleSelected = (props, btnProp )=> {
 const SlotNav = props => {
   return(
     <div id="navContainer">
-      <div className={`slotNavBtn ${toggleSelected(props, 'targeting')}`}onClick={()=> props.handleSlotNavSelect('targeting')}>Targeting</div>
-      <div className={`slotNavBtn ${toggleSelected(props, 'config')}`}onClick={()=> props.handleSlotNavSelect('config')}>Config</div>
+      <div className={`slotNavBtn ${toggleSelected(props, 'targeting')}`}onClick={() => props.handleSlotNavSelect('targeting')}>Targeting</div>
+      <div className={`slotNavBtn ${toggleSelected(props, 'renderInfo')}`}onClick={() => props.handleSlotNavSelect('renderInfo')}>Render</div>
     </div>
   )
 }
