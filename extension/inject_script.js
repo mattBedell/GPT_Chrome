@@ -74,7 +74,7 @@ function getTargeting(slot) {
 function patchSetTargeting(key, val) {
   let { slotIdent } = this;
   this._setTargeting(key, val);
-  let targVals = val;
+  let targVals = typeof val === 'object' ? val : [];
   if(typeof val !== 'object') targVals = [val]
   dispatchEvent(new CustomEvent('DOM_SLOT_TARG_TO_SCRIPT', {detail: {
     slotIdent,
@@ -87,16 +87,21 @@ function patchSetTargeting(key, val) {
 function scrollToDiv(e) {
   let div = document.body.querySelector(`#${e.detail}`);
   if(!div) return;
-
-  let divPos = div.getBoundingClientRect();
-
-  if(divPos.top < 0) {
-
-  }
+  window.div = div;
+  // div.scrollIntoView()
+  // let divPos = div.getBoundingClientRect();
+  let frameId = animateScrollToDiv();
 }
+
 function animateScrollToDiv(timestamp) {
-  if(divPos.top < 5) {
-    
+  let dist = div.offsetTop - document.body.scrollTop;
+  let increment = (dist / 5) * .3;
+  if(increment >= 0 && increment < 1) increment = 1;
+  if(increment <= 0 && increment > -1) increment = -1;
+  if(Math.abs(dist) >= 5) {
+    console.log(dist, increment);
+    document.body.scrollTop += increment;
+    window.requestAnimationFrame(animateScrollToDiv);
   }
 }
 

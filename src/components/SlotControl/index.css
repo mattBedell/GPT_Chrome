@@ -22,6 +22,7 @@
   font-size: .8em;
 }
 .quickDisplayTrue {
+  cursor: pointer;
   color: rgb(22,122,198);
   border: 2px solid rgb(22,122,198);
 }

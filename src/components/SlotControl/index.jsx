@@ -4,7 +4,6 @@ import './index.css'
 const jumpToDiv = props => {
   let { divId, divExists, tabId } = props;
   if(divExists) {
-    console.log(tabId, chrome.tabs)
     chrome.tabs.sendMessage(tabId, {
       type: 'POPUP_JUMP_TO_DIV',
       payload: divId
