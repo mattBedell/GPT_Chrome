@@ -3,6 +3,7 @@ import { changeTab, updateTab } from './tabs.js';
 import { selectSlot, selectSlotNav } from './ui.js';
 import { setPort } from './chrome.js';
 import { setStateFromBG } from './app.js';
+import { copyDfpLink } from './dfp.js';
 
 export {
     updateSlots,
@@ -16,4 +17,5 @@ export {
     selectSlotNav,
     setPort,
     setStateFromBG,
+    copyDfpLink,
 };

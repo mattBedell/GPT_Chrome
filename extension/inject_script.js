@@ -17,9 +17,15 @@ addEventListener('SCROLL_TO_DIV', scrollToDiv);
 
 function eventRenderEndedCallback(e) {
   let { slotIdent } = e.slot;
-  let neededKeys = ['size', 'isEmpty', 'isBackfill','lineItemId', 'advertiserId', 'campaignId']
+  let neededKeys = ['size', 'isEmpty', 'isBackfill','campaignId', 'lineItemId', 'creativeId'];
   let renderInfo = neededKeys.map(key => {
-    if(key === 'size') return {[key]: [`${e[key][0]}x${e[key][1]}`]};
+    if(key === 'size') return { [key]: [`${e[key][0]}x${e[key][1]}`] };
+    if(!e[key] && (key === 'lineItemId' || key === 'creativeId')) {
+      let agnosticKey = `sourceAgnostic${key.charAt(0).toUpperCase()}${key.slice(1)}`;
+      return { [key]: [e[agnosticKey]] };
+    }
+    if(key === 'campaignId') return { orderId: [e[key]] };
+
     return {
       [key]: [e[key]]
     }
@@ -46,12 +52,14 @@ function patchDefineSlot(...args) {
 function configSlotInfo(slot) {
   let path = slot.getAdUnitPath();
   let name = path.split('/')[path.split('/').length - 1];
+  let dfpId = path.split('/')[1];
   let divId = slot.getSlotElementId();
   let slotIdent = `${ident}-${divId}`;
   slot.slotIdent = slotIdent;
   let configuredSlot = {
     path,
     name,
+    dfpId,
     divId,
     divExists: document.querySelector(`#${divId}`) ? true : false,
     targeting: [],
@@ -63,15 +71,8 @@ function configSlotInfo(slot) {
   return configuredSlot;
 };
 
-function getTargeting(slot) {
-  return slot.getTargetingKeys().map(key => {
-    return {
-      [key]: slot.getTargeting(key),
-    };
-  })
-};
-
 function patchSetTargeting(key, val) {
+  // TODO check if passed val is array, send to slot troubleshoot log
   let { slotIdent } = this;
   this._setTargeting(key, val);
   let targVals = typeof val === 'object' ? val : [];
@@ -79,7 +80,7 @@ function patchSetTargeting(key, val) {
   dispatchEvent(new CustomEvent('DOM_SLOT_TARG_TO_SCRIPT', {detail: {
     slotIdent,
     targObj: {
-      [key]: targVals,
+      [`${key}`]: targVals,
     }
   }}))
 }
@@ -87,23 +88,23 @@ function patchSetTargeting(key, val) {
 function scrollToDiv(e) {
   let div = document.body.querySelector(`#${e.detail}`);
   if(!div) return;
-  window.div = div;
+  div.scrollIntoView();
   // div.scrollIntoView()
   // let divPos = div.getBoundingClientRect();
-  let frameId = animateScrollToDiv();
+  // let frameId = animateScrollToDiv();
 }
 
-function animateScrollToDiv(timestamp) {
-  let dist = div.offsetTop - document.body.scrollTop;
-  let increment = (dist / 5) * .3;
-  if(increment >= 0 && increment < 1) increment = 1;
-  if(increment <= 0 && increment > -1) increment = -1;
-  if(Math.abs(dist) >= 5) {
-    console.log(dist, increment);
-    document.body.scrollTop += increment;
-    window.requestAnimationFrame(animateScrollToDiv);
-  }
-}
+// function animateScrollToDiv(timestamp) {
+//   let dist = div.offsetTop - document.body.scrollTop;
+//   let increment = (dist / 5) * .3;
+//   if(increment >= 0 && increment < 1) increment = 1;
+//   if(increment <= 0 && increment > -1) increment = -1;
+//   if(Math.abs(dist) >= 5) {
+//     console.log(dist, increment);
+//     document.body.scrollTop += increment;
+//     window.requestAnimationFrame(animateScrollToDiv);
+//   }
+// }
 
 
 

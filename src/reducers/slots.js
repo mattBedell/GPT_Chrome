@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-function updateSlotProps(slot, props) {
-  return Object.assign({}, slot, props);
+function updateObj(obj, props) {
+  return Object.assign({}, obj, props);
 }
 function updateSlotInList(state, slotIdent, updater) {
   return state.map(slot => {
@@ -54,7 +54,7 @@ export const slots = (state = [], action) => {
 
     case 'UPDATE_SLOT_TARGS':
     return updateSlotInList(state, action.payload.slotIdent, slot => {
-      return updateSlotProps(slot, updateTargeting(slot, action.payload.targObj));
+      return updateObj(slot, updateTargeting(slot, action.payload.targObj));
     })
 
     case 'UPDATE_SLOT_REFRESH':
@@ -62,7 +62,7 @@ export const slots = (state = [], action) => {
 
     case 'UPDATE_SLOT_RENDER':
     return updateSlotInList(state, action.payload.slotIdent, slot => {
-      return updateSlotProps(slot, { renderInfo: action.payload.renderInfo });
+      return updateObj(slot, { renderInfo: action.payload.renderInfo });
     })
 
     default:

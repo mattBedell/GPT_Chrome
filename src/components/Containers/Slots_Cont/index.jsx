@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllSlots, getUi, getCurrentTab } from './../../../reducers/index.js';
-import { selectSlot, selectSlotNav } from './../../../actions/index.js';
+import { getAllSlots, getUi, getCurrentTab, getDfpLink } from './../../../reducers/index.js';
+import { selectSlot, selectSlotNav, copyDfpLink } from './../../../actions/index.js';
 
 import Slot from './../../Slot/index.jsx';
 import SlotDetail from './../../SlotDetail/index.jsx';
@@ -45,6 +45,8 @@ class Slots extends Component {
                 selectedSlot={this.props.ui.selectedSlot}
                 selectedSlotNav={this.props.ui.selectedSlotNav}
                 handleSlotNavSelect={this.handleSlotNavSelect}
+                setDfpLink={this.props.copyDfpLink}
+                dfpLink={this.props.dfpLink}
                 {...slot}
       />)}
   }
@@ -61,12 +63,14 @@ const mapStateToProps = state => {
     slots: getAllSlots(state),
     ui: getUi(state),
     tabId: getCurrentTab(state),
+    dfpLink: getDfpLink(state),
   };
 }
 const mapDispatchToProps = dispatch => {
   return {
     selectSlot: slotIdent => dispatch(selectSlot(slotIdent)),
     selectSlotNav: slotNav => dispatch(selectSlotNav(slotNav)),
+    copyDfpLink: dfpLink => dispatch(copyDfpLink(dfpLink)),
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Slots);
