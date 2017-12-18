@@ -2,11 +2,13 @@
 const path = require('path');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack-dev.config');
+var config = require('./webpack.config.js')({ BUILD_TYPE: 'popup', NODE_ENV: 'hot' });
 
+console.log(config);
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   contentBase: path.resolve('extension'),
+  hot: true,
   stats: {
     colors: true
   }
@@ -14,4 +16,5 @@ new WebpackDevServer(webpack(config), {
   if (err) {
     return console.log(err);
   }
+  console.log('Listening on PORT: 3001');
 });
