@@ -1,12 +1,56 @@
+const { execSync } = require('child_process');
 const webpack = require('webpack');
 const path = require('path');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
+const WebpackOnBuildPlugin = require('on-build-webpack');
 const merge = require('webpack-merge');
 
 const SCRIPTS_DIR = path.join(__dirname, 'src/scripts');
 const EXTENSION_DIR = path.join(__dirname, 'extension/dist');
 
 const POPUP_ENTRY = path.join(__dirname, 'src/index.jsx');
+
+function getActiveTab() {
+  let activeTab = execSync('chrome-cli info');
+  return activeTab.toString().split('\n')[0].split(': ')[1];
+}
+
+function createOrReloadExtensions(activeTab) {
+  let chromeTabs = execSync('chrome-cli list tabs');
+
+  if (chromeTabs.includes('Extensions')) {
+    const extExp = /\]\ Extensions$/s;
+    let tab = chromeTabs.toString().split('\n').reduce((val, next) => {
+      if (extExp.test(next)) {
+        return next;
+      }
+      return val;
+    }, '');
+    if (tab) {
+      let closeBracketInd = tab.indexOf(']');
+      let windowInd = tab.indexOf(':');
+      let tabId = windowInd ? tab.substring(windowInd + 1, closeBracketInd) : tab.substring(1, closeBracketInd);
+      execSync(`chrome-cli reload -t ${tabId}; chrome-cli reload -t ${activeTab}`);
+    } else {
+      execSync(`chrome-cli open chrome://extensions; chrome-cli activate -t ${activeTab}; chrome-cli reload -t ${activeTab}`);
+    }
+  } else {
+    execSync(`chrome-cli open chrome://extensions; chrome-cli activate -t ${activeTab}; chrome-cli reload -t ${activeTab}`);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const production = {
@@ -47,6 +91,7 @@ const scripts = {
   devtool: 'eval-source-map',
   entry: {
     background: `${SCRIPTS_DIR}/background.js`,
+    script: `${SCRIPTS_DIR}/script.js`,
     inject_script: `${SCRIPTS_DIR}/inject_script.js`,
   },
   output: {
@@ -65,7 +110,11 @@ const scripts = {
       }],
     }],
   },
-  plugins: [],
+  plugins: [
+    new WebpackOnBuildPlugin(function(stats) {
+      createOrReloadExtensions(getActiveTab());
+    }),
+  ],
 };
 
 const popup = {
@@ -106,6 +155,9 @@ const configs = {
 module.exports = ((env = {}) => {
   const { BUILD_TYPE, NODE_ENV } = env;
   const base = configs[BUILD_TYPE];
-
-  return merge.smartStrategy({ entry: 'prepend' })(base, configs[NODE_ENV] || {});
+  
+  console.log(merge.smartStrategy({ entry: 'prepend', plugins: 'replace' })(base, configs[NODE_ENV] || {}));
+  return merge.smartStrategy({ entry: 'prepend', plugins: 'replace' })(base, configs[NODE_ENV] || {});
 });
+
+// "chrome-cli reload -t $((chrome-cli list tabs | grep -q ]\\ Extensions$ || chrome-cli open chrome://extensions; chrome-cli list tabs) | grep ]\\ Extensions$ | perl -pe 's/(.*(?=:):)|\\[//g' | sed -e 's/\\] Extensions//g') || exit 0"

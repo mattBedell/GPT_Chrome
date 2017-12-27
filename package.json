@@ -6,16 +6,13 @@
   "scripts": {
     "hot": "node dev-server.js",
     "prehot": "npm run prebuild-popup",
-
+    "prebuild-scripts": "find extension/dist | grep -e background.js -e script.js -e inject_script.js | xargs rm",
     "build-scripts": "webpack --config webpack.config.js --env.BUILD_TYPE=scripts --progress --colors",
-    "prebuild-scripts": "find extension/dist | grep -e background.js -e inject_script.js | xargs rm",
-
+    "build-scripts-dev": "npm run build-scripts -- --watch",
     "build-popup": "webpack --config webpack.config.js --env.BUILD_TYPE=popup --progress --colors",
     "prebuild-popup": "find extension/dist | grep popup.js | xargs rm",
-
     "build-scripts-prod": "npm run build-scripts -- --env.NODE_ENV=production",
     "build-popup-prod": "npm run build-popup -- --env.NODE_ENV=production",
-
     "build-all-prod": "npm run build-scripts-prod && npm run build-popup-prod"
   },
   "author": "Matt Bedell",
@@ -24,12 +21,14 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "html-webpack-plugin": "^2.30.1",
+    "on-build-webpack": "^0.1.0",
     "react-hot-loader": "^3.1.3",
+    "redux-logger": "^3.0.6",
     "webpack-dev-server": "^2.9.5",
     "webpack-visualizer-plugin": "^0.1.11"
   },
