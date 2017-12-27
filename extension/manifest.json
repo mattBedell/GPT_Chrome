@@ -5,22 +5,25 @@
     "description": "GPT Helper",
     "version": "1.0",
 
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "index.html"
     },
     "background": {
         "persistant": true,
-        "scripts": ["/build/bg.js"]
+        "scripts": ["dist/background.js"]
     },
     "content_scripts":[{
         "matches":["http://*/*", "https://*/*"],
-        "js": ["script.js"],
+        "js": ["dist/script.js"],
         "run_at": "document_start"
     }],
-    "web_accessible_resources": ["inject_script.js", "/build/main.js"],
+    "web_accessible_resources": ["dist/inject_script.js", "dist/popup.js"],
     "permissions": [
         "activeTab",
-        "history"
+        "history",
+        "tabs"
     ]
 }
