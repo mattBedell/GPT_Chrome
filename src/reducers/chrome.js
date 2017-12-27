@@ -1,14 +1,33 @@
-export const chrome = (state = {}, action) => {
-  switch(action.type) {
-    case 'SET_PORT':
-    return { cPort: action.payload };
+import {
+  SWITCH_TAB,
+} from './../actions/actionTypes';
 
-    case 'SET_STATE_FROM_BG':
-    return action.payload.chrome
-    default:
-    return state;
+import { slots } from './slots';
+
+const tab = (state = {}, action) => {
+  return {
+    ...state,
+    slots: slots(state.slots, action),
   }
 }
-export const getPort = state => {
-  return state.chrome.cPort;
+
+const tabs = (state = {}, action) => {
+  switch(action.type) {
+    case SWITCH_TAB:
+      return {
+        ...state,
+        currentTab: action.tabId,
+      }
+    default:
+      const { tabId } = action;
+      if (!tabId) {
+        return state;
+      }
+      return {
+        ...state,
+        [tabId]: tab(state[tabId], action)
+      }
+  }
 }
+
+export default tabs;

@@ -1,0 +1,13 @@
+
+///// CHROME /////
+export const SWITCH_TAB = 'SWITCH_TAB';
+export const POPUP_CONNECT = 'POPUPCONNECT';
+
+///// SLOTS /////
+export const RECIEVE_SLOTS = 'RECIEVE_SLOTS';
+export const DEFINE_SLOT = 'DEFINE_SLOT';
+/// TARGETING
+export const SET_TARGETING = 'SET_TARGETING';
+export const CLEAR_TARGETING = 'CLEAR_TARGETING';
+/// VIEWABILITY
+export const IMPRESSION_VIEWABILITY = 'IMPRESSION_VIEWABILITY';
