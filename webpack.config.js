@@ -156,7 +156,6 @@ module.exports = ((env = {}) => {
   const { BUILD_TYPE, NODE_ENV } = env;
   const base = configs[BUILD_TYPE];
   
-  console.log(merge.smartStrategy({ entry: 'prepend', plugins: 'replace' })(base, configs[NODE_ENV] || {}));
   return merge.smartStrategy({ entry: 'prepend', plugins: 'replace' })(base, configs[NODE_ENV] || {});
 });
 
