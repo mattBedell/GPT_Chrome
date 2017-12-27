@@ -1,6 +1,8 @@
-export const setPort = payload => {
+import { SWITCH_TAB } from './actionTypes';
+
+export const switchTab = tabId => {
   return {
-    type: 'SET_PORT',
-    payload
+    type: SWITCH_TAB,
+    tabId,
   }
 }
