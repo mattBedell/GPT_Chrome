@@ -1,7 +1,12 @@
 
 ///// CHROME /////
-export const SWITCH_TAB = 'SWITCH_TAB';
 export const POPUP_CONNECT = 'POPUPCONNECT';
+/// TABS
+export const SWITCH_TAB = 'SWITCH_TAB';
+export const REMOVE_TAB = 'REMOVE_TAB';
+export const CLEAR_TAB = 'CLEAR_TAB';
+export const DETACH_TAB = 'DETACH_TAB';
+export const ATTACH_TAB = 'ATTACH_TAB';
 
 ///// SLOTS /////
 export const RECIEVE_SLOTS = 'RECIEVE_SLOTS';
