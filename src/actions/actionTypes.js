@@ -1,6 +1,6 @@
 
 ///// CHROME /////
-export const POPUP_CONNECT = 'POPUPCONNECT';
+export const POPUP_CONNECT = 'POPUP_CONNECT';
 /// TABS
 export const SWITCH_TAB = 'SWITCH_TAB';
 export const REMOVE_TAB = 'REMOVE_TAB';

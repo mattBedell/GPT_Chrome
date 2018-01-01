@@ -8,6 +8,7 @@ import {
   IMPRESSION_VIEWABILITY,
 } from './../actions/actionTypes';
 import { defineSlot, setTargeting, clearTargeting, switchTab, removeTab, clearTab, detachTab, attachTab } from '../actions/index';
+import { getTab } from './../reducers/chrome';
 import rootReducer from './../reducers/index';
 
 const logger = createLogger({ collapsed: true});
@@ -43,13 +44,11 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 });
 
 chrome.runtime.onConnect.addListener(port => {
-  // store.dispatch(switchTab(port.sender.tab.id));
   if (port.sender.url === chrome.runtime.getURL('index.html')) {
-    // port.postMessage({
-    //   type: 'POPUP_CONNECT',
-    //   payload: Object.assign({}, state, { slots: getSlotsByTab(state, tabId) }),
-    //   tabId
-    // });
+    port.postMessage({
+      type: POPUP_CONNECT,
+      tab: getTab(store.getState()),
+    });
   };
   
   port.onMessage.addListener(msg => {

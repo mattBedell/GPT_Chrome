@@ -4,6 +4,7 @@ import {
   CLEAR_TAB,
   DETACH_TAB,
   ATTACH_TAB,
+  POPUP_CONNECT,
 } from './../actions/actionTypes';
 
 import { slots } from './slots';
@@ -51,6 +52,9 @@ const tabIds = (state = [], action) => {
 
 const tabs = (state = {}, action) => {
   switch(action.type) {
+    case POPUP_CONNECT:
+      return action.tab;
+
     case SWITCH_TAB:
       return {
         ...state,
@@ -96,6 +100,20 @@ const tabs = (state = {}, action) => {
         tabIds: tabIds(state.tabIds, action),
         [tabId]: tab(state[tabId], action),
       }
+  }
+}
+
+export const getTab = (state, tabId = null) => {
+  const { currentTab } = state;
+  if ( tabId ) {
+    return {
+      currentTab,
+      [tabId]: state[tabId],
+    }
+  }
+  return {
+    currentTab,
+    [currentTab]: state[currentTab],
   }
 }
 
