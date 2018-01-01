@@ -60,7 +60,7 @@ const tabs = (state = {}, action) => {
     case REMOVE_TAB:
       const newState = {
         ...state,
-        tabIds: tabIds(state, action),
+        tabIds: tabIds(state.tabIds, action),
       }
       delete newState[action.tabId];
       return newState;

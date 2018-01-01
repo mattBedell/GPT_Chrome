@@ -53,7 +53,7 @@ chrome.runtime.onConnect.addListener(port => {
   };
   
   port.onMessage.addListener(msg => {
-    const windowTabId = makeTabId(port.sender.windowId, prot.sender.tabId);
+    const windowTabId = makeTabId(port.sender.tab.windowId, port.sender.tab.id);
 
     switch (msg.type) {
       case DEFINE_SLOT:
