@@ -103,17 +103,15 @@ const tabs = (state = {}, action) => {
   }
 }
 
+export const getCurrentTab = state => {
+  return state.tabs.currentTab;
+}
+
 export const getTab = (state, tabId = null) => {
-  const { currentTab } = state;
-  if ( tabId ) {
-    return {
-      currentTab,
-      [tabId]: state[tabId],
-    }
-  }
+  const currentTab = getCurrentTab(state);
   return {
     currentTab,
-    [currentTab]: state[currentTab],
+    [tabId || currentTab]: state['tabs'][tabId || currentTab],
   }
 }
 
