@@ -1,5 +1,15 @@
 import { combineReducers } from 'redux';
 
-import chrome from './chrome';
+import tabs from './chrome';
+import nav from './nav';
+import { popup } from './popup';
 
-export default chrome;
+
+
+
+
+export default combineReducers({
+  tabs,
+  popup,
+  nav,
+});
