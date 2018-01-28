@@ -103,9 +103,18 @@ const tabs = (state = {}, action) => {
   }
 }
 
+/** Get get currently active chrome tab id
+ * @param {Object} state
+*/
 export const getCurrentTab = state => {
   return state.tabs.currentTab;
 }
+
+/** Get state slice by tab id
+ * @param {Object} state
+ * @param {string} [tabId= current tab id ] - tab
+ * @returns {Object} The slice of state by tab id {currentTab: id, [tabId]: {...}}
+*/
 
 export const getTab = (state, tabId = null) => {
   const currentTab = getCurrentTab(state);
@@ -114,5 +123,6 @@ export const getTab = (state, tabId = null) => {
     [tabId || currentTab]: state['tabs'][tabId || currentTab],
   }
 }
+
 
 export default tabs;

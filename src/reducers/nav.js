@@ -15,4 +15,10 @@ const nav = (state = initialState, action) => {
   }
 }
 
+/** Get top level navigation
+ * @param {Object} state
+*/
+export const getSelectedView = state => state.nav.selectedView;
+
+
 export default nav;
