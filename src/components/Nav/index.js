@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './index.scss';
 
-import Button from '../Button';
+import { connect } from 'react-redux';
+import { setView } from './../../actions/nav';
+import { getSelectedView } from './../../reducers/nav'
 
+
+import Primary from './Primary';
 
 const Nav = props => {
   return (
-    <nav className='container-nav'>
-      <Button
-        onClick={() => props.setView('Slots')}
-        active={props.selectedView === 'Slots'}
-      >Slots</Button>
-      <Button
-        onClick={() => props.setView('Targeting')}
-        active={props.selectedView === 'Targeting'}
-      >Targeting</Button>
-
-    </nav>
+    <Primary
+      selectedView={props.selectedView}
+      setView={props.setView}
+      />
   )
-};
+}
 
-export default Nav;
+
+const mapStateToProps = state => {
+  return {
+    selectedView: getSelectedView(state),
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setView: view => dispatch(setView(view)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
