@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { setView } from './../actions/nav';
 
 import { ThemeProvider } from 'styled-components';
-import HTLDarkTheme from './../style/themes/HTLDark';
-import variables from './../style/variables';
+import HTLDarkTheme from './../assets/themes/HTLDark';
 
 
 import Nav from './Nav';
