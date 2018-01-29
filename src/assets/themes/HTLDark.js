@@ -10,7 +10,8 @@ import ralewayBlack from './../fonts/Raleway/Raleway-Black.ttf';
 const Styles = {
 
     // BRAND
-    brandPrimary: '#3097D1',
+    brandPrimary: '#3988E3',
+    // brandPrimary: '#3097D1',
     brandInfo: '#8eb4cb',
     brandSuccess: '#2ab27b',
     brandWarning: '#cbb956',
@@ -18,8 +19,8 @@ const Styles = {
   
   
     // MENU
-    menuPrimary: '#424a55',
-    menuExpanded: '#636D79',
+    menuPrimary: '#414955',
+    menuExpanded: '#616C79',
   
     // ICONS
     iconPrimary: '#3988e3',
@@ -27,7 +28,7 @@ const Styles = {
   
     // BODY
     bodyBg: '#f5f8fa',
-    textColor: '#636b6f',
+    textColor: '#F6F7FB',
 };
 
 injectGlobal`
