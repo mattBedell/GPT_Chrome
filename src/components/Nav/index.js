@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { setView } from './../../actions/nav';
-import { getSelectedView } from './../../reducers/nav'
-
-
 import Primary from './Primary';
+import QuickView from './QuickView';
 
 const Nav = props => {
   return (
-    <Primary
-      selectedView={props.selectedView}
-      setView={props.setView}
-      />
+    <>
+      <Primary
+        selectedValue={props.selectedValue}
+        setSelected={props.setSelected}
+        />
+      <QuickView />
+    </>
   )
 }
 
-
-const mapStateToProps = state => {
-  return {
-    selectedView: getSelectedView(state),
-  }
+Nav.propTypes = {
+  selectedValue: PropTypes.string.isRequired,
+  setSelected: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setView: view => dispatch(setView(view)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default Nav;
