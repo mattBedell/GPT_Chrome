@@ -6,15 +6,16 @@ import styled from 'styled-components';
 const Button = styled.button`
   border: none;
   background: none;
-  background-color: ${props => props.active ? props.theme.brandPrimary : props.theme.bodyBg};
+  background-color: ${props => props.active ? props.theme.menuExpanded : props.theme.menuPrimary};
+  color: ${props => props.active ? props.theme.iconHighlighted : 'inherit'};
   user-select: none;
   white-space: pre;
-  font-weight: ${props => props.active ? 'bolder' : 'inherit'};
+  font-weight: bolder;
   &:focus {
     outline: none;
   }
   &:hover {
-    filter: ${props => props.active ? 'none' : 'brightness(97%)' };
+    filter: ${props => props.active ? 'none' : 'brightness(130%)' };
   }
 `;
 
