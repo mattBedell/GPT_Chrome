@@ -75,7 +75,9 @@ const hot = {
       use: [{
         loader: 'babel-loader',
         options: {
-          presets: [["es2015", {"modules": false}]],
+          presets: [
+            ['@babel/preset-es2015', {"modules": false}],
+          ],
           plugins: ["react-hot-loader/babel"]
         }
       }]
@@ -105,7 +107,10 @@ const scripts = {
       use: [{
         loader: 'babel-loader',
         options: {
-          presets: ['es2015', 'stage-0'],
+          presets: [
+            ['@babel/preset-es2015'],
+            ['@babel/preset-stage-0']
+          ],
         }
       }],
     }],
@@ -131,7 +136,14 @@ const popup = {
       use: [{
         loader: 'babel-loader',
         options: {
-          presets: ["es2015", "stage-0", "react"],
+          plugins: [
+              '@babel/plugin-transform-runtime',
+          ],
+          presets: [
+            ['@babel/preset-es2015'],
+            ['@babel/preset-stage-0'],
+            ['@babel/preset-react']
+          ],
         }
       }]
     },
