@@ -8,6 +8,8 @@ import {
   IMPRESSION_VIEWABILITY,
 } from './../actions/actionTypes';
 
+import { getTab } from './chrome';
+
 
 const initialStateSlot = {
   impressionViewablity: {
@@ -102,3 +104,14 @@ export const slots = (state = initialStateSlots, action) => {
   }
 }
 
+/** Get Slots for current tab
+ * @param {Object} state
+ * @returns {Array} Slot objects
+*/
+
+export const getSlots = state => {
+  const tab = getTab(state);
+  const { currentTab } = tab;
+
+  return tab[currentTab]['slots']['slotIds'].map(slotId => tab[currentTab]['slots'][slotId]);
+}
