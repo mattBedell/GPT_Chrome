@@ -25,6 +25,7 @@ const Styles = {
     // ICONS
     iconPrimary: '#3988e3',
     iconHighlighted: '#FFBA0B',
+    iconClosed: '#7288a3',
   
     // BODY
     bodyBg: '#f5f8fa',
