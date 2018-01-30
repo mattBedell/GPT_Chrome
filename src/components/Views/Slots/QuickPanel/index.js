@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { withTheme } from 'styled-components';
+
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
+
+import DivIcon from './../../../Icons/Browser';
+import CogIcon from './../../../Icons/Gear';
+
+
 
 
 const QuickPanelContainer = styled.div`
@@ -14,7 +21,7 @@ const QuickPanelContainer = styled.div`
 const QuickPanel = props => {
   return (
     <QuickPanelContainer >
-
+      <DivIcon isSelected={props.isSelected} />
     </QuickPanelContainer>
   )
 };
@@ -22,6 +29,7 @@ const QuickPanel = props => {
 
 QuickPanel.propTypes = {
   slotId: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -36,4 +44,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuickPanel);
+const QuickPanelThemed = withTheme(QuickPanel);
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuickPanelThemed);

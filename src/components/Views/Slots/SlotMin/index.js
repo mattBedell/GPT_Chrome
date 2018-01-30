@@ -58,7 +58,7 @@ const SlotMin = props => {
       <SlotName isSelected={props.isSelected} >
         {props.slot.path}
       </SlotName>
-      <QuickPanel slotId={props.slot.slotId}/>
+      <QuickPanel isSelected={props.isSelected} slotId={props.slot.slotId}/>
     </MinContainer>
   )
 }
