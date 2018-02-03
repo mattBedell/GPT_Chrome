@@ -1,31 +1,26 @@
-export const updateSlots = (payload, tabId) => {
+import { DEFINE_SLOT, SET_TARGETING, CLEAR_TARGETING, } from './actionTypes';
+
+
+export const defineSlot = (slot, tabId) => {
   return {
-    type: 'UPDATE_SLOTS',
-    payload,
+    type: DEFINE_SLOT,
+    slot,
     tabId,
   }
 };
-export const clearSlots = tabId => {
+
+export const setTargeting = (payload, tabId) => {
   return {
-    type: 'CLEAR_SLOTS',
-    tabId
+    type: SET_TARGETING,
+    ...payload,
+    tabId,
   }
 };
-export const updateSlotTargs = payload => {
+
+export const clearTargeting = (targeting, tabId) => {
   return {
-    type: 'UPDATE_SLOT_TARGS',
-    payload
+    type: CLEAR_TARGETING,
+    ...payload,
+    tabId,
   }
 };
-export const updateSlotRefresh = payload => {
-  return {
-    type: 'UPDATE_SLOT_REFRESH',
-    payload
-  }
-};
-export const updateSlotRender = payload => {
-  return {
-    type: 'UPDATE_SLOT_RENDER',
-    payload
-  }
-}

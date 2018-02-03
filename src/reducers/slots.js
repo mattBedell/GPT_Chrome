@@ -1,79 +1,117 @@
 import { combineReducers } from 'redux';
 
-function updateObj(obj, props) {
-  return Object.assign({}, obj, props);
-}
-function updateSlotInList(state, slotIdent, updater) {
-  return state.map(slot => {
-    if(slot.slotIdent === slotIdent) {
-      return updater(slot);
-    }
-    return slot;
-  })
-}
-function updateTargeting(slotObj, newTargeting) {
-  let targeting = [...slotObj.targeting, newTargeting];
-  return {
-    targeting
-  };
-};
-function updateSlotRefresh(state, action) {
-  if(action.payload.whichSlots === 'ALL') {
-    return state.map(slot => {
-      slot.isRefreshed += 1;
-      return slot;
-    })
+import {
+  RECIEVE_SLOTS,
+  DEFINE_SLOT,
+  SET_TARGETING,
+  CLEAR_TARGETING,
+  IMPRESSION_VIEWABILITY,
+} from './../actions/actionTypes';
+
+import { getTab } from './chrome';
+
+
+const initialStateSlot = {
+  impressionViewablity: {
+    viewable: false,
+    count: 0,
   }
-  // TODO - CHANGE NESTED LOOP
-  let stateToUpdate = state.map(slot => slot);
-  action.payload.whichSlots.forEach(slotIdent => {
-    stateToUpdate.forEach(slot => {
-      if(slot.slotIdent === slotIdent) {
-        slot.isRefreshed += 1;
-      }
-    })
-  });
-  return stateToUpdate;
-};
-function updateSlotRender(state, action) {
-
 }
 
+const initialStateSlots = {
+  slotIds: [],
+}
 
-
-export const slots = (state = [], action) => {
+const targeting = (state = {}, action) => {
   switch(action.type) {
-    case 'SET_STATE_FROM_BG':
-    return action.payload.slots;
+    case SET_TARGETING:
+      return {
+        ...state,
+        ...action.targeting,
+      }
 
-    case 'UPDATE_SLOTS':
-    return [...state, ...action.payload]
-
-    case 'CLEAR_SLOTS':
-    return state.filter(slot => slot.tabId !== action.tabId);
-
-    case 'UPDATE_SLOT_TARGS':
-    return updateSlotInList(state, action.payload.slotIdent, slot => {
-      return updateObj(slot, updateTargeting(slot, action.payload.targObj));
-    })
-
-    case 'UPDATE_SLOT_REFRESH':
-    return updateSlotRefresh(state, action);
-
-    case 'UPDATE_SLOT_RENDER':
-    return updateSlotInList(state, action.payload.slotIdent, slot => {
-      return updateObj(slot, { renderInfo: action.payload.renderInfo });
-    })
+    case CLEAR_TARGETING:
+      // TODO: clear specific targeting keys
+      return {};
 
     default:
-    return state;
+      return state;
   }
-};
-
-export const getSlotsByTabId = (state, tabId) => {
-  return state.slots.filter(slot => slot.tabId == tabId);
 }
 
+const impressionViewablity = (state = initialStateSlots.impressionViewablity, action) => {
+  switch(action.type) {
+    case IMPRESSION_VIEWABILITY:
+      return action.impressionViewablity
+    default:
+      return state;
+  }
+}
+
+
+const slot = (state = {}, action) => {
+  return {
+    ...state,
+      targeting: targeting(state.targeting, action),
+      impressionViewablity: impressionViewablity(state.impressionViewablity, action),
+  }
+}
+
+const slotIds = (state = [], action) => {
+  switch (action.type) {
+    case RECIEVE_SLOTS:
+      return action.slots.map(slot => slot.slotId);
+
+    default:
+      if (!action.slot.slotId || state.includes(action.slot.slotId)) {
+        return state;
+      }
+      return [...state, action.slot.slotId];
+  }
+}
+
+export const slots = (state = initialStateSlots, action) => {
+  switch (action.type) {
+    case RECIEVE_SLOTS:
+      return {
+        ...state,
+        slotIds: slotIds(state.slotIds, action),
+        ...action.slots.reduce((slotsObj, slot) => {
+              slotsObj[slot.slotId] = slot;
+              return slotsObj;
+        }, {})
+      }
+
+    case DEFINE_SLOT:
+      return {
+        ...state,
+        slotIds: slotIds(state.slotIds, action),
+        [action.slot.slotId]: slot(action.slot, action),
+      }
+
+    default:
+    // SLOT UPDATES
+      const { slotId } = action;
+
+      if (!slotId) {
+        return state;
+      };
+
+      return {
+        ...state,
+        [slotId]: slot(state[slotId], action),
+      };
+  }
+}
+
+/** Get Slots for current tab
+ * @param {Object} state
+ * @returns {Array} Slot objects
+*/
+
 export const getSlots = state => {
-  return state.slots;
+  const tab = getTab(state);
+  const { currentTab } = tab;
+
+  return tab[currentTab]['slots']['slotIds'].map(slotId => tab[currentTab]['slots'][slotId]);
 }
