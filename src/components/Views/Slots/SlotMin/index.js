@@ -33,7 +33,7 @@ const Arrow = styled.div`
 
 const SlotName = styled.div`
   color: ${props => props.isSelected ? props.theme.iconHighlighted : 'inherit'};
-  font-size: .8em;
+  font-size: 12px;
 `;
 
 
@@ -52,13 +52,14 @@ const minMaxSlot = props => {
 
 
 const SlotMin = props => {
+  const { slot } = props;
   return (
     <MinContainer onClick={() => minMaxSlot(props)} isSelected={props.isSelected}>
       <Arrow isSelected={props.isSelected}/>
       <SlotName isSelected={props.isSelected} >
         {props.slot.path}
       </SlotName>
-      <QuickPanel isSelected={props.isSelected} slotId={props.slot.slotId}/>
+      <QuickPanel isSelected={props.isSelected} {...slot} />
     </MinContainer>
   )
 }
