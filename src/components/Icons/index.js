@@ -15,4 +15,4 @@ export {
   EyeIcon,
   WarnNoFillIcon,
   WarnFillIcon,
-}
+};
