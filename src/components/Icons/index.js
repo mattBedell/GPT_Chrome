@@ -1,6 +1,6 @@
 
 import DivIcon from './Browser';
-// import CogIcon from './Gear';
+import CogIcon from './Gear';
 import ComputerIcon from './Computer';
 import EventsIcon from './Events';
 import EyeIcon from './Eye';
@@ -9,7 +9,7 @@ import WarnFillIcon from './WarnFill';
 
 export {
   DivIcon,
-  // CogIcon,
+  CogIcon,
   ComputerIcon,
   EventsIcon,
   EyeIcon,
