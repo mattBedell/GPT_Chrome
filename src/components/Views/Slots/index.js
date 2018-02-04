@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { getSlots } from './../../../reducers/slots';
-import { getSelectedSlot } from './../../../reducers/nav';
 
-import SlotMin from './SlotMin';
+import Slot from './Slot';
+
 
 
 const Slots = props => {
   return (
     <>
-      {props.slots.map(slot => <SlotMin key={`slots-${slot.slotId}`} slot={slot} />)}
+      {props.slots.map((slot, i ) => <Slot key={`slots-${slot.slotId}`} slot={slot} index={i} />)}
     </>
   )
 }
