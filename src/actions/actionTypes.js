@@ -24,4 +24,4 @@ export const IMPRESSION_VIEWABILITY = 'IMPRESSION_VIEWABILITY';
 ///// NAV /////
 
 export const SET_VIEW = 'SET_VIEW';
-export const SET_SLOT = 'SET_SLOT';
+export const SET_SLOT_OPEN = 'SET_SLOT_OPEN';
