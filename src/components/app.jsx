@@ -14,9 +14,13 @@ import Slots from './Views/Slots';
 
 const Spacer = styled.div`
   width: 100%;
-  height: 2px;
   background-color: ${props => props.theme.brandPrimary}
 `;
+
+const ViewContainer = styled.div`
+  height: 430px;
+  overflow-y: scroll;
+`
 
 class App extends Component {
   render() {
@@ -24,11 +28,13 @@ class App extends Component {
       <ThemeProvider theme={HTLDarkTheme}>
       <>
         <Nav
-          selectedValue={this.props.selectedView}
+          selectedView={this.props.selectedView}
           setSelected={this.props.setView}
         />
         <Spacer />
-        <Slots />
+        <ViewContainer>
+          <Slots />
+        </ViewContainer>
       </>
       </ThemeProvider>
     )
