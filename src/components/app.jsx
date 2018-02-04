@@ -14,6 +14,7 @@ import Slots from './Views/Slots';
 
 const Spacer = styled.div`
   width: 100%;
+  height: 2px;
   background-color: ${props => props.theme.brandPrimary}
 `;
 

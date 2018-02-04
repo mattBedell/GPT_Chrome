@@ -14,9 +14,15 @@ import {
   EventsIcon,
   EyeIcon,
   WarnNoFillIcon,
-  WarnFillIcon } from './../../../../Icons';
+  WarnFillIcon
+} from './../../../../Icons';
 
+import WithTooltip from './../../../../Icons/WithTooltip';
 
+const DivIconWithTooltip = WithTooltip(DivIcon, 'Div exists in DOM');
+const ComputerIconWithTooltip = WithTooltip(ComputerIcon, 'Creative rendered');
+const EventsIconWithTooltip = WithTooltip(EventsIcon, 'Go to slot events');
+const EyeIconWithTooltip = WithTooltip(EyeIcon, 'Impression Viewable');
 
 
 const QuickPanelContainer = styled.div`
@@ -29,10 +35,26 @@ const QuickPanelContainer = styled.div`
 const QuickPanel = props => {
   return (
     <QuickPanelContainer >
-      <DivIcon isSelected={props.isOpen} width='17px' height='17px'/>
-      <ComputerIcon isSelected={props.isOpen} width='17px' height='17px'/>
-      <EventsIcon isSelected={props.isOpen} width='17px' height='17px'/>
-      <EyeIcon isSelected={props.isOpen} width='17px' height='17px'/>
+      <DivIconWithTooltip iconProps={{
+        isSelected: props.isOpen,
+        width: '17px',
+        height: '17px',
+      }} />
+      <ComputerIconWithTooltip iconProps={{
+        isSelected: props.isOpen,
+        width: '17px',
+        height: '17px',
+      }}/>
+      <EventsIconWithTooltip iconProps={{
+        isSelected: props.isOpen,
+        width: '17px',
+        height: '17px',
+      }}/>
+      <EyeIconWithTooltip iconProps={{
+        isSelected: props.isOpen,
+        width: '17px',
+        height: '17px',
+      }}/>
       <WarnNoFillIcon isSelected={props.isOpen} width='17px' height='17px'/>
     </QuickPanelContainer>
   )

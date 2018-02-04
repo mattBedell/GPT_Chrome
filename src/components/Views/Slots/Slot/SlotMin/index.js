@@ -29,7 +29,6 @@ const Arrow = styled.div`
   border-left: 8px solid ${props => props.isOpen ? props.theme.menuPrimary : props.theme.menuExpanded};
   transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
   transition: border-left-color .2s, transform .2s;
-  position: relative;
   margin-left: 10px;
 `;
 
