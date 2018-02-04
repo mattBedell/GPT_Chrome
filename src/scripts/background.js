@@ -1,15 +1,17 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
+import { POPUP_CONNECT } from '../actions/actionTypes';
 import {
-  POPUP_CONNECT,
-  DEFINE_SLOT,
-  SET_TARGETING,
-  CLEAR_TARGETING,
-  IMPRESSION_VIEWABILITY,
-} from './../actions/actionTypes';
-import { defineSlot, setTargeting, clearTargeting, switchTab, removeTab, clearTab, detachTab, attachTab } from '../actions/index';
-import { getTab } from './../reducers/chrome';
-import rootReducer from './../reducers/index';
+  switchTab,
+  removeTab,
+  clearTab,
+  detachTab,
+  attachTab
+} from '../actions/index';
+import { getTab } from '../reducers/chrome';
+import rootReducer from '../reducers/index';
+import GptListeners from './Listeners/Background/gpt';
+import GptEventListeners from './Listeners/Background/events';
 
 const logger = createLogger({ collapsed: true});
 const store = createStore(rootReducer, applyMiddleware(logger));
@@ -54,18 +56,8 @@ chrome.runtime.onConnect.addListener(port => {
   port.onMessage.addListener(msg => {
     const windowTabId = makeTabId(port.sender.tab.windowId, port.sender.tab.id);
 
-    switch (msg.type) {
-      case DEFINE_SLOT:
-        store.dispatch(defineSlot(msg.payload, windowTabId));
-        break;
-
-      case SET_TARGETING:
-        store.dispatch(setTargeting(msg.payload, windowTabId));
-        break;
-
-      case CLEAR_TARGETING:
-        store.dispatch(clearTargeting(msg.payload, windowTabId));
-        break;
-    }
+    GptListeners(store, msg, windowTabId);
+    GptEventListeners(store, msg, windowTabId);
+    
   })
 });

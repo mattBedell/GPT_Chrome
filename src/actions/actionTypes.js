@@ -11,6 +11,10 @@ export const ATTACH_TAB = 'ATTACH_TAB';
 ///// SLOTS /////
 export const RECIEVE_SLOTS = 'RECIEVE_SLOTS';
 export const DEFINE_SLOT = 'DEFINE_SLOT';
+
+/// EVENTS
+
+export const RENDER_ENDED = 'RENDER_ENDED';
 /// TARGETING
 export const SET_TARGETING = 'SET_TARGETING';
 export const CLEAR_TARGETING = 'CLEAR_TARGETING';

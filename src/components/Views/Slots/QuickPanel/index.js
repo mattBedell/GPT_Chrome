@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 
-import DivIcon from './../../../Icons/Browser';
-import CogIcon from './../../../Icons/Gear';
+import { DivIcon, CogIcon, ComputerIcon, EventsIcon, EyeIcon, WarnNoFillIcon, WarnFillIcon } from './../../../Icons';
 
 
 
@@ -16,12 +15,18 @@ import CogIcon from './../../../Icons/Gear';
 const QuickPanelContainer = styled.div`
   width: 120px;
   height: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const QuickPanel = props => {
   return (
     <QuickPanelContainer >
-      <DivIcon isSelected={props.isSelected} />
+      <DivIcon isSelected={props.isSelected} width='17px' height='17px'/>
+      <ComputerIcon isSelected={props.isSelected} width='17px' height='17px'/>
+      <EventsIcon isSelected={props.isSelected} width='17px' height='17px'/>
+      <EyeIcon isSelected={props.isSelected} width='17px' height='17px'/>
+      <WarnNoFillIcon isSelected={props.isSelected} width='17px' height='17px'/>
     </QuickPanelContainer>
   )
 };

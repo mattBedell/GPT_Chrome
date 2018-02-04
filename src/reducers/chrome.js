@@ -8,6 +8,7 @@ import {
 } from './../actions/actionTypes';
 
 import { slots } from './slots';
+import { events } from './events';
 
 const tab = (state = {}, action) => {
   switch(action.type) {
@@ -22,6 +23,7 @@ const tab = (state = {}, action) => {
       return {
         ...state,
         slots: slots(state.slots, action),
+        events: events(state.events, action),
         detached: false,
       }
   }

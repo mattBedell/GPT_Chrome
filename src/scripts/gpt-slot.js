@@ -17,6 +17,7 @@ const configureSlotObject = slot => {
     sizes: slotSizesToArray(slot),
     divExists: document.getElementById(`${div}`) ? true : false,
     refresh: 0,
+    timestamp: Date.now(),
   }
 }
 
@@ -32,8 +33,11 @@ function defineSlot(...args) {
 function patchSetTargeting(key, value) {
   this._setTargeting(key, value);
   dispatchEvent(new CustomEvent(SET_TARGETING, { detail: {
+    timestamp: Date.now(),
     slotId: this.slotId,
-    targeting: this.getTargetingMap(),
+    targeting: {
+      [key]: Array.isArray(value) ? [...value] : [value],
+    },
   }}));
   return this;
 }

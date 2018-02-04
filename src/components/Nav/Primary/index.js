@@ -6,7 +6,7 @@ import Button from './../../Button';
 const PrimaryButton = Button.extend`
   height: 40px;
   width: 100px;
-  font-size: 1em;
+  font-size: 17px;
   box-shadow: ${props => props.active ? '0px 3px 18px -9px rgb(182, 188, 196)' : 'none'};
   position: relative;
   z-index: ${props => props.active ? 1 : 0};
