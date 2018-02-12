@@ -1,10 +1,25 @@
-import { SET_VIEW, SET_SLOT_OPEN, POPUP_CONNECT } from '../actions/actionTypes';
+import {
+  SET_VIEW,
+  SET_SLOT_OPEN,
+  QUICK_PANEL_TOGGLE,
+  POPUP_CONNECT
+} from '../actions/actionTypes';
 
 import { combineReducers } from 'redux';
 
-const initialState = {
-  selectedView: 'Slots',
+
+function editSlotNav(state, action, callback) {
+  return state.map(slotNav => {
+    if (slotNav.slotId === action.payload.slotId) {
+      return {
+        ...slotNav,
+        ...callback(slotNav, action)
+      }
+    }
+    return slotNav;
+  })
 }
+
 const view = (state = 'Slots', action) => {
   switch(action.type) {
     case SET_VIEW:
@@ -24,20 +39,25 @@ const slots = (state = [], action) => {
               slotId,
               isOpen: false,
               selection: 'targeting',
+              quickPanelOpen: false,
             }
         })
       ];
 
     case SET_SLOT_OPEN:
-      return state.map(slotNav => {
-        if(slotNav.slotId === action.payload.slotId) {
-          return {
-            ...slotNav,
-            isOpen: action.payload.isOpen,
-          }
+      return editSlotNav(state, action, (slotObj, action) => {
+        return {
+          isOpen: action.payload.isOpen,
         }
-        return slotNav;
-      });
+      })
+
+    case QUICK_PANEL_TOGGLE:
+      return editSlotNav(state, action, (slotObj) => {
+        return {
+          quickPanelOpen: !slotObj.quickPanelOpen,
+        }
+      })
+
     default:
       return state;
   }
