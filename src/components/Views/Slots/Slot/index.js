@@ -13,7 +13,7 @@ const Slot = props => {
       <SlotMin
         key={`slots-${props.slot.slotId}`}
         slotNav={props.slotNav}
-        slotName={props.slot.path}
+        slotName={props.slot.path.split('/').slice(2).join('/')}
         slotId={props.slot.slotId}
         index={props.index}
       />
