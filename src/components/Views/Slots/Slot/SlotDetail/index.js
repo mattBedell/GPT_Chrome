@@ -8,8 +8,8 @@ import styled from 'styled-components';
 const DetailContainer = styled.div`
   width: 100%;
   height: 330px;
-  background-color: ${props => props.theme.menuExpanded}
-`
+  background-color: ${props => props.theme.menuExpanded};
+`;
 
 
 const SlotDetail = props => {
