@@ -15,7 +15,12 @@ const MinContainer = styled.div`
   background-color: ${props => props.isOpen ? props.theme.menuExpanded : props.theme.menuPrimary};
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  & > :first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
   cursor: pointer;
   position: sticky;
   top: ${props => props.index * 30}px;
@@ -30,11 +35,13 @@ const Arrow = styled.div`
   transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
   transition: border-left-color .2s, transform .2s;
   margin-left: 10px;
+  margin-right: 10px;
 `;
 
 const SlotName = styled.div`
   color: ${props => props.isOpen ? props.theme.iconHighlighted : 'inherit'};
   font-size: 12px;
+  margin-right: auto;
 `;
 
 
@@ -44,14 +51,15 @@ const SlotName = styled.div`
 const SlotMin = props => {
   return (
     <MinContainer
-      onClick={() => props.setSlot(props.slotId,!props.slotNav.isOpen)} 
       isOpen={props.slotNav.isOpen}
       index={props.index}
     >
+    <div onClick={e => props.setSlot(props.slotId,!props.slotNav.isOpen)}>
       <Arrow isOpen={props.slotNav.isOpen}/>
       <SlotName isOpen={props.slotNav.isOpen} >
         {props.slotName}
       </SlotName>
+    </div>
       <QuickPanel isOpen={props.slotNav.isOpen} slotId={props.slotId} />
     </MinContainer>
   )
