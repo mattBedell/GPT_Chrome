@@ -28,7 +28,7 @@ import { getSlotNav } from '../../../../../reducers/nav';
 // TODO: needs more flexible HOCS, possibly with decorators
 const DivExistsIcon = WithFade(WithTooltip(DivIcon, 'Div exists in DOM'), {timeout: 200});
 
-const RenderIcon = WithFade(WithTooltip(ComputerIcon, 'Creative rendered'), {timeout: 200});
+const RenderIcon = WithFade(WithTooltip(ComputerIcon, 'Slot rendered'), {timeout: 200});
 const ErrorIcon = WithFade(WarnNoFillIcon, {timeout: 200});
 const AltPanelIcon = WithFade(CogIcon, {timeout: 200});
 const RefreshSlotIcon = WithFade(WithTooltip(RefreshIcon, 'Refresh slot'), {timeout: 200});
