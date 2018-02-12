@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TransitionGroup } from 'react-transition-group';
 
 import { withTheme } from 'styled-components';
 
@@ -14,48 +15,78 @@ import {
   EventsIcon,
   EyeIcon,
   WarnNoFillIcon,
-  WarnFillIcon
+  WarnFillIcon,
+  RefreshIcon,
+  DocumentI,
 } from './../../../../Icons';
 
-import WithTooltip from './../../../../Icons/WithTooltip';
+import WithTooltip from './../../../../HOCs/WithTooltip';
+import WithFade from './../../../../HOCs/WithFade';
+import { toggleQuickPanel } from '../../../../../actions/nav';
+import { getSlotNav } from '../../../../../reducers/nav';
 
-const DivIconWithTooltip = WithTooltip(DivIcon, 'Div exists in DOM');
-const ComputerIconWithTooltip = WithTooltip(ComputerIcon, 'Creative rendered');
+// TODO: needs more flexible HOCS, possibly with decorators
+const DivExistsIcon = WithFade(WithTooltip(DivIcon, 'Div exists in DOM'), {timeout: 200});
+
+const RenderIcon = WithFade(WithTooltip(ComputerIcon, 'Creative rendered'), {timeout: 200});
+const ErrorIcon = WithFade(WarnNoFillIcon, {timeout: 200});
+const AltPanelIcon = WithFade(CogIcon, {timeout: 200});
+const RefreshSlotIcon = WithFade(WithTooltip(RefreshIcon, 'Refresh slot'), {timeout: 200});
+const ScrollToIcon = WithFade(WithTooltip(DocumentI, 'Scroll to slot'), {timeout: 200});
 const EventsIconWithTooltip = WithTooltip(EventsIcon, 'Go to slot events');
 const EyeIconWithTooltip = WithTooltip(EyeIcon, 'Impression Viewable');
-
 
 const QuickPanelContainer = styled.div`
   width: 120px;
   height: 100%;
-  display: flex;
-  align-items: center;
+  
+  & > :first-child {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    & > div {
+      margin-right: 5px;
+    }
+
+    & > :last-child {
+      margin: 0px 7px 0 3px;
+    }
+  }
 `;
 
 const QuickPanel = props => {
+  const iconProps = {
+    isOpen: props.isOpen,
+    width: '17px',
+    height: '17px',
+  }
   return (
     <QuickPanelContainer >
-      <DivIconWithTooltip iconProps={{
-        isSelected: props.isOpen,
-        width: '17px',
-        height: '17px',
-      }} />
-      <ComputerIconWithTooltip iconProps={{
-        isSelected: props.isOpen,
-        width: '17px',
-        height: '17px',
-      }}/>
-      <EventsIconWithTooltip iconProps={{
-        isSelected: props.isOpen,
-        width: '17px',
-        height: '17px',
-      }}/>
-      <EyeIconWithTooltip iconProps={{
-        isSelected: props.isOpen,
-        width: '17px',
-        height: '17px',
-      }}/>
-      <WarnNoFillIcon isSelected={props.isOpen} width='17px' height='17px'/>
+      <TransitionGroup>
+        {!props.slotNav.quickPanelOpen ? [
+          <DivExistsIcon key={`qp-div-exists-${props.slotId}`}
+          {...iconProps}
+          />,
+          <RenderIcon key={`qp-render-${props.slotId}`}
+          {...iconProps}
+          />,
+        ]: [
+          <ScrollToIcon key={`qp-scrollto-${props.slotId}`}
+          {...iconProps}
+          />,
+          <RefreshSlotIcon key={`qp-refresh-${props.slotId}`}
+          {...iconProps}
+          />,
+        ]}
+          <AltPanelIcon key={`qp-alt-panel-${props.slotId}-closed`}
+          isSelected={props.slotNav.quickPanelOpen}
+          {...iconProps}
+          handleClick={e => props.toggleQuickPanel(props.slotId)}
+          />
+      </TransitionGroup>
+      
     </QuickPanelContainer>
   )
 };
@@ -68,13 +99,13 @@ QuickPanel.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // TODO
+    slotNav: getSlotNav(state, ownProps.slotId),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    // TODO
+    toggleQuickPanel: slotId => dispatch(toggleQuickPanel(slotId)),
   }
 }
 
