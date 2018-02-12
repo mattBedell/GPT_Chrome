@@ -6,6 +6,8 @@ import EventsIcon from './Events';
 import EyeIcon from './Eye';
 import WarnNoFillIcon from './WarnNoFill';
 import WarnFillIcon from './WarnFill';
+import RefreshIcon from './Refresh';
+import DocumentI from './Document';
 
 export {
   DivIcon,
@@ -15,4 +17,6 @@ export {
   EyeIcon,
   WarnNoFillIcon,
   WarnFillIcon,
+  RefreshIcon,
+  DocumentI,
 };
