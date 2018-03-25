@@ -9,7 +9,12 @@ import SlotDetail from './SlotDetail';
 
 const Slot = props => {
   return (
-    <>
+    <div style={
+      {
+        transform: 'translateX(0px)',
+        position: 'sticky',
+        top: `${props.index * 30}px`,
+        }}>
       <SlotMin
         key={`slots-${props.slot.slotId}`}
         slotNav={props.slotNav}
@@ -17,8 +22,8 @@ const Slot = props => {
         slotId={props.slot.slotId}
         index={props.index}
       />
-      {props.slotNav.isOpen ? <SlotDetail /> : <></>}
-    </>
+      {props.slotNav.isOpen ? <SlotDetail slotId={props.slot.slotId}/> : <></>}
+    </div>
   )
 };
 
