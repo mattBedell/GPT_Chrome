@@ -5,21 +5,27 @@ import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 
+import SlotNav from '../SlotNav';
+import Targeting from '../Targeting';
+
 const DetailContainer = styled.div`
   width: 100%;
-  height: 330px;
+  height: 300px;
   background-color: ${props => props.theme.menuExpanded};
 `;
 
 
 const SlotDetail = props => {
   return (
-    <DetailContainer />
+    <DetailContainer >
+      <SlotNav />
+      <Targeting slotId={props.slotId}/>
+    </DetailContainer>
   );
 };
 
 SlotDetail.propTypes = {
-  
+  slotId: PropTypes.string.isRequired,
 }
 
 
