@@ -39,6 +39,19 @@ const targeting = (state = {}, action) => {
   }
 }
 
+/** Get Slots for current tab
+ * @param {Object} state
+ * @param {String} slotId
+ * @returns {Object} targeting
+*/
+
+export const getTargeting = (state, slotId)=> {
+  const tab = getTab(state);
+  const { currentTab } = tab;
+
+  return tab[currentTab]['slots'][slotId]['targeting'];
+}
+
 const impressionViewablity = (state = false, action) => {
   switch(action.type) {
     case IMPRESSION_VIEWABILITY:
