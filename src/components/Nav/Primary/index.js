@@ -22,26 +22,26 @@ const PrimaryViewNav = props => {
     <nav>
       <PrimaryButton
         onClick={() => shouldDispatchSetView(props, 'Slots')}
-        active={props.selectedValue === 'Slots'}
+        active={props.selectedView === 'Slots'}
       >Slots</PrimaryButton>
       <PrimaryButton
         onClick={() => shouldDispatchSetView(props, 'Page')}
-        active={props.selectedValue === 'Page'}
+        active={props.selectedView === 'Page'}
       >Page</PrimaryButton>
       <PrimaryButton
         onClick={() => shouldDispatchSetView(props, 'Events')}
-        active={props.selectedValue === 'Events'}
+        active={props.selectedView === 'Events'}
       >Events</PrimaryButton>
       <PrimaryButton
         onClick={() => shouldDispatchSetView(props, 'Debug')}
-        active={props.selectedValue === 'Debug'}
+        active={props.selectedView === 'Debug'}
       >Debug</PrimaryButton>
     </nav>
   )
 };
 
 PrimaryViewNav.propTypes = {
-  selectedValue: PropTypes.string.isRequired,
+  selectedView: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
 }
 

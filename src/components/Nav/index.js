@@ -8,7 +8,7 @@ const Nav = props => {
   return (
     <>
       <Primary
-        selectedValue={props.selectedValue}
+        selectedView={props.selectedView}
         setSelected={props.setSelected}
         />
       <QuickView />
@@ -17,7 +17,7 @@ const Nav = props => {
 }
 
 Nav.propTypes = {
-  selectedValue: PropTypes.string.isRequired,
+  selectedView: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
 }
 

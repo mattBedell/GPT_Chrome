@@ -11,7 +11,9 @@ const testState = {
       "slots": {
         "slotIds": [
           "y1wqplt1dro-jbviptu5",
-          "7fdk7lm6pfb-jbviptuh"
+          "7fdk7lm6pfb-jbviptuh",
+          "d5vqplt13d5-jbvipd2v",
+          "dngeplt4hfv-xsvidke3",
         ],
         "y1wqplt1dro-jbviptu5": {
           "slotId": "y1wqplt1dro-jbviptu5",
@@ -198,7 +200,197 @@ const testState = {
               "300x250"
             ]
           }
-        }
+        },
+        "d5vqplt13d5-jbvipd2v": {
+          "slotId": "d5vqplt13d5-jbvipd2v",
+          "div": "ad_3",
+          "path": "/32173961/desktop/frontpage/listing",
+          "gptId": "32173961",
+          "name": "listing",
+          "sizes": [
+            [
+              300,
+              250
+            ],
+            [
+              300,
+              600
+            ]
+          ],
+          "divExists": false,
+          "refresh": 0,
+          "targeting": {
+            "keywords": [
+              "a.interesting",
+              "a.videos",
+              "k.ready for",
+              "k.dui",
+              "a.pets",
+              "s.frontpage",
+              "s.brandlift.holdout_7",
+              "s.brandlift.holdout_4",
+              "k.jedi",
+              "a.gaming",
+              "a.life_advice",
+              "s.loggedout",
+              "s.sfw",
+              "k.us",
+              "s.brandlift.holdout_13",
+              "k.kylo ren",
+              "a.photography",
+              "k.actual",
+              "k.library",
+              "a.humor",
+              "a.animals"
+            ],
+            "adblock": [
+              "off"
+            ],
+            "listing": [
+              "listing"
+            ],
+            "interests": [
+              "interesting",
+              "videos",
+              "pets",
+              "gaming",
+              "life_advice",
+              "photography",
+              "humor",
+              "animals"
+            ],
+            "placement": [
+              "atf"
+            ],
+            "whitelist_status": [
+              "all_ads"
+            ],
+            "subreddit_screen": [],
+            "percentage": [
+              "95"
+            ],
+            "iaa": [],
+            "random_number": [
+              "95"
+            ],
+            "environment": [
+              "production"
+            ],
+            "nsfw": [],
+            "logged_in": [],
+            "has_used_mobile_app": [],
+            "full_url": [
+              "https://www.reddit.com/"
+            ],
+            "amznbid": [
+              "igj6kg"
+            ],
+            "amznp": [
+              "e5ph4w"
+            ],
+            "amzniid": [
+              "It_nRb24bEYxtJFBE24Tl7EAAAFgr04B8gEAAA0zAYwXxEg"
+            ],
+            "amznsz": [
+              "300x250"
+            ]
+          }
+        },
+        "dngeplt4hfv-xsvidke3": {
+          "slotId": "dngeplt4hfv-xsvidke3",
+          "div": "ad_2",
+          "path": "/32173961/desktop/frontpage/listing",
+          "gptId": "32173961",
+          "name": "listing",
+          "sizes": [
+            [
+              300,
+              250
+            ],
+            [
+              300,
+              600
+            ]
+          ],
+          "divExists": true,
+          "refresh": 0,
+          "targeting": {
+            "keywords": [
+              "a.interesting",
+              "a.videos",
+              "k.ready for",
+              "k.dui",
+              "a.pets",
+              "s.frontpage",
+              "s.brandlift.holdout_7",
+              "s.brandlift.holdout_4",
+              "k.jedi",
+              "a.gaming",
+              "a.life_advice",
+              "s.loggedout",
+              "s.sfw",
+              "k.us",
+              "s.brandlift.holdout_13",
+              "k.kylo ren",
+              "a.photography",
+              "k.actual",
+              "k.library",
+              "a.humor",
+              "a.animals"
+            ],
+            "adblock": [
+              "off"
+            ],
+            "listing": [
+              "listing"
+            ],
+            "interests": [
+              "interesting",
+              "videos",
+              "pets",
+              "gaming",
+              "life_advice",
+              "photography",
+              "humor",
+              "animals"
+            ],
+            "placement": [
+              "atf"
+            ],
+            "whitelist_status": [
+              "all_ads"
+            ],
+            "subreddit_screen": [],
+            "percentage": [
+              "95"
+            ],
+            "iaa": [],
+            "random_number": [
+              "95"
+            ],
+            "environment": [
+              "production"
+            ],
+            "nsfw": [],
+            "logged_in": [],
+            "has_used_mobile_app": [],
+            "full_url": [
+              "https://www.reddit.com/"
+            ],
+            "amznbid": [
+              "igj6kg"
+            ],
+            "amznp": [
+              "e5ph4w"
+            ],
+            "amzniid": [
+              "It_nRb24bEYxtJFBE24Tl7EAAAFgr04B8gEAAA0zAYwXxEg"
+            ],
+            "amznsz": [
+              "300x250"
+            ]
+          }
+        },
       },
       "detached": false
     }

@@ -18,17 +18,24 @@ const Spacer = styled.div`
   background-color: ${props => props.theme.brandPrimary}
 `;
 
+const ViewContainer = styled.div`
+  height: 430px;
+  overflow-y: scroll;
+`
+
 class App extends Component {
   render() {
     return(
       <ThemeProvider theme={HTLDarkTheme}>
       <>
         <Nav
-          selectedValue={this.props.selectedView}
+          selectedView={this.props.selectedView}
           setSelected={this.props.setView}
         />
         <Spacer />
-        <Slots />
+        <ViewContainer>
+          <Slots />
+        </ViewContainer>
       </>
       </ThemeProvider>
     )

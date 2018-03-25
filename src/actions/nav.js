@@ -1,4 +1,4 @@
-import { SET_VIEW, SET_SLOT } from "./actionTypes";
+import { SET_VIEW, SET_SLOT_OPEN, QUICK_PANEL_TOGGLE } from "./actionTypes";
 
 export const setView = selectedView => {
   return {
@@ -9,11 +9,21 @@ export const setView = selectedView => {
   }
 };
 
-export const setSlot = selectedSlot => {
+export const setSlot = (slotId, isOpen) => {
   return {
-    type: SET_SLOT,
+    type: SET_SLOT_OPEN,
     payload: {
-      selectedSlot,
+      slotId,
+      isOpen,
     }
   }
 };
+
+export const toggleQuickPanel = slotId => {
+  return {
+    type: QUICK_PANEL_TOGGLE,
+    payload: {
+      slotId,
+    }
+  }
+}

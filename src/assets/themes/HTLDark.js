@@ -20,7 +20,8 @@ const Styles = {
   
     // MENU
     menuPrimary: '#414955',
-    menuExpanded: '#616C79',
+    menuExpanded: '#5A6471',
+    // menuExpanded: '#616C79',
   
     // ICONS
     iconPrimary: '#3988e3',
@@ -28,7 +29,7 @@ const Styles = {
     iconClosed: '#7288a3',
   
     // BODY
-    bodyBg: '#f5f8fa',
+    bodyBg: '#616C79',
     textColor: '#F6F7FB',
 };
 
@@ -70,7 +71,6 @@ injectGlobal`
   }
 
   body {
-    border: 1px solid red;
     box-sizing: content-box;
     background-color: ${Styles.bodyBg};
     width: 400px;
