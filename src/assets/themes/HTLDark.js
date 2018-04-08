@@ -29,6 +29,13 @@ const Styles = {
       closed: '#7288a3',
     },
 
+    content: {
+      content1: '#657E9B',
+      content2: '#4B6480',
+      content3: '#8C97A5',
+      content4: '#77818F',
+    },
+
     global: {
       bodyBg: '#616C79',
       textColor: '#F6F7FB',
