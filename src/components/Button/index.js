@@ -6,8 +6,8 @@ import styled from 'styled-components';
 const Button = styled.button`
   border: none;
   background: none;
-  background-color: ${props => props.active ? props.theme.menuExpanded : props.theme.menuPrimary};
-  color: ${props => props.active ? props.theme.iconHighlighted : 'inherit'};
+  background-color: ${props => props.active ? props.theme.menu.expanded : props.theme.menuPrimary};
+  color: ${props => props.active ? props.theme.icon.highlighted : 'inherit'};
   user-select: none;
   white-space: pre;
   font-weight: bolder;

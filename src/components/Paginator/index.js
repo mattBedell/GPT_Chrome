@@ -14,7 +14,7 @@ const PaginatorContainer = styled.div`
 
 const PageNum = styled.div`
   margin: 5px;
-  color: ${props => props.isActive ? props.theme.iconPrimary : 'inheret'};
+  color: ${props => props.isActive ? props.theme.icon.primary : 'inheret'};
 `;
 
 class Paginator extends Component {

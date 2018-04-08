@@ -9,28 +9,30 @@ import ralewayBlack from './../fonts/Raleway/Raleway-Black.ttf';
 
 const Styles = {
 
-    // BRAND
-    brandPrimary: '#3988E3',
-    // brandPrimary: '#3097D1',
-    brandInfo: '#8eb4cb',
-    brandSuccess: '#2ab27b',
-    brandWarning: '#cbb956',
-    brandDanger: '#bf5329',
+    brand: {
+      primary: '#3988E3',
+      // brandPrimary: '#3097D1',
+      info: '#8eb4cb',
+      success: '#2ab27b',
+      warning: '#cbb956',
+      danger: '#bf5329',
+    },
+
+    menu: {
+      primary: '#414955',
+      expanded: '#5A6471',
+    },
   
-  
-    // MENU
-    menuPrimary: '#414955',
-    menuExpanded: '#5A6471',
-    // menuExpanded: '#616C79',
-  
-    // ICONS
-    iconPrimary: '#3988e3',
-    iconHighlighted: '#FFBA0B',
-    iconClosed: '#7288a3',
-  
-    // BODY
-    bodyBg: '#616C79',
-    textColor: '#F6F7FB',
+    icon: {
+      primary: '#3988e3',
+      highlighted: '#FFBA0B',
+      closed: '#7288a3',
+    },
+
+    global: {
+      bodyBg: '#616C79',
+      textColor: '#F6F7FB',
+    },
 };
 
 injectGlobal`
@@ -66,13 +68,13 @@ injectGlobal`
     margin: 0;
     font-family: 'Raleway', sans-serif;
     font-weight: ;
-    color: ${Styles.textColor};
+    color: ${Styles.global.textColor};
     box-sizing: border-box;
   }
 
   body {
     box-sizing: content-box;
-    background-color: ${Styles.bodyBg};
+    background-color: ${Styles.global.bodyBg};
     width: 400px;
     height: 500px;
   }
