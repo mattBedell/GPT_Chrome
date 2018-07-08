@@ -6,14 +6,14 @@ import {
   removeTab,
   clearTab,
   detachTab,
-  attachTab
+  attachTab,
 } from '../actions/index';
 import { getTab } from '../reducers/chrome';
 import rootReducer from '../reducers/index';
 import GptListeners from './Listeners/Background/gpt';
 import GptEventListeners from './Listeners/Background/events';
 
-const logger = createLogger({ collapsed: true});
+const logger = createLogger({ collapsed: true });
 const store = createStore(rootReducer, applyMiddleware(logger));
 
 const makeTabId = (windowId, tabId) => `${windowId}:${tabId}`;
@@ -45,19 +45,18 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
   store.dispatch(removeTab(windowTabId));
 });
 
-chrome.runtime.onConnect.addListener(port => {
+chrome.runtime.onConnect.addListener((port) => {
   if (port.sender.url === chrome.runtime.getURL('index.html')) {
     port.postMessage({
       type: POPUP_CONNECT,
       tab: getTab(store.getState()),
     });
-  };
-  
-  port.onMessage.addListener(msg => {
+  }
+
+  port.onMessage.addListener((msg) => {
     const windowTabId = makeTabId(port.sender.tab.windowId, port.sender.tab.id);
 
     GptListeners(store, msg, windowTabId);
     GptEventListeners(store, msg, windowTabId);
-    
-  })
+  });
 });

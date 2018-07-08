@@ -5,9 +5,6 @@ import nav from './nav';
 import { popup } from './popup';
 
 
-
-
-
 export default combineReducers({
   tabs,
   popup,

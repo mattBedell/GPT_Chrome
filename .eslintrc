@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "warn",
+    "max-len": [1, 150, 2],
+    "no-underscore-dangle": "off"
+  },
+  "globals": {
+    "chrome": false,
+    "window": false,
+    "googletag": true,
+    "document": false
+  },
+  "extends": ["airbnb-base"]
+}

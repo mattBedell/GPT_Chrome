@@ -1,0 +1,401 @@
+{
+  "slots": {
+    "slotIds": [
+      "ewcmecg86dw-jjdfh09d",
+      "7aa2xzcsoao-jjdfh09j"
+    ],
+    "ewcmecg86dw-jjdfh09d": {
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "div": "atf",
+      "path": "/12345678/medrec",
+      "gptId": "12345678",
+      "name": "listing",
+      "sizes": [
+        [
+          300,
+          250
+        ],
+        [
+          300,
+          600
+        ]
+      ],
+      "divExists": true,
+      "refresh": 0,
+      "timestamp": 1531090030226,
+      "targeting": {
+        "keywords": [
+          null
+        ],
+        "screen": [
+          false
+        ],
+        "nsfw": [
+          null
+        ],
+        "logged_in": [
+          false
+        ],
+        "placement": [
+          "atf"
+        ],
+        "platform": [
+          "redesign"
+        ],
+        "full_url": [
+          "https://example.com"
+        ],
+        "layout": [
+          null
+        ],
+        "wls": [
+          6
+        ],
+        "whitelist_status": [
+          "all_ads"
+        ],
+        "random_number": [
+          11
+        ],
+        "percentage": [
+          11
+        ],
+        "position": [
+          "first"
+        ]
+      },
+      "impressionViewablity": false
+    },
+    "7aa2xzcsoao-jjdfh09j": {
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "div": "btf",
+      "path": "/12345678/medrec",
+      "gptId": "12345678",
+      "name": "listing",
+      "sizes": [
+        [
+          300,
+          250
+        ]
+      ],
+      "divExists": true,
+      "refresh": 0,
+      "timestamp": 1531090030231,
+      "targeting": {
+        "keywords": [
+          null
+        ],
+        "screen": [
+          false
+        ],
+        "nsfw": [
+          null
+        ],
+        "logged_in": [
+          false
+        ],
+        "placement": [
+          "btf"
+        ],
+        "platform": [
+          "redesign"
+        ],
+        "full_url": [
+          "https://example.com"
+        ],
+        "layout": [
+          null
+        ],
+        "wls": [
+          6
+        ],
+        "whitelist_status": [
+          "all_ads"
+        ],
+        "random_number": [
+          11
+        ],
+        "percentage": [
+          11
+        ],
+        "position": [
+          "bottom"
+        ]
+      },
+      "impressionViewablity": false
+    }
+  },
+  "events": [
+    {
+      "timestamp": 1531090030226,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "type": "SLOT:GPT:DEFINE_SLOT"
+    },
+    {
+      "timestamp": 1531090030227,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "keywords": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "screen": [
+          false
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "nsfw": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "logged_in": [
+          false
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "placement": [
+          "atf"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "platform": [
+          "redesign"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "full_url": [
+          "https://example.com"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "layout": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "wls": [
+          6
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030228,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "whitelist_status": [
+          "all_ads"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030229,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "random_number": [
+          11
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030229,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "percentage": [
+          11
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030229,
+      "slotId": "ewcmecg86dw-jjdfh09d",
+      "targeting": {
+        "position": [
+          "first"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030231,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "type": "SLOT:GPT:DEFINE_SLOT"
+    },
+    {
+      "timestamp": 1531090030231,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "keywords": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030231,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "screen": [
+          false
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030231,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "nsfw": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030233,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "logged_in": [
+          false
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030233,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "placement": [
+          "btf"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030233,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "platform": [
+          "redesign"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030240,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "full_url": [
+          "https://example.com"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030242,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "layout": [
+          null
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030251,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "wls": [
+          6
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030252,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "whitelist_status": [
+          "all_ads"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030256,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "random_number": [
+          11
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030260,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "percentage": [
+          11
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    },
+    {
+      "timestamp": 1531090030280,
+      "slotId": "7aa2xzcsoao-jjdfh09j",
+      "targeting": {
+        "position": [
+          "bottom"
+        ]
+      },
+      "type": "SLOT:GPT:SET_TARGETING"
+    }
+  ],
+  "detached": false
+}

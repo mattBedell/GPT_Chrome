@@ -10,7 +10,7 @@ import {
   clearTargeting,
 } from '../../../actions';
 
-export default function(store, msg, windowTabId) {
+export default function (store, msg, windowTabId) {
   switch (msg.type) {
     case DEFINE_SLOT:
       store.dispatch(defineSlot(msg.payload, windowTabId));
@@ -23,5 +23,8 @@ export default function(store, msg, windowTabId) {
     case CLEAR_TARGETING:
       store.dispatch(clearTargeting(msg.payload, windowTabId));
       break;
+
+    default:
+      break;
   }
-};
+}

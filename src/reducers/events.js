@@ -2,7 +2,6 @@ import {
   RENDER_ENDED,
   DEFINE_SLOT,
   SET_TARGETING,
-  CLEAR_TARGETING,
 } from '../actions/actionTypes';
 
 import {
@@ -11,28 +10,27 @@ import {
   GPT,
 } from '../actions/eventTypes';
 
-const eventHelper = (action, type, subType) => {
-  return {
-    type: `${type}:${subType}:${action.type}`,
-  }
-}
+const eventHelper = (action, type, subType) => ({
+  type: `${type}:${subType}:${action.type}`,
+});
 
-export const events = (state = {}, action) => {
-  let typeObj, slotId, timestamp;
+export const events = (state = {}, action) => { // eslint-disable-line
   switch (action.type) {
-    case RENDER_ENDED:
-      typeObj = eventHelper(action, SLOT, RENDER);
+    case RENDER_ENDED: {
+      const typeObj = eventHelper(action, SLOT, RENDER);
       return [
         ...state,
         Object.assign({},
           typeObj,
-          action.payload)
+          action.payload),
       ];
-    
-    case DEFINE_SLOT:
-      typeObj = eventHelper(action, SLOT, GPT);
-      timestamp = action.payload.timestamp;
-      slotId = action.payload.slot.slotId;
+    }
+
+    case DEFINE_SLOT: {
+      const typeObj = eventHelper(action, SLOT, GPT);
+
+      const { timestamp, slot } = action.payload;
+      const { slotId } = slot;
 
       return [
         ...state,
@@ -41,24 +39,24 @@ export const events = (state = {}, action) => {
           slotId,
         }, typeObj),
       ];
+    }
 
-      case SET_TARGETING:
-        typeObj = eventHelper(action, SLOT, GPT);
-        timestamp = action.payload.timestamp;
-        slotId = action.payload.slotId;
+    case SET_TARGETING: {
+      const typeObj = eventHelper(action, SLOT, GPT);
 
-        return [
-          ...state,
-          Object.assign({
-            timestamp,
-            slotId,
-            targeting: action.payload.targeting,
-          }, typeObj),
-        ];
+      const { timestamp, slotId } = action.payload;
 
-
+      return [
+        ...state,
+        Object.assign({
+          timestamp,
+          slotId,
+          targeting: action.payload.targeting,
+        }, typeObj),
+      ];
+    }
 
     default:
-    return state;
+      return state;
   }
-}
+};
