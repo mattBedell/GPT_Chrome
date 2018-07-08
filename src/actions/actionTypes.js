@@ -1,27 +1,27 @@
 
-///// CHROME /////
+// /// CHROME /////
 export const POPUP_CONNECT = 'POPUP_CONNECT';
-/// TABS
+// / TABS
 export const SWITCH_TAB = 'SWITCH_TAB';
 export const REMOVE_TAB = 'REMOVE_TAB';
 export const CLEAR_TAB = 'CLEAR_TAB';
 export const DETACH_TAB = 'DETACH_TAB';
 export const ATTACH_TAB = 'ATTACH_TAB';
 
-///// SLOTS /////
+// /// SLOTS /////
 export const RECIEVE_SLOTS = 'RECIEVE_SLOTS';
 export const DEFINE_SLOT = 'DEFINE_SLOT';
 
-/// EVENTS
+// / EVENTS
 
 export const RENDER_ENDED = 'RENDER_ENDED';
-/// TARGETING
+// / TARGETING
 export const SET_TARGETING = 'SET_TARGETING';
 export const CLEAR_TARGETING = 'CLEAR_TARGETING';
-/// VIEWABILITY
+// / VIEWABILITY
 export const IMPRESSION_VIEWABILITY = 'IMPRESSION_VIEWABILITY';
 
-///// NAV /////
+// /// NAV /////
 
 export const SET_VIEW = 'SET_VIEW';
 export const SET_SLOT_OPEN = 'SET_SLOT_OPEN';
