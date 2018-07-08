@@ -7,13 +7,13 @@ injectScript.src = chrome.runtime.getURL('dist/inject_script.js');
 const checkHead = setInterval(() => {
   if (document.head) {
     document.head.appendChild(injectScript);
-    clearInterval(checkHead)
+    clearInterval(checkHead);
   }
 });
 
 const port = chrome.runtime.connect();
 
-chrome.runtime.onMessage.addListener(msg => {
+chrome.runtime.onMessage.addListener((msg) => {
   console.log('SCRIPT CONNECTED...');
 });
 
