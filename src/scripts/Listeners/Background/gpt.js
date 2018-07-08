@@ -23,5 +23,8 @@ export default function (store, msg, windowTabId) {
     case CLEAR_TARGETING:
       store.dispatch(clearTargeting(msg.payload, windowTabId));
       break;
+
+    default:
+      break;
   }
 }

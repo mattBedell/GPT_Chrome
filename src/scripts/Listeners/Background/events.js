@@ -11,5 +11,8 @@ export default function (store, msg, windowTabId) {
     case RENDER_ENDED:
       store.dispatch(renderEnded(msg.payload, windowTabId));
       break;
+
+    default:
+      break;
   }
 }

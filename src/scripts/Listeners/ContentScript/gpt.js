@@ -5,6 +5,8 @@ import {
   IMPRESSION_VIEWABILITY,
 } from '../../../actions/actionTypes';
 
+const { addEventListener } = window;
+
 export default function (port) {
   addEventListener(DEFINE_SLOT, (e) => {
     port.postMessage({

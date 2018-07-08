@@ -3,6 +3,7 @@ import {
   RENDER_ENDED,
 } from '../../../actions/actionTypes';
 
+const { dispatchEvent, CustomEvent } = window;
 
 export default function (googletag) {
   googletag.pubads().addEventListener('slotRenderEnded', (event) => {
