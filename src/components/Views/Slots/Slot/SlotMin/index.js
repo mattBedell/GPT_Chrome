@@ -12,7 +12,7 @@ import QuickPanel from './../QuickPanel';
 const MinContainer = styled.div`
   width: 400px;
   height: 30px;
-  background-color: ${props => props.isOpen ? props.theme.menuExpanded : props.theme.menuPrimary};
+  background-color: ${props => props.isOpen ? props.theme.menu.expanded : props.theme.menu.primary};
   display: flex;
   justify-content: space-between;
   & > :first-child {
@@ -32,7 +32,7 @@ const Arrow = styled.div`
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-left: 8px solid ${props => props.isOpen ? props.theme.menuPrimary : props.theme.menuExpanded};
+  border-left: 8px solid ${props => props.isOpen ? props.theme.menu.primary : props.theme.menu.expanded};
   transform: ${props => props.isOpen ? 'rotate(90deg)' : 'rotate(0deg)'};
   transition: border-left-color .2s, transform .2s;
   margin-left: 10px;
@@ -40,7 +40,7 @@ const Arrow = styled.div`
 `;
 
 const SlotName = styled.div`
-  color: ${props => props.isOpen ? props.theme.iconHighlighted : 'inherit'};
+  color: ${props => props.isOpen ? props.theme.icon.highlighted : 'inherit'};
   font-size: 12px;
   margin-right: auto;
 `;

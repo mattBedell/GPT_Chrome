@@ -14,7 +14,9 @@ const PaginatorContainer = styled.div`
 
 const PageNum = styled.div`
   margin: 5px;
-  color: ${props => props.isActive ? props.theme.iconPrimary : 'inheret'};
+  color: ${props => props.isActive ? props.theme.icon.primary : 'inheret'};
+  cursor: pointer;
+  user-select: none;
 `;
 
 class Paginator extends Component {
@@ -27,25 +29,20 @@ class Paginator extends Component {
 
     this.pageThruRef = this.pageThruRef.bind(this);
     this.pages = 1;
+    this.positions = new Set();
   }
 
   pageThruRef(el) {
     if(!el) return;
-    const { top } = el.getBoundingClientRect();
-    if(!this.anchorTop) {
-      this.anchorTop = top;
-      this.setState({
-        anchorTop: top,
-      });
-
-    } else if (top === this.anchorTop) {
-      this.pages += 1;
+    const { left, width } = el.getBoundingClientRect();
+    this.positions.add(left);
+    if (!this.offset) {
+      this.offset = width;
     }
 
     this.setState({
-      pages: this.pages,
+      pages: this.positions.size,
     });
-
   }
 
   handleNumClick(e, pageNum) {
@@ -62,20 +59,28 @@ class Paginator extends Component {
     return (
       <div>
         <div>
-          {this.props.render(this.state, this.pageThruRef)}
+          {this.props.render({ref: this.pageThruRef, offset: this.offset, currentPage: this.state.currentPage})}
         </div>
-        <PaginatorContainer>
-          {pageArr.map(page => <PageNum
-          key={`pagenum-${page}`}
-          isActive={page === this.state.currentPage}
-          onClick={e => this.handleNumClick(e, page)}
-          >{page}</PageNum>)}
-        </PaginatorContainer>
+        {this.props.pageLinks ?
+          <PaginatorContainer>
+            {pageArr.map(page => <PageNum
+            key={`pagenum-${page}`}
+            isActive={page === this.state.currentPage}
+            onClick={e => this.handleNumClick(e, page)}
+            >{page}</PageNum>)}
+          </PaginatorContainer>
+          : []}
       </div>
     );
   }
+}
 
+Paginator.propTypes = {
+  render: PropTypes.func.isRequired,
+}
 
+Paginator.defaultProps = {
+  pageLinks: false,
 }
 
 export default Paginator;

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Button from '../../../../Button';
 
 const NavContainer = styled.div`
-  background-color: ${props => props.theme.bodyBg};
+  background-color: ${props => props.theme.global.bodyBg};
   height: 25px;
   width: 100%;
   padding: 8px 0px 20px 30px;
@@ -18,7 +18,7 @@ const NavContainer = styled.div`
 
 const SlotNavBtn = Button.extend`
   background-color: inherit;
-  color: ${props => props.active ? props.theme.iconPrimary : 'inherit'};
+  color: ${props => props.active ? props.theme.icon.primary : 'inherit'};
   margin: 0px 5px;
   &:hover {
     filter: none;

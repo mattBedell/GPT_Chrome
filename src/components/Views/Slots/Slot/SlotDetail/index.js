@@ -11,7 +11,7 @@ import Targeting from '../Targeting';
 const DetailContainer = styled.div`
   width: 100%;
   height: 300px;
-  background-color: ${props => props.theme.menuExpanded};
+  background-color: ${props => props.theme.menu.expanded};
 `;
 
 

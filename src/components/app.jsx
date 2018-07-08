@@ -6,6 +6,7 @@ import { getSelectedView } from './../reducers/nav';
 
 import styled, { ThemeProvider } from 'styled-components';
 import HTLDarkTheme from './../assets/themes/HTLDark';
+import ColorMap from '../components/Theme/ColorMap';
 
 import Nav from './Nav';
 import Slots from './Views/Slots';
@@ -15,28 +16,50 @@ import Slots from './Views/Slots';
 const Spacer = styled.div`
   width: 100%;
   height: 2px;
-  background-color: ${props => props.theme.brandPrimary}
+  background-color: ${props => props.theme.brand.primary};
 `;
 
 const ViewContainer = styled.div`
   height: 430px;
   overflow-y: scroll;
-`
+`;
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount() {
+    const queryString = window.location.search.substring(1);
+    const searchParams = new URLSearchParams(queryString);
+
+    if (searchParams.has('colorMap')) {
+      this.setState({
+        colorMap: true,
+      });
+    }
+  }
   render() {
     return(
       <ThemeProvider theme={HTLDarkTheme}>
-      <>
-        <Nav
-          selectedView={this.props.selectedView}
-          setSelected={this.props.setView}
-        />
-        <Spacer />
-        <ViewContainer>
-          <Slots />
-        </ViewContainer>
-      </>
+
+        {this.state.colorMap ? <ColorMap></ColorMap>
+        :
+        (
+          <>
+            <Nav
+              selectedView={this.props.selectedView}
+              setSelected={this.props.setView}
+            />
+            <Spacer />
+            <ViewContainer>
+              <Slots />
+            </ViewContainer>
+          </>
+        )
+        }
+
       </ThemeProvider>
     )
   }

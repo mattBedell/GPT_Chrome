@@ -18,14 +18,14 @@ const TooltipContainer = styled.div`
 
 const TextContainer = styled.div`
   font-size: 12px;
-  background-color: ${props => props.theme.brandInfo};
+  background-color: ${props => props.theme.brand.info};
   padding: 2px;
 `;
 
 const Arrow = styled.div`
   width: 0px;
   height: 0px;
-  border-top: 4px solid ${props => props.theme.brandInfo};
+  border-top: 4px solid ${props => props.theme.brand.info};
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
 

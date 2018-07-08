@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getTargeting } from '../../../../../reducers/slots';
 
 import styled from 'styled-components';
+import { lighten, darken } from 'polished';
 
 import Paginator from '../../../../Paginator';
 
@@ -12,7 +13,6 @@ const KeyValView = styled.div`
   height: 245px;
   display: flex;
   flex-flow: column wrap;
-  overflow: hidden;
 `;
 
 
@@ -20,36 +20,25 @@ const KeyValContainer = styled.div`
   display: flex;
   font-size: 12px;
   width: 100%;
-  margin: 5px 10px 0px 5px;
-  overflow-y: scroll;
-  transform: ${props => `translate(${(props.pageNum - 1) * - 398}px)`};
-  transition: transform .1s;
-  z-index: 0;
-`;
-
-const TargetingContainer = styled.div`
-  display: flex;
   flex-wrap: wrap;
+  transform: ${props => `translate(${(props.currentPage - 1) * -props.offset}px)`};
+  transition: transform .2s;
 `;
 
-const KeyContainer = styled.div`
-  display: flex;
+const ValBox = styled.div`
+  background-color: ${props => props.theme.content.content2};
+  border: 1px solid ${props => lighten(.2, props.theme.content.content2)};
+  padding: 5px;
+  margin: 2px;
 `;
 
-const TargBox = styled.div`
-  padding: 2px;
-  margin: 4px;
-  margin-bottom: 0px;
-  background-color: gray;
-`;
-
-const KeyBox = TargBox.extend`
-  padding-left: 4px;
-  padding-right: 4px;
-  margin-right: 3px;
+const KeyBox = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  background-color: ${props => props.theme.content.content4};
+  margin-bottom: 2px;
 `;
 
 const sortTargetingByLength = (targetingObj, sort = 'asc') => {
@@ -70,28 +59,26 @@ const sortTargetingByLength = (targetingObj, sort = 'asc') => {
 };
 
 
-
-
 const Targeting = props => {
   return (
-    <Paginator pageLimit={300} name={`targeting-${props.slotId}`} render={(state, pageThruRef) => {
+    <Paginator pageLinks={true} render={(pagination) => {
       return(
-      <KeyValView>
-        {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => (
-          <div style={{width: '100%'}} key={`sentinal-${props.slotId}-key-${targs.key}-${i}`} ref={pageThruRef}>
-            <KeyValContainer key={`${props.slotId}-key-${targs.key}-${i}`} pageNum={state.currentPage}>
-              <KeyContainer>
-                <KeyBox>{targs.key}</KeyBox>
-              </KeyContainer>
-              <TargetingContainer>
-              {targs.vals.map((val, j) => (
-                <TargBox key={`${props.slotId}-val-${val}-${i}-${j}`}>{val}</TargBox>
-              ))}
-              </TargetingContainer>
-            </KeyValContainer>
-          </div>
-        ))}
-      </KeyValView>
+        <KeyValView>
+          {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => {
+            return (
+              <div style={{width: '100%'}} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
+                <KeyValContainer key={`keyval-${props.slotId}-${i}`} currentPage={pagination.currentPage} offset={pagination.offset}>
+                  <KeyBox>{targs.key}</KeyBox>
+                  {targs.vals.map((val, j) => {
+                    return (
+                      <ValBox key={`val-${val}-${j}`}>{val}</ValBox>
+                    )
+                  })}
+                </KeyValContainer>
+              </div>
+            )
+          })}
+        </KeyValView>
       )
     }} />
   );
