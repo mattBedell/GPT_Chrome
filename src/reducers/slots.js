@@ -87,7 +87,7 @@ export const slots = (state = initialStateSlots, action) => {
         ...state,
         slotIds: slotIds(state.slotIds, action),
         ...action.payload.slots.reduce((slotsObj, incomingSlot) => {
-          slotsObj[slot.slotId] = incomingSlot; // eslint-disable-line
+          slotsObj[incomingSlot.slotId] = incomingSlot; // eslint-disable-line
           return slotsObj;
         }, {}),
       };

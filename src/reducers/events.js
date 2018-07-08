@@ -29,7 +29,7 @@ export const events = (state = {}, action) => { // eslint-disable-line
     case DEFINE_SLOT: {
       const typeObj = eventHelper(action, SLOT, GPT);
 
-      const { timestamp, slot } = action;
+      const { timestamp, slot } = action.payload;
       const { slotId } = slot;
 
       return [
@@ -44,8 +44,7 @@ export const events = (state = {}, action) => { // eslint-disable-line
     case SET_TARGETING: {
       const typeObj = eventHelper(action, SLOT, GPT);
 
-      const { timestamp, slot } = action;
-      const { slotId } = slot;
+      const { timestamp, slotId } = action.payload;
 
       return [
         ...state,
