@@ -13,7 +13,7 @@ const checkHead = setInterval(() => {
 
 const port = chrome.runtime.connect();
 
-chrome.runtime.onMessage.addListener((msg) => {
+chrome.runtime.onMessage.addListener(() => {
   console.log('SCRIPT CONNECTED...');
 });
 

@@ -1,4 +1,4 @@
-import patchRefresh from './pubads-refresh';
+// import patchRefresh from './pubads-refresh';
 import slot from './gpt-slot';
 import eventListeners from './Listeners/InjectScript';
 
