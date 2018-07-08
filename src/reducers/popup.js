@@ -1,3 +1,1 @@
-export const popup = (state = {}, action) => {
-  return state;
-}
+export const popup = (state = {}, action) => state; // eslint-disable-line
