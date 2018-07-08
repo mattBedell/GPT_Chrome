@@ -1,7 +1,9 @@
 {
   "parser": "babel-eslint",
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "warn",
+    "max-len": [1, 150, 2]
   },
   "globals": {
     "chrome": false,
