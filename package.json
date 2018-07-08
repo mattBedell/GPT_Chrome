@@ -13,7 +13,8 @@
     "prebuild-popup": "find extension/dist | grep popup.js | xargs rm",
     "build-scripts-prod": "npm run build-scripts -- --env.NODE_ENV=production",
     "build-popup-prod": "npm run build-popup -- --env.NODE_ENV=production",
-    "build-all-prod": "npm run build-scripts-prod && npm run build-popup-prod"
+    "build-all-prod": "npm run build-scripts-prod && npm run build-popup-prod",
+    "fix-scripts": "eslint --fix ./src/scripts"
   },
   "author": "Matt Bedell",
   "license": "ISC",

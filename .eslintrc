@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "no-console": "off"
+  },
+  "globals": {
+    "chrome": false,
+    "window": false,
+    "googletag": true,
+    "document": false
+  },
+  "extends": ["airbnb-base"]
+}
