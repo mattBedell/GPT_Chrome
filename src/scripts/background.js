@@ -59,4 +59,14 @@ chrome.runtime.onConnect.addListener((port) => {
     GptListeners(store, msg, windowTabId);
     GptEventListeners(store, msg, windowTabId);
   });
+
+  if (process.env.NODE_ENV === 'development') {
+    // reload extension if current hash changes
+    port.onMessage.addListener((msg) => {
+      if (msg.type === 'EXTENSION_RELOAD') {
+        chrome.tabs.reload(port.sender.tab.id);
+        chrome.runtime.reload();
+      }
+    });
+  }
 });

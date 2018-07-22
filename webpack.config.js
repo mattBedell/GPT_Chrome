@@ -1,13 +1,20 @@
 
-const webpack = require('webpack');
+const { execSync } = require('child_process');
 const path = require('path');
+
+const webpack = require('webpack');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
+const WebpackOnBuildPlugin = require('on-build-webpack');
 const merge = require('webpack-merge');
 
 const SCRIPTS_DIR = path.join(__dirname, 'src/scripts');
 const EXTENSION_DIR = path.join(__dirname, 'extension/dist');
-
 const POPUP_ENTRY = path.join(__dirname, 'src/index.jsx');
+
+function getActiveTab() {
+  const activeTab = execSync('chrome-cli info');
+  return activeTab.toString().split('\n')[0].split(': ')[1];
+}
 
 const production = {
   devtool: 'source-map',
@@ -76,7 +83,18 @@ const scripts = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+    new webpack.ExtendedAPIPlugin(),
+    new WebpackOnBuildPlugin(() => {
+      const tabId = getActiveTab();
+      execSync(`chrome-cli reload -t ${tabId}`);
+    }),
+  ],
 };
 
 const popup = {
