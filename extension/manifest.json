@@ -17,7 +17,7 @@
     },
     "content_scripts":[{
         "matches":["http://*/*", "https://*/*"],
-        "js": ["dist/script.js"],
+        "js": ["dist/content_script.js"],
         "run_at": "document_start"
     }],
     "web_accessible_resources": ["dist/inject_script.js", "dist/popup.js"],

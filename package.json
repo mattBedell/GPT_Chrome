@@ -6,7 +6,7 @@
   "scripts": {
     "hot": "node dev-server.js",
     "prehot": "npm run prebuild-popup",
-    "prebuild-scripts": "find extension/dist | grep -e background.js -e script.js -e inject_script.js | xargs rm",
+    "prebuild-scripts": "find extension/dist | grep -e background.js -e content_script.js -e inject_script.js | xargs rm",
     "build-scripts": "webpack --config webpack.config.js --env.BUILD_TYPE=scripts --progress --colors",
     "build-scripts-dev": "npm run build-scripts -- --watch",
     "build-popup": "webpack --config webpack.config.js --env.BUILD_TYPE=popup --progress --colors",

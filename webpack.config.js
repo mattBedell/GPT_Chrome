@@ -93,7 +93,7 @@ const scripts = {
   devtool: 'eval-source-map',
   entry: {
     background: `${SCRIPTS_DIR}/background.js`,
-    script: `${SCRIPTS_DIR}/script.js`,
+    content_script: `${SCRIPTS_DIR}/content_script.js`,
     inject_script: `${SCRIPTS_DIR}/inject_script.js`,
   },
   output: {
@@ -120,7 +120,7 @@ const scripts = {
   },
   plugins: [
     new WebpackOnBuildPlugin(function(stats) {
-      createOrReloadExtensions(getActiveTab());
+      // createOrReloadExtensions(getActiveTab());
     }),
   ],
 };
