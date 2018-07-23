@@ -10,7 +10,8 @@
     "chrome": false,
     "window": false,
     "googletag": true,
-    "document": false
+    "document": false,
+    "__webpack_hash__": false
   },
   "extends": ["airbnb-base"]
 }
