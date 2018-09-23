@@ -45,16 +45,27 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
   store.dispatch(removeTab(windowTabId));
 });
 
+let popupPort = null;
+
 chrome.runtime.onConnect.addListener((port) => {
   if (port.sender.url === chrome.runtime.getURL('index.html')) {
     port.postMessage({
       type: POPUP_CONNECT,
       tab: getTab(store.getState()),
     });
+    popupPort = port;
+
+    port.onDisconnect.addListener(() => {
+      popupPort = null;
+    });
   }
 
   port.onMessage.addListener((msg) => {
     const windowTabId = makeTabId(port.sender.tab.windowId, port.sender.tab.id);
+
+    if (popupPort) {
+      popupPort.postMessage(msg);
+    }
 
     GptListeners(store, msg, windowTabId);
     GptEventListeners(store, msg, windowTabId);

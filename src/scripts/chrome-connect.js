@@ -2,6 +2,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import { connect } from '../actions/popup';
 import rootReducer from '../reducers/index';
+import { getCurrentTab } from '../reducers/chrome';
+
+import GptListeners from './Listeners/Background/gpt';
+import GptEventListeners from './Listeners/Background/events';
 
 import { POPUP_CONNECT } from '../actions/actionTypes';
 
@@ -18,8 +22,12 @@ port.onMessage.addListener((msg) => {
       store.dispatch(connect(msg.tab));
       break;
 
-    default:
+    default: {
+      const currentTab = getCurrentTab(store.getState());
+      GptListeners(store, msg, currentTab);
+      GptEventListeners(store, msg, currentTab);
       break;
+    }
   }
 });
 
