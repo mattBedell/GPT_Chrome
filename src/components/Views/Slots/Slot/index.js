@@ -12,7 +12,6 @@ const Slot = props => {
     <div style={
       {
         transform: 'translateX(0px)',
-        position: 'sticky',
         top: `${props.index * 30}px`,
         }}>
       <SlotMin

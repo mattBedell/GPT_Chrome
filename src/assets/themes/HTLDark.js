@@ -77,6 +77,9 @@ injectGlobal`
     font-weight: ;
     color: ${Styles.global.textColor};
     box-sizing: border-box;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   body {
@@ -86,10 +89,5 @@ injectGlobal`
     height: 500px;
   }
 `;
-
-
-
-
-
 
 export default Styles;
