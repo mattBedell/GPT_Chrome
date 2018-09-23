@@ -21,7 +21,7 @@ const Spacer = styled.div`
 
 const ViewContainer = styled.div`
   height: 430px;
-  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 class App extends Component {
@@ -43,7 +43,6 @@ class App extends Component {
   render() {
     return(
       <ThemeProvider theme={HTLDarkTheme}>
-
         {this.state.colorMap ? <ColorMap></ColorMap>
         :
         (
@@ -59,7 +58,6 @@ class App extends Component {
           </>
         )
         }
-
       </ThemeProvider>
     )
   }

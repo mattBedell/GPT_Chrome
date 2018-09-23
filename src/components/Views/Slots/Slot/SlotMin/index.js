@@ -22,7 +22,6 @@ const MinContainer = styled.div`
     width: 100%;
   }
   cursor: pointer;
-  position: sticky;
   top: ${props => props.index * 30}px;
   z-index: 2;
 `;
