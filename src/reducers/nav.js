@@ -4,6 +4,7 @@ import {
   SET_SLOT_OPEN,
   QUICK_PANEL_TOGGLE,
   POPUP_CONNECT,
+  DEFINE_SLOT,
 } from '../actions/actionTypes';
 
 
@@ -50,6 +51,18 @@ const slots = (state = [], action) => {
       return editSlotNav(state, action, slotObj => ({
         quickPanelOpen: !slotObj.quickPanelOpen,
       }));
+
+    case DEFINE_SLOT:
+      console.log('define Slot', action);
+      return [
+        ...state,
+        {
+          slotId: action.payload.slot.slotId,
+          isOpen: false,
+          selection: 'targeting',
+          quickPanelOpen: false,
+        },
+      ];
 
     default:
       return state;

@@ -122,6 +122,9 @@ export const slots = (state = initialStateSlots, action) => {
 export const getSlots = (state) => {
   const tab = getTab(state);
   const { currentTab } = tab;
+  if (!currentTab) {
+    return [];
+  }
 
   return tab[currentTab].slots.slotIds.map(slotId => tab[currentTab].slots[slotId]);
 };
