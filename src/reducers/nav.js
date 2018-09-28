@@ -53,7 +53,6 @@ const slots = (state = [], action) => {
       }));
 
     case DEFINE_SLOT:
-      console.log('define Slot', action);
       return [
         ...state,
         {

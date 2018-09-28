@@ -10,13 +10,13 @@ import {
 } from '../actions/index';
 import { getTab } from '../reducers/chrome';
 import rootReducer from '../reducers/index';
-import GptListeners from './Listeners/Background/gpt';
-import GptEventListeners from './Listeners/Background/events';
+import MessageRegister from './Connect/MessageRegister';
+
+const makeTabId = (windowId, tabId) => `${windowId}:${tabId}`;
 
 const logger = createLogger({ collapsed: true });
 const store = createStore(rootReducer, applyMiddleware(logger));
-
-const makeTabId = (windowId, tabId) => `${windowId}:${tabId}`;
+const ActionRegister = MessageRegister(store.dispatch);
 
 chrome.tabs.onActivated.addListener((active) => {
   const windowTabId = makeTabId(active.windowId, active.tabId);
@@ -62,16 +62,19 @@ chrome.runtime.onConnect.addListener((port) => {
 
   port.onMessage.addListener((msg) => {
     const windowTabId = makeTabId(port.sender.tab.windowId, port.sender.tab.id);
+    const messageRouter = ActionRegister(windowTabId);
 
+    // route messages to appropriate action creator and dispatch to store
+    messageRouter(msg);
+
+    // forward messages to connected popup
     if (popupPort) {
       popupPort.postMessage(msg);
     }
-
-    GptListeners(store, msg, windowTabId);
-    GptEventListeners(store, msg, windowTabId);
   });
 
   if (process.env.NODE_ENV === 'development') {
+    window.store = store;
     // reload extension if current hash changes
     port.onMessage.addListener((msg) => {
       if (msg.type === 'EXTENSION_RELOAD') {
