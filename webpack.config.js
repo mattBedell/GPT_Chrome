@@ -34,14 +34,16 @@ const config = {
       },
     ],
   },
-  plugins: [
-    new DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
-  ],
+  plugins: [],
 };
 
 module.exports = (env, argv) => {
+  // webpack is failing to set process.env.NODE_ENV on definePlugin so do it here
+  // https://webpack.js.org/concepts/mode/#usage
+  config.plugins.push(new DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(argv.mode),
+  }));
+
   if (argv.mode === 'development') {
     config.plugins = [
       ...config.plugins,
