@@ -4,16 +4,9 @@
   "description": "GPT helper extension ",
   "main": "dev-server.js",
   "scripts": {
-    "hot": "node dev-server.js",
-    "build-test": "webpack --config build/webpack.config.js --progress --watch --mode=development",
-    "prehot": "npm run prebuild-popup",
-    "prebuild-scripts": "find extension/dist | grep -e background.js -e content_script.js -e inject_script.js | xargs rm",
-    "build-scripts": "webpack --config webpack.config.js --env.BUILD_TYPE=scripts --progress --colors",
-    "build-popup": "webpack --config webpack.config.js --env.BUILD_TYPE=popup --progress --colors",
-    "prebuild-popup": "find extension/dist | grep popup.js | xargs rm",
-    "build-scripts-prod": "npm run build-scripts -- --env.NODE_ENV=production",
-    "build-popup-prod": "npm run build-popup -- --env.NODE_ENV=production",
-    "build-all-prod": "npm run build-scripts-prod && npm run build-popup-prod"
+    "build": "webpack --config webpack.config.js",
+    "build-dev": "npm run build -- --progress --watch --mode=development",
+    "build-prod": "npm run build -- --mode=production"
   },
   "author": "Matt Bedell",
   "license": "ISC",
