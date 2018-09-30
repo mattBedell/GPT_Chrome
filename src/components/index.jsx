@@ -6,9 +6,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger }from 'redux-logger';
 import { Provider } from 'react-redux';
 
-import store from './scripts/chrome-connect';
+import store from '../scripts/chrome-connect';
 
-import App from './components/app.jsx';
+import App from './app.jsx';
 
 const render = Component => {
   ReactDOM.render(
