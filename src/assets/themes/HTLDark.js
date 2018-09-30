@@ -1,45 +1,45 @@
 import { injectGlobal } from 'styled-components';
 
 
-import ralewayRegular from './../fonts/Raleway/Raleway-Regular.ttf';
-import ralewayMedium from './../fonts/Raleway/Raleway-Medium.ttf';
-import ralewayBold from './../fonts/Raleway/Raleway-Bold.ttf';
-import ralewayBlack from './../fonts/Raleway/Raleway-Black.ttf';
+import ralewayRegular from '../fonts/Raleway/Raleway-Regular.ttf';
+import ralewayMedium from '../fonts/Raleway/Raleway-Medium.ttf';
+import ralewayBold from '../fonts/Raleway/Raleway-Bold.ttf';
+import ralewayBlack from '../fonts/Raleway/Raleway-Black.ttf';
 
 
 const Styles = {
 
-    brand: {
-      primary: '#3988E3',
-      // brandPrimary: '#3097D1',
-      info: '#8eb4cb',
-      success: '#2ab27b',
-      warning: '#cbb956',
-      danger: '#bf5329',
-    },
+  brand: {
+    primary: '#3988E3',
+    // brandPrimary: '#3097D1',
+    info: '#8eb4cb',
+    success: '#2ab27b',
+    warning: '#cbb956',
+    danger: '#bf5329',
+  },
 
-    menu: {
-      primary: '#414955',
-      expanded: '#5A6471',
-    },
-  
-    icon: {
-      primary: '#3988e3',
-      highlighted: '#FFBA0B',
-      closed: '#7288a3',
-    },
+  menu: {
+    primary: '#414955',
+    expanded: '#5A6471',
+  },
 
-    content: {
-      content1: '#657E9B',
-      content2: '#4B6480',
-      content3: '#8C97A5',
-      content4: '#77818F',
-    },
+  icon: {
+    primary: '#3988e3',
+    highlighted: '#FFBA0B',
+    closed: '#7288a3',
+  },
 
-    global: {
-      bodyBg: '#616C79',
-      textColor: '#F6F7FB',
-    },
+  content: {
+    content1: '#657E9B',
+    content2: '#4B6480',
+    content3: '#8C97A5',
+    content4: '#77818F',
+  },
+
+  global: {
+    bodyBg: '#616C79',
+    textColor: '#F6F7FB',
+  },
 };
 
 injectGlobal`
