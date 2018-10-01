@@ -16,10 +16,10 @@ const DetailContainer = styled.div`
 
 
 const SlotDetail = props => (
-    <DetailContainer >
-      <SlotNav />
-      <Targeting slotId={props.slotId}/>
-    </DetailContainer>
+  <DetailContainer>
+    <SlotNav />
+    <Targeting slotId={props.slotId} />
+  </DetailContainer>
 );
 
 SlotDetail.propTypes = {

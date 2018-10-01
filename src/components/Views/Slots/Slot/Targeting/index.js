@@ -58,20 +58,23 @@ const sortTargetingByLength = (targetingObj, sort = 'asc') => {
 
 
 const Targeting = props => (
-    <Paginator pageLinks={true} render={pagination => (
-        <KeyValView>
-          {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => (
-              <div style={{ width: '100%' }} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
-                <KeyValContainer key={`keyval-${props.slotId}-${i}`} currentPage={pagination.currentPage} offset={pagination.offset}>
-                  <KeyBox>{targs.key}</KeyBox>
-                  {targs.vals.map((val, j) => (
-                      <ValBox key={`val-${val}-${j}`}>{val}</ValBox>
-                  ))}
-                </KeyValContainer>
-              </div>
-          ))}
-        </KeyValView>
-    )} />
+  <Paginator
+    pageLinks
+    render={pagination => (
+      <KeyValView>
+        {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => (
+          <div style={{ width: '100%' }} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
+            <KeyValContainer key={`keyval-${props.slotId}-${i}`} currentPage={pagination.currentPage} offset={pagination.offset}>
+              <KeyBox>{targs.key}</KeyBox>
+              {targs.vals.map((val, j) => (
+                <ValBox key={`val-${val}-${j}`}>{val}</ValBox>
+              ))}
+            </KeyValContainer>
+          </div>
+        ))}
+      </KeyValView>
+    )}
+  />
 );
 
 Targeting.propTypes = {

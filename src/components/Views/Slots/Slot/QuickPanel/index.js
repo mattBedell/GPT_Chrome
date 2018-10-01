@@ -63,28 +63,33 @@ const QuickPanel = (props) => {
     height: '17px',
   };
   return (
-    <QuickPanelContainer >
+    <QuickPanelContainer>
       <TransitionGroup>
         {!props.slotNav.quickPanelOpen ? [
-          <DivExistsIcon key={`qp-div-exists-${props.slotId}`}
-          {...iconProps}
+          <DivExistsIcon
+            key={`qp-div-exists-${props.slotId}`}
+            {...iconProps}
           />,
-          <RenderIcon key={`qp-render-${props.slotId}`}
-          {...iconProps}
+          <RenderIcon
+            key={`qp-render-${props.slotId}`}
+            {...iconProps}
           />,
         ] : [
-          <ScrollToIcon key={`qp-scrollto-${props.slotId}`}
-          {...iconProps}
+          <ScrollToIcon
+            key={`qp-scrollto-${props.slotId}`}
+            {...iconProps}
           />,
-          <RefreshSlotIcon key={`qp-refresh-${props.slotId}`}
-          {...iconProps}
+          <RefreshSlotIcon
+            key={`qp-refresh-${props.slotId}`}
+            {...iconProps}
           />,
         ]}
-          <AltPanelIcon key={`qp-alt-panel-${props.slotId}-closed`}
+        <AltPanelIcon
+          key={`qp-alt-panel-${props.slotId}-closed`}
           isSelected={props.slotNav.quickPanelOpen}
           {...iconProps}
           handleClick={e => props.toggleQuickPanel(props.slotId)}
-          />
+        />
       </TransitionGroup>
 
     </QuickPanelContainer>

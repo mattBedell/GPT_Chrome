@@ -26,11 +26,11 @@ const SlotNavBtn = Button.extend`
 `;
 
 const SlotNav = props => (
-    <NavContainer>
-      <SlotNavBtn active={true}>Targeting</SlotNavBtn>
-      <SlotNavBtn active={false}>Render</SlotNavBtn>
-      <SlotNavBtn active={false}>DFP</SlotNavBtn>
-    </NavContainer>
+  <NavContainer>
+    <SlotNavBtn active>Targeting</SlotNavBtn>
+    <SlotNavBtn active={false}>Render</SlotNavBtn>
+    <SlotNavBtn active={false}>DFP</SlotNavBtn>
+  </NavContainer>
 );
 
 SlotNav.propTypes = {

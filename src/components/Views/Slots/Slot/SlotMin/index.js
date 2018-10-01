@@ -46,18 +46,18 @@ const SlotName = styled.div`
 
 
 const SlotMin = props => (
-    <MinContainer
-      isOpen={props.slotNav.isOpen}
-      index={props.index}
-    >
+  <MinContainer
+    isOpen={props.slotNav.isOpen}
+    index={props.index}
+  >
     <div onClick={e => props.setSlot(props.slotId, !props.slotNav.isOpen)}>
-      <Arrow isOpen={props.slotNav.isOpen}/>
-      <SlotName isOpen={props.slotNav.isOpen} >
+      <Arrow isOpen={props.slotNav.isOpen} />
+      <SlotName isOpen={props.slotNav.isOpen}>
         {props.slotName}
       </SlotName>
     </div>
-      <QuickPanel isOpen={props.slotNav.isOpen} slotId={props.slotId} />
-    </MinContainer>
+    <QuickPanel isOpen={props.slotNav.isOpen} slotId={props.slotId} />
+  </MinContainer>
 );
 
 SlotMin.propTypes = {

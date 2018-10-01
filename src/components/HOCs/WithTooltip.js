@@ -37,7 +37,7 @@ export default function (IconContainer, tooltipText) {
           onMouseEnter={e => this.setTooltipOn(e)}
           onMouseLeave={e => this.setTooltipOff(e)}
           style={{ height: this.props.height, width: this.props.width }}
-          >
+        >
           {this.state.tooltip ? <Tooltip tooltipText={tooltipText} anchorId={this.anchorId} /> : <></>}
           <IconContainer {...this.props} />
         </div>

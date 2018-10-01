@@ -18,24 +18,32 @@ const shouldDispatchSetView = (props, toView) => {
 };
 
 const PrimaryViewNav = props => (
-    <nav>
-      <PrimaryButton
-        onClick={() => shouldDispatchSetView(props, 'Slots')}
-        active={props.selectedView === 'Slots'}
-      >Slots</PrimaryButton>
-      <PrimaryButton
-        onClick={() => shouldDispatchSetView(props, 'Page')}
-        active={props.selectedView === 'Page'}
-      >Page</PrimaryButton>
-      <PrimaryButton
-        onClick={() => shouldDispatchSetView(props, 'Events')}
-        active={props.selectedView === 'Events'}
-      >Events</PrimaryButton>
-      <PrimaryButton
-        onClick={() => shouldDispatchSetView(props, 'Debug')}
-        active={props.selectedView === 'Debug'}
-      >Debug</PrimaryButton>
-    </nav>
+  <nav>
+    <PrimaryButton
+      onClick={() => shouldDispatchSetView(props, 'Slots')}
+      active={props.selectedView === 'Slots'}
+    >
+Slots
+    </PrimaryButton>
+    <PrimaryButton
+      onClick={() => shouldDispatchSetView(props, 'Page')}
+      active={props.selectedView === 'Page'}
+    >
+Page
+    </PrimaryButton>
+    <PrimaryButton
+      onClick={() => shouldDispatchSetView(props, 'Events')}
+      active={props.selectedView === 'Events'}
+    >
+Events
+    </PrimaryButton>
+    <PrimaryButton
+      onClick={() => shouldDispatchSetView(props, 'Debug')}
+      active={props.selectedView === 'Debug'}
+    >
+Debug
+    </PrimaryButton>
+  </nav>
 );
 
 PrimaryViewNav.propTypes = {

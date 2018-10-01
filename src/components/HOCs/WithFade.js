@@ -40,13 +40,13 @@ export default function (FadedComponent, options = {}) {
       delete childProps.in;
       return (
         <Transition
-        timeout={transOptions.timeout}
-        onEnter={this.handleEnter.bind(this)}
-        {...this.props}
+          timeout={transOptions.timeout}
+          onEnter={this.handleEnter.bind(this)}
+          {...this.props}
         >
           {transitionState => (
             <FadeContainer opacity={transOptions[transitionState]} {...childProps} duration={transOptions.timeout}>
-              <FadedComponent {...childProps}/>
+              <FadedComponent {...childProps} />
             </FadeContainer>
           )}
         </Transition>

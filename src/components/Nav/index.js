@@ -9,7 +9,7 @@ const Nav = props => (
       <Primary
         selectedView={props.selectedView}
         setSelected={props.setSelected}
-        />
+      />
       <QuickView />
     </>
 );

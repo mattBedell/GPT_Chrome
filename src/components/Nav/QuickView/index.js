@@ -12,9 +12,7 @@ const Backdrop = styled.div`
 `;
 
 const QuickView = props => (
-    <Backdrop>
-
-    </Backdrop>
+  <Backdrop />
 );
 
 export default QuickView;

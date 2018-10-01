@@ -10,18 +10,18 @@ import store from '../scripts/chrome-connect';
 
 import App from './app.jsx';
 
-const render = Component => {
+const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
         <Component />
       </Provider>
     </AppContainer>,
-    document.getElementById('root')
+    document.getElementById('root'),
   )
 }
 
-render(App)
+render(App);
 
 if (module.hot) {
   module.hot.accept('./components/app.jsx', () => { render(App) });

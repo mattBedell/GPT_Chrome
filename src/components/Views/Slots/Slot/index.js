@@ -8,20 +8,21 @@ import SlotMin from './SlotMin';
 import SlotDetail from './SlotDetail';
 
 const Slot = props => (
-    <div style={
+  <div style={
       {
         transform: 'translateX(0px)',
         top: `${props.index * 30}px`,
-      }}>
-      <SlotMin
-        key={`slots-${props.slot.slotId}`}
-        slotNav={props.slotNav}
-        slotName={props.slot.path.split('/').slice(2).join('/')}
-        slotId={props.slot.slotId}
-        index={props.index}
-      />
-      {props.slotNav.isOpen ? <SlotDetail slotId={props.slot.slotId}/> : <></>}
-    </div>
+      }}
+  >
+    <SlotMin
+      key={`slots-${props.slot.slotId}`}
+      slotNav={props.slotNav}
+      slotName={props.slot.path.split('/').slice(2).join('/')}
+      slotId={props.slot.slotId}
+      index={props.index}
+    />
+    {props.slotNav.isOpen ? <SlotDetail slotId={props.slot.slotId} /> : <></>}
+  </div>
 );
 
 Slot.propTypes = {
