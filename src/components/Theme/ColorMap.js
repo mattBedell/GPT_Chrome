@@ -26,28 +26,22 @@ const CatagoryValue = styled.div`
   }
 `;
 
-const ColorMap = props => {
-  return (
+const ColorMap = props => (
     <>
-      {Object.keys(props.theme).map(catagory => {
-        return (
-          <div key={catagory}>
-            <CatagoryTitle>{catagory.toUpperCase()}</CatagoryTitle>
-            <CatagoryContainer>
-              {Object.keys(props.theme[catagory]).map(key => {
-                return (
-                  <CatagoryValue key={`${catagory}-${key}`} color={props.theme[catagory][key]}>
-                    <h4>{key}</h4>
-                    <h4>{props.theme[catagory][key]}</h4>
-                  </CatagoryValue>
-                )
-              })}
-            </CatagoryContainer>
-          </div>
-        )
-      })}
+      {Object.keys(props.theme).map(catagory => (
+        <div key={catagory}>
+          <CatagoryTitle>{catagory.toUpperCase()}</CatagoryTitle>
+          <CatagoryContainer>
+            {Object.keys(props.theme[catagory]).map(key => (
+              <CatagoryValue key={`${catagory}-${key}`} color={props.theme[catagory][key]}>
+                <h4>{key}</h4>
+                <h4>{props.theme[catagory][key]}</h4>
+              </CatagoryValue>
+            ))}
+          </CatagoryContainer>
+        </div>
+      ))}
     </>
-  )
-}
+);
 
 export default withTheme(ColorMap);

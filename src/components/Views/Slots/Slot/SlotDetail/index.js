@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 
@@ -15,18 +13,16 @@ const DetailContainer = styled.div`
 `;
 
 
-const SlotDetail = props => {
-  return (
-    <DetailContainer >
-      <SlotNav />
-      <Targeting slotId={props.slotId}/>
-    </DetailContainer>
-  );
-};
+const SlotDetail = ({ slotId }) => (
+  <DetailContainer>
+    <SlotNav />
+    <Targeting slotId={slotId} />
+  </DetailContainer>
+);
 
 SlotDetail.propTypes = {
   slotId: PropTypes.string.isRequired,
-}
+};
 
 
 export default SlotDetail;

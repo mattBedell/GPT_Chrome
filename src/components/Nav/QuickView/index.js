@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 
@@ -11,12 +10,8 @@ const Backdrop = styled.div`
   z-index: 2;
 `;
 
-const QuickView = props => {
-  return (
-    <Backdrop>
-
-    </Backdrop>
-  )
-}
+const QuickView = () => (
+  <Backdrop />
+);
 
 export default QuickView;

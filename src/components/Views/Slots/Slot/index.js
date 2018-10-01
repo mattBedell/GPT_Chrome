@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -7,33 +7,32 @@ import { getSlotNav } from '../../../../reducers/nav';
 import SlotMin from './SlotMin';
 import SlotDetail from './SlotDetail';
 
-const Slot = props => {
-  return (
-    <div style={
+const Slot = ({ index, slot, slotNav }) => (
+  <div style={
       {
         transform: 'translateX(0px)',
-        top: `${props.index * 30}px`,
-        }}>
-      <SlotMin
-        key={`slots-${props.slot.slotId}`}
-        slotNav={props.slotNav}
-        slotName={props.slot.path.split('/').slice(2).join('/')}
-        slotId={props.slot.slotId}
-        index={props.index}
-      />
-      {props.slotNav.isOpen ? <SlotDetail slotId={props.slot.slotId}/> : <></>}
-    </div>
-  )
-};
+        top: `${index * 30}px`,
+      }}
+  >
+    <SlotMin
+      key={`slots-${slot.slotId}`}
+      slotNav={slotNav}
+      slotName={slot.path.split('/').slice(2).join('/')}
+      slotId={slot.slotId}
+      index={index}
+    />
+    {slotNav.isOpen ? <SlotDetail slotId={slot.slotId} /> : <></>}
+  </div>
+);
 
 Slot.propTypes = {
   slot: PropTypes.object.isRequired,
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    slotNav: getSlotNav(state, ownProps.slot.slotId),
-  }
+  index: PropTypes.number.isRequired,
+  slotNav: PropTypes.object.isRequired,
 };
+
+const mapStateToProps = (state, ownProps) => ({
+  slotNav: getSlotNav(state, ownProps.slot.slotId),
+});
 
 export default connect(mapStateToProps)(Slot);

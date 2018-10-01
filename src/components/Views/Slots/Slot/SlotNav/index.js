@@ -1,8 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
-
+import React from 'react';
 import styled from 'styled-components';
 
 import Button from '../../../../Button';
@@ -18,26 +14,19 @@ const NavContainer = styled.div`
 
 const SlotNavBtn = Button.extend`
   background-color: inherit;
-  color: ${props => props.active ? props.theme.icon.primary : 'inherit'};
+  color: ${props => (props.active ? props.theme.icon.primary : 'inherit')};
   margin: 0px 5px;
   &:hover {
     filter: none;
   }
 `;
 
-const SlotNav = props => {
-  return (
-    <NavContainer>
-      <SlotNavBtn active={true}>Targeting</SlotNavBtn>
-      <SlotNavBtn active={false}>Render</SlotNavBtn>
-      <SlotNavBtn active={false}>DFP</SlotNavBtn>
-    </NavContainer>
-  );
-};
-
-SlotNav.propTypes = {
-  
-}
-
+const SlotNav = () => (
+  <NavContainer>
+    <SlotNavBtn active>Targeting</SlotNavBtn>
+    <SlotNavBtn active={false}>Render</SlotNavBtn>
+    <SlotNavBtn active={false}>DFP</SlotNavBtn>
+  </NavContainer>
+);
 
 export default SlotNav;

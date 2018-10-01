@@ -40,13 +40,14 @@ const ArrowContainer = styled.div`
 class Tooltip extends Component {
   constructor(props) {
     super(props);
+    const { anchorId } = this.props;
     this.tooltipRoot = document.querySelector('#tooltip-root');
-    this.anchorRect = document.querySelector(`#${this.props.anchorId}`).getBoundingClientRect();
+    this.anchorRect = document.querySelector(`#${anchorId}`).getBoundingClientRect();
     this.state = {
       opacity: 0,
       left: 0,
       top: this.anchorRect.y - this.anchorRect.height - 8,
-    }
+    };
   }
 
   componentDidMount() {
@@ -55,25 +56,36 @@ class Tooltip extends Component {
       opacity: 100,
       left: (this.anchorRect.x - (this.dimensions.width / 2)) + this.anchorRect.width / 2,
     });
-  };
+  }
 
   render() {
+    const {
+      top,
+      left,
+      opacity,
+    } = this.state;
+    const { tooltipText } = this.props;
     return ReactDOM.createPortal(
       <TooltipContainer
-        left={this.state.left}
-        top={this.state.top}
-        opacity={this.state.opacity}
+        left={left}
+        top={top}
+        opacity={opacity}
       >
         <TextContainer>
-          {this.props.tooltipText}
+          {tooltipText}
         </TextContainer>
         <ArrowContainer>
           <Arrow />
         </ArrowContainer>
-      </TooltipContainer>
-    , this.tooltipRoot)
+      </TooltipContainer>,
+      this.tooltipRoot,
+    );
   }
 }
 
+Tooltip.propTypes = {
+  anchorId: PropTypes.string.isRequired,
+  tooltipText: PropTypes.string.isRequired,
+};
 
 export default Tooltip;
