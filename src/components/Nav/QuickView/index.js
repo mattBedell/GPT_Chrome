@@ -11,12 +11,10 @@ const Backdrop = styled.div`
   z-index: 2;
 `;
 
-const QuickView = props => {
-  return (
+const QuickView = props => (
     <Backdrop>
 
     </Backdrop>
-  )
-}
+);
 
 export default QuickView;

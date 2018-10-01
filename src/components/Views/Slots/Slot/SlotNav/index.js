@@ -18,26 +18,24 @@ const NavContainer = styled.div`
 
 const SlotNavBtn = Button.extend`
   background-color: inherit;
-  color: ${props => props.active ? props.theme.icon.primary : 'inherit'};
+  color: ${props => (props.active ? props.theme.icon.primary : 'inherit')};
   margin: 0px 5px;
   &:hover {
     filter: none;
   }
 `;
 
-const SlotNav = props => {
-  return (
+const SlotNav = props => (
     <NavContainer>
       <SlotNavBtn active={true}>Targeting</SlotNavBtn>
       <SlotNavBtn active={false}>Render</SlotNavBtn>
       <SlotNavBtn active={false}>DFP</SlotNavBtn>
     </NavContainer>
-  );
-};
+);
 
 SlotNav.propTypes = {
-  
-}
+
+};
 
 
 export default SlotNav;

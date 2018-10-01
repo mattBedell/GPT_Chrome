@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 
-
 export default styled.div`
 width: ${props => props.width};
 height: ${props => props.height};
 transition: transform .2s;
 display: inline-block;
 path {
-  fill: ${props => props.isOpen ? props.theme.menu.primary : props.theme.menu.expanded};
+  fill: ${props => (props.isOpen ? props.theme.menu.primary : props.theme.menu.expanded)};
   transition: fill .2s;
 }
 &:hover {

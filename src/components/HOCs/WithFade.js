@@ -7,18 +7,18 @@ import styled from 'styled-components';
 const FadeContainer = styled.div`
   opacity: ${props => props.opacity / 100};
   transition: opacity ${props => props.duration / 1000}s;
-  width: ${props => props.width ? props.width : 'inherit'};
-  height: ${props => props.height ? props.height : 'inherit'};
+  width: ${props => (props.width ? props.width : 'inherit')};
+  height: ${props => (props.height ? props.height : 'inherit')};
 `;
 
-export default function(FadedComponent, options = {}) {
+export default function (FadedComponent, options = {}) {
   const defaultOptions = {
     timeout: 1000,
     entering: 0,
     entered: 100,
     exiting: 0,
     exited: 0,
-  }
+  };
 
   const transOptions = Object.assign({}, defaultOptions, options);
   return class extends Component {
@@ -31,12 +31,12 @@ export default function(FadedComponent, options = {}) {
        *  exited, entering
        * too quickly for a reflow
        * this triggers a reflow between the two states so an animation happens
-       **/
-      node.scrollTop
+       * */
+      node.scrollTop;
     }
 
     render() {
-      const childProps = Object.assign({}, this.props)
+      const childProps = Object.assign({}, this.props);
       delete childProps.in;
       return (
         <Transition
@@ -44,16 +44,13 @@ export default function(FadedComponent, options = {}) {
         onEnter={this.handleEnter.bind(this)}
         {...this.props}
         >
-          {transitionState => {
-          return (
+          {transitionState => (
             <FadeContainer opacity={transOptions[transitionState]} {...childProps} duration={transOptions.timeout}>
               <FadedComponent {...childProps}/>
             </FadeContainer>
-          )}}
+          )}
         </Transition>
-      )
+      );
     }
-  }
+  };
 }
-
-

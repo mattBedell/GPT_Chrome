@@ -7,13 +7,12 @@ import { getSlotNav } from '../../../../reducers/nav';
 import SlotMin from './SlotMin';
 import SlotDetail from './SlotDetail';
 
-const Slot = props => {
-  return (
+const Slot = props => (
     <div style={
       {
         transform: 'translateX(0px)',
         top: `${props.index * 30}px`,
-        }}>
+      }}>
       <SlotMin
         key={`slots-${props.slot.slotId}`}
         slotNav={props.slotNav}
@@ -23,17 +22,14 @@ const Slot = props => {
       />
       {props.slotNav.isOpen ? <SlotDetail slotId={props.slot.slotId}/> : <></>}
     </div>
-  )
-};
+);
 
 Slot.propTypes = {
   slot: PropTypes.object.isRequired,
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    slotNav: getSlotNav(state, ownProps.slot.slotId),
-  }
 };
+
+const mapStateToProps = (state, ownProps) => ({
+  slotNav: getSlotNav(state, ownProps.slot.slotId),
+});
 
 export default connect(mapStateToProps)(Slot);

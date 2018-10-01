@@ -46,7 +46,7 @@ class Tooltip extends Component {
       opacity: 0,
       left: 0,
       top: this.anchorRect.y - this.anchorRect.height - 8,
-    }
+    };
   }
 
   componentDidMount() {
@@ -55,7 +55,7 @@ class Tooltip extends Component {
       opacity: 100,
       left: (this.anchorRect.x - (this.dimensions.width / 2)) + this.anchorRect.width / 2,
     });
-  };
+  }
 
   render() {
     return ReactDOM.createPortal(
@@ -70,8 +70,9 @@ class Tooltip extends Component {
         <ArrowContainer>
           <Arrow />
         </ArrowContainer>
-      </TooltipContainer>
-    , this.tooltipRoot)
+      </TooltipContainer>,
+      this.tooltipRoot,
+    );
   }
 }
 

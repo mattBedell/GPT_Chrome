@@ -15,18 +15,16 @@ const DetailContainer = styled.div`
 `;
 
 
-const SlotDetail = props => {
-  return (
+const SlotDetail = props => (
     <DetailContainer >
       <SlotNav />
       <Targeting slotId={props.slotId}/>
     </DetailContainer>
-  );
-};
+);
 
 SlotDetail.propTypes = {
   slotId: PropTypes.string.isRequired,
-}
+};
 
 
 export default SlotDetail;

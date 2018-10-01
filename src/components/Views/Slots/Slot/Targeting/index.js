@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import quickSort from './../../../../../utils/quickSort';
 import { connect } from 'react-redux';
-import { getTargeting } from '../../../../../reducers/slots';
 
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
+import { getTargeting } from '../../../../../reducers/slots';
+import quickSort from '../../../../../utils/quickSort';
 
 import Paginator from '../../../../Paginator';
 
@@ -27,7 +27,7 @@ const KeyValContainer = styled.div`
 
 const ValBox = styled.div`
   background-color: ${props => props.theme.content.content2};
-  border: 1px solid ${props => lighten(.2, props.theme.content.content2)};
+  border: 1px solid ${props => lighten(0.2, props.theme.content.content2)};
   padding: 5px;
   margin: 2px;
 `;
@@ -42,12 +42,10 @@ const KeyBox = styled.div`
 `;
 
 const sortTargetingByLength = (targetingObj, sort = 'asc') => {
-  const targArray = Object.keys(targetingObj).map(key => {
-    return {
-      key,
-      vals: targetingObj[key],
-    }
-  });
+  const targArray = Object.keys(targetingObj).map(key => ({
+    key,
+    vals: targetingObj[key],
+  }));
 
   quickSort(targArray, (arr, i) => arr[i].vals.length);
 
@@ -59,40 +57,30 @@ const sortTargetingByLength = (targetingObj, sort = 'asc') => {
 };
 
 
-const Targeting = props => {
-  return (
-    <Paginator pageLinks={true} render={(pagination) => {
-      return(
+const Targeting = props => (
+    <Paginator pageLinks={true} render={pagination => (
         <KeyValView>
-          {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => {
-            return (
-              <div style={{width: '100%'}} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
+          {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => (
+              <div style={{ width: '100%' }} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
                 <KeyValContainer key={`keyval-${props.slotId}-${i}`} currentPage={pagination.currentPage} offset={pagination.offset}>
                   <KeyBox>{targs.key}</KeyBox>
-                  {targs.vals.map((val, j) => {
-                    return (
+                  {targs.vals.map((val, j) => (
                       <ValBox key={`val-${val}-${j}`}>{val}</ValBox>
-                    )
-                  })}
+                  ))}
                 </KeyValContainer>
               </div>
-            )
-          })}
+          ))}
         </KeyValView>
-      )
-    }} />
-  );
-};
+    )} />
+);
 
 Targeting.propTypes = {
   slotId: PropTypes.string.isRequired,
-}
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    targeting: getTargeting(state, ownProps.slotId),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  targeting: getTargeting(state, ownProps.slotId),
+});
 
 
 export default connect(mapStateToProps)(Targeting);

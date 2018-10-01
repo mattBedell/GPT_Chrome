@@ -14,7 +14,7 @@ const PaginatorContainer = styled.div`
 
 const PageNum = styled.div`
   margin: 5px;
-  color: ${props => props.isActive ? props.theme.icon.primary : 'inheret'};
+  color: ${props => (props.isActive ? props.theme.icon.primary : 'inheret')};
   cursor: pointer;
   user-select: none;
 `;
@@ -25,7 +25,7 @@ class Paginator extends Component {
     this.state = {
       pages: 1,
       currentPage: 1,
-    }
+    };
 
     this.pageThruRef = this.pageThruRef.bind(this);
     this.pages = 1;
@@ -33,7 +33,7 @@ class Paginator extends Component {
   }
 
   pageThruRef(el) {
-    if(!el) return;
+    if (!el) return;
     const { left, width } = el.getBoundingClientRect();
     this.positions.add(left);
     if (!this.offset) {
@@ -54,15 +54,15 @@ class Paginator extends Component {
   render() {
     const pageArr = [];
     for (let i = 0; i < this.state.pages; i++) {
-      pageArr.push(i+1);
+      pageArr.push(i + 1);
     }
     return (
       <div>
         <div>
-          {this.props.render({ref: this.pageThruRef, offset: this.offset, currentPage: this.state.currentPage})}
+          {this.props.render({ ref: this.pageThruRef, offset: this.offset, currentPage: this.state.currentPage })}
         </div>
-        {this.props.pageLinks ?
-          <PaginatorContainer>
+        {this.props.pageLinks
+          ? <PaginatorContainer>
             {pageArr.map(page => <PageNum
             key={`pagenum-${page}`}
             isActive={page === this.state.currentPage}
@@ -77,10 +77,10 @@ class Paginator extends Component {
 
 Paginator.propTypes = {
   render: PropTypes.func.isRequired,
-}
+};
 
 Paginator.defaultProps = {
   pageLinks: false,
-}
+};
 
 export default Paginator;

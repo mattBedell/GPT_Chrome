@@ -18,21 +18,21 @@ import {
   WarnFillIcon,
   RefreshIcon,
   DocumentI,
-} from './../../../../Icons';
+} from '../../../../Icons';
 
-import WithTooltip from './../../../../HOCs/WithTooltip';
-import WithFade from './../../../../HOCs/WithFade';
+import WithTooltip from '../../../../HOCs/WithTooltip';
+import WithFade from '../../../../HOCs/WithFade';
 import { toggleQuickPanel } from '../../../../../actions/nav';
 import { getSlotNav } from '../../../../../reducers/nav';
 
 // TODO: needs more flexible HOCS, possibly with decorators
-const DivExistsIcon = WithFade(WithTooltip(DivIcon, 'Div exists in DOM'), {timeout: 200});
+const DivExistsIcon = WithFade(WithTooltip(DivIcon, 'Div exists in DOM'), { timeout: 200 });
 
-const RenderIcon = WithFade(WithTooltip(ComputerIcon, 'Slot rendered'), {timeout: 200});
-const ErrorIcon = WithFade(WarnNoFillIcon, {timeout: 200});
-const AltPanelIcon = WithFade(CogIcon, {timeout: 200});
-const RefreshSlotIcon = WithFade(WithTooltip(RefreshIcon, 'Refresh slot'), {timeout: 200});
-const ScrollToIcon = WithFade(WithTooltip(DocumentI, 'Scroll to slot'), {timeout: 200});
+const RenderIcon = WithFade(WithTooltip(ComputerIcon, 'Slot rendered'), { timeout: 200 });
+const ErrorIcon = WithFade(WarnNoFillIcon, { timeout: 200 });
+const AltPanelIcon = WithFade(CogIcon, { timeout: 200 });
+const RefreshSlotIcon = WithFade(WithTooltip(RefreshIcon, 'Refresh slot'), { timeout: 200 });
+const ScrollToIcon = WithFade(WithTooltip(DocumentI, 'Scroll to slot'), { timeout: 200 });
 const EventsIconWithTooltip = WithTooltip(EventsIcon, 'Go to slot events');
 const EyeIconWithTooltip = WithTooltip(EyeIcon, 'Impression Viewable');
 
@@ -56,12 +56,12 @@ const QuickPanelContainer = styled.div`
   }
 `;
 
-const QuickPanel = props => {
+const QuickPanel = (props) => {
   const iconProps = {
     isOpen: props.isOpen,
     width: '17px',
     height: '17px',
-  }
+  };
   return (
     <QuickPanelContainer >
       <TransitionGroup>
@@ -72,7 +72,7 @@ const QuickPanel = props => {
           <RenderIcon key={`qp-render-${props.slotId}`}
           {...iconProps}
           />,
-        ]: [
+        ] : [
           <ScrollToIcon key={`qp-scrollto-${props.slotId}`}
           {...iconProps}
           />,
@@ -86,28 +86,24 @@ const QuickPanel = props => {
           handleClick={e => props.toggleQuickPanel(props.slotId)}
           />
       </TransitionGroup>
-      
+
     </QuickPanelContainer>
-  )
+  );
 };
 
 
 QuickPanel.propTypes = {
   slotId: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
-}
+};
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    slotNav: getSlotNav(state, ownProps.slotId),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  slotNav: getSlotNav(state, ownProps.slotId),
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleQuickPanel: slotId => dispatch(toggleQuickPanel(slotId)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  toggleQuickPanel: slotId => dispatch(toggleQuickPanel(slotId)),
+});
 
 const QuickPanelThemed = withTheme(QuickPanel);
 
