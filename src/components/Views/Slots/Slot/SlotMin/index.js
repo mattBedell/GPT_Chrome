@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { getSlotNav } from '../../../../../reducers/nav';
-import { setSlot } from '../../../../../actions/nav';
+import { setSlot as setSlotAction } from '../../../../../actions/nav';
 
 
 import QuickPanel from '../QuickPanel';
@@ -45,18 +44,24 @@ const SlotName = styled.div`
 `;
 
 
-const SlotMin = props => (
+const SlotMin = ({
+  slotNav,
+  index,
+  setSlot,
+  slotId,
+  slotName,
+}) => (
   <MinContainer
-    isOpen={props.slotNav.isOpen}
-    index={props.index}
+    isOpen={slotNav.isOpen}
+    index={index}
   >
-    <div onClick={e => props.setSlot(props.slotId, !props.slotNav.isOpen)}>
-      <Arrow isOpen={props.slotNav.isOpen} />
-      <SlotName isOpen={props.slotNav.isOpen}>
-        {props.slotName}
+    <div role="presentation" onClick={() => setSlot(slotId, !slotNav.isOpen)}>
+      <Arrow isOpen={slotNav.isOpen} />
+      <SlotName isOpen={slotNav.isOpen}>
+        {slotName}
       </SlotName>
     </div>
-    <QuickPanel isOpen={props.slotNav.isOpen} slotId={props.slotId} />
+    <QuickPanel isOpen={slotNav.isOpen} slotId={slotId} />
   </MinContainer>
 );
 
@@ -64,10 +69,12 @@ SlotMin.propTypes = {
   slotName: PropTypes.string.isRequired,
   slotNav: PropTypes.object.isRequired,
   slotId: PropTypes.string.isRequired,
+  setSlot: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setSlot: (slotId, isOpen) => dispatch(setSlot(slotId, isOpen)),
+  setSlot: (slotId, isOpen) => dispatch(setSlotAction(slotId, isOpen)),
 });
 
 export default connect(null, mapDispatchToProps)(SlotMin);

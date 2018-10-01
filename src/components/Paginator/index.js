@@ -52,22 +52,24 @@ class Paginator extends Component {
   }
 
   render() {
+    const { pages, currentPage } = this.state;
+    const { render, pageLinks } = this.props;
     const pageArr = [];
-    for (let i = 0; i < this.state.pages; i++) {
+    for (let i = 0; i < pages; i += 1) {
       pageArr.push(i + 1);
     }
     return (
       <div>
         <div>
-          {this.props.render({ ref: this.pageThruRef, offset: this.offset, currentPage: this.state.currentPage })}
+          {render({ ref: this.pageThruRef, offset: this.offset, currentPage })}
         </div>
-        {this.props.pageLinks
+        {pageLinks
           ? (
             <PaginatorContainer>
               {pageArr.map(page => (
                 <PageNum
                   key={`pagenum-${page}`}
-                  isActive={page === this.state.currentPage}
+                  isActive={page === currentPage}
                   onClick={e => this.handleNumClick(e, page)}
                 >
                   {page}
@@ -83,6 +85,7 @@ class Paginator extends Component {
 
 Paginator.propTypes = {
   render: PropTypes.func.isRequired,
+  pageLinks: PropTypes.bool,
 };
 
 Paginator.defaultProps = {

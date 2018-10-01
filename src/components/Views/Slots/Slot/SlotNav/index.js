@@ -1,8 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
-
+import React from 'react';
 import styled from 'styled-components';
 
 import Button from '../../../../Button';
@@ -25,17 +21,12 @@ const SlotNavBtn = Button.extend`
   }
 `;
 
-const SlotNav = props => (
+const SlotNav = () => (
   <NavContainer>
     <SlotNavBtn active>Targeting</SlotNavBtn>
     <SlotNavBtn active={false}>Render</SlotNavBtn>
     <SlotNavBtn active={false}>DFP</SlotNavBtn>
   </NavContainer>
 );
-
-SlotNav.propTypes = {
-
-};
-
 
 export default SlotNav;

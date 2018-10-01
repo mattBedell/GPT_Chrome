@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../Button';
@@ -12,39 +12,41 @@ const PrimaryButton = Button.extend`
   z-index: ${props => (props.active ? 1 : 0)};
 `;
 
-const shouldDispatchSetView = (props, toView) => {
-  if (props.selectedValue === toView) return;
-  props.setSelected(toView);
+const PrimaryViewNav = (props) => {
+  const { selectedView } = props;
+  const shouldDispatchSetView = (toView) => {
+    if (selectedView === toView) return;
+    props.setSelected(toView);
+  };
+  return (
+    <nav>
+      <PrimaryButton
+        onClick={() => shouldDispatchSetView('Slots')}
+        active={selectedView === 'Slots'}
+      >
+  Slots
+      </PrimaryButton>
+      <PrimaryButton
+        onClick={() => shouldDispatchSetView('Page')}
+        active={selectedView === 'Page'}
+      >
+  Page
+      </PrimaryButton>
+      <PrimaryButton
+        onClick={() => shouldDispatchSetView('Events')}
+        active={selectedView === 'Events'}
+      >
+  Events
+      </PrimaryButton>
+      <PrimaryButton
+        onClick={() => shouldDispatchSetView('Debug')}
+        active={selectedView === 'Debug'}
+      >
+  Debug
+      </PrimaryButton>
+    </nav>
+  );
 };
-
-const PrimaryViewNav = props => (
-  <nav>
-    <PrimaryButton
-      onClick={() => shouldDispatchSetView(props, 'Slots')}
-      active={props.selectedView === 'Slots'}
-    >
-Slots
-    </PrimaryButton>
-    <PrimaryButton
-      onClick={() => shouldDispatchSetView(props, 'Page')}
-      active={props.selectedView === 'Page'}
-    >
-Page
-    </PrimaryButton>
-    <PrimaryButton
-      onClick={() => shouldDispatchSetView(props, 'Events')}
-      active={props.selectedView === 'Events'}
-    >
-Events
-    </PrimaryButton>
-    <PrimaryButton
-      onClick={() => shouldDispatchSetView(props, 'Debug')}
-      active={props.selectedView === 'Debug'}
-    >
-Debug
-    </PrimaryButton>
-  </nav>
-);
 
 PrimaryViewNav.propTypes = {
   selectedView: PropTypes.string.isRequired,

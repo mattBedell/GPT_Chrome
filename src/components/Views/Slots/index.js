@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
 import { connect } from 'react-redux';
 import { getSlots } from '../../../reducers/slots';
@@ -16,11 +15,5 @@ const Slots = props => (
 const mapStateToProps = state => ({
   slots: getSlots(state),
 });
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-
-//   }
-// }
 
 export default connect(mapStateToProps)(Slots);

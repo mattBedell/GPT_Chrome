@@ -14,8 +14,9 @@ export default function (IconContainer, tooltipText) {
       this.timeoutId = '';
     }
 
-    setTooltipOn(event) {
-      if (this.state.tooltip) return;
+    setTooltipOn() {
+      const { tooltip } = this.state;
+      if (tooltip) return;
       this.timeoutId = setTimeout(() => {
         this.setState({
           tooltip: true,
@@ -23,7 +24,7 @@ export default function (IconContainer, tooltipText) {
       }, 500);
     }
 
-    setTooltipOff(event) {
+    setTooltipOff() {
       clearTimeout(this.timeoutId);
       this.setState({
         tooltip: false,
@@ -31,14 +32,16 @@ export default function (IconContainer, tooltipText) {
     }
 
     render() {
+      const { tooltip } = this.state;
+      const { width, height } = this.props;
       return (
         <div
           id={this.anchorId}
           onMouseEnter={e => this.setTooltipOn(e)}
           onMouseLeave={e => this.setTooltipOff(e)}
-          style={{ height: this.props.height, width: this.props.width }}
+          style={{ height, width }}
         >
-          {this.state.tooltip ? <Tooltip tooltipText={tooltipText} anchorId={this.anchorId} /> : <></>}
+          {tooltip ? <Tooltip tooltipText={tooltipText} anchorId={this.anchorId} /> : <></>}
           <IconContainer {...this.props} />
         </div>
       );

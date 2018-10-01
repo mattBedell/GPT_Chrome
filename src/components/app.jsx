@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setView } from './../actions/nav';
-import { getSelectedView } from './../reducers/nav';
-
 import styled, { ThemeProvider } from 'styled-components';
-import HTLDarkTheme from './../assets/themes/HTLDark';
-import ColorMap from '../components/Theme/ColorMap';
+
+import { setView } from '../actions/nav';
+import { getSelectedView } from '../reducers/nav';
+
+import HTLDarkTheme from '../assets/themes/HTLDark';
+import ColorMap from './Theme/ColorMap';
 
 import Nav from './Nav';
 import Slots from './Views/Slots';
-
 
 
 const Spacer = styled.div`
@@ -25,11 +25,11 @@ const ViewContainer = styled.div`
 `;
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   componentDidMount() {
     const queryString = window.location.search.substring(1);
     const searchParams = new URLSearchParams(queryString);
@@ -40,40 +40,46 @@ class App extends Component {
       });
     }
   }
+
   render() {
-    return(
+    const { selectedView, setViewComp } = this.props;
+    const { colorMap } = this.state;
+    return (
       <ThemeProvider theme={HTLDarkTheme}>
-        {this.state.colorMap ? <ColorMap></ColorMap>
-        :
-        (
+        {colorMap ? <ColorMap />
+          : (
           <>
             <Nav
-              selectedView={this.props.selectedView}
-              setSelected={this.props.setView}
+              selectedView={selectedView}
+              setSelected={setViewComp}
             />
             <Spacer />
             <ViewContainer>
               <Slots />
             </ViewContainer>
           </>
-        )
+          )
         }
       </ThemeProvider>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => (
+  {
     selectedView: getSelectedView(state),
   }
-}
+);
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setView: view => dispatch(setView(view)),
+const mapDispatchToProps = dispatch => (
+  {
+    setViewComp: view => dispatch(setView(view)),
   }
-}
+);
+
+App.propTypes = {
+  selectedView: PropTypes.string.isRequired,
+  setViewComp: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

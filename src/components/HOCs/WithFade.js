@@ -22,16 +22,16 @@ export default function (FadedComponent, options = {}) {
 
   const transOptions = Object.assign({}, defaultOptions, options);
   return class extends Component {
-    constructor(props) {
-      super(props);
-    }
-
-    handleEnter(node, isAppearing) {
-      /** on mount <Transition /> passes transition state
+    static handleEnter(node) {
+      /*
+       * on mount <Transition /> passes transition state
        *  exited, entering
        * too quickly for a reflow
        * this triggers a reflow between the two states so an animation happens
-       * */
+       *
+      */
+
+      // eslint-disable-next-line no-unused-expressions
       node.scrollTop;
     }
 
@@ -41,7 +41,7 @@ export default function (FadedComponent, options = {}) {
       return (
         <Transition
           timeout={transOptions.timeout}
-          onEnter={this.handleEnter.bind(this)}
+          onEnter={node => this.constructor.handleEnter(node)}
           {...this.props}
         >
           {transitionState => (

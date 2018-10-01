@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
-import { lighten, darken } from 'polished';
+import { lighten } from 'polished';
 import { getTargeting } from '../../../../../reducers/slots';
 import quickSort from '../../../../../utils/quickSort';
 
@@ -62,12 +62,12 @@ const Targeting = props => (
     pageLinks
     render={pagination => (
       <KeyValView>
-        {sortTargetingByLength(props.targeting, 'desc').map((targs, i) => (
-          <div style={{ width: '100%' }} key={`sentinal-keyval-${props.slotId}-${i}`} ref={pagination.ref}>
-            <KeyValContainer key={`keyval-${props.slotId}-${i}`} currentPage={pagination.currentPage} offset={pagination.offset}>
+        {sortTargetingByLength(props.targeting, 'desc').map(targs => (
+          <div style={{ width: '100%' }} key={`sentinal-keyval-${props.slotId}-${targs.key}`} ref={pagination.ref}>
+            <KeyValContainer key={`keyval-${props.slotId}-${targs.key}`} currentPage={pagination.currentPage} offset={pagination.offset}>
               <KeyBox>{targs.key}</KeyBox>
-              {targs.vals.map((val, j) => (
-                <ValBox key={`val-${val}-${j}`}>{val}</ValBox>
+              {targs.vals.map(val => (
+                <ValBox key={`val-${val}`}>{val}</ValBox>
               ))}
             </KeyValContainer>
           </div>
@@ -77,13 +77,13 @@ const Targeting = props => (
   />
 );
 
-Targeting.propTypes = {
-  slotId: PropTypes.string.isRequired,
-};
-
 const mapStateToProps = (state, ownProps) => ({
   targeting: getTargeting(state, ownProps.slotId),
 });
 
+Targeting.propTypes = {
+  slotId: PropTypes.string.isRequired,
+  targeting: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps)(Targeting);
